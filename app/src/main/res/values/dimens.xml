@@ -1,0 +1,48 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="eight">8dp</dimen>
+    <dimen name="four">8dp</dimen>
+    <dimen name="twelve">12dp</dimen>
+    <dimen name="twentyfour">24dp</dimen>
+    <dimen name="ten">10dp</dimen>
+
+
+    <dimen name="fourteen">14dp</dimen>
+    <dimen name="twenty_four">24dp</dimen>
+    <dimen name="_2dp">2dp</dimen>
+    <dimen name="_3dp">3dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+
+    <dimen name="menu_arrow">18dp</dimen>
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">14sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">14sp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">30dp</dimen>
+
+    <dimen name="list_padding">0dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
+
+    <dimen name="default_corner_radii">56dp</dimen>
+    <dimen name="default_badge_corner_radii">16dp</dimen>
+    <dimen name="default_nav_item_padding">12dp</dimen>
+    <dimen name="default_nav_item_text_size">14sp</dimen>
+    <dimen name="default_nav_item_text_padding">8dp</dimen>
+    <dimen name="default_nav_item_title_max_width">80dp</dimen>
+    <dimen name="default_icon_size">24dp</dimen>
+    <dimen name="default_nav_item_badge_padding">2dp</dimen>
+    <dimen name="default_nav_item_badge_text_size">7sp</dimen>
+
+
+    <!--Created by : Nilesh Birhade
+     Date : 29/01/2018
+    -->
+    <!-- Spacing -->
+    <dimen name="view_spacing_small">8dp</dimen>
+
+    <!-- Floating Action Button -->
+
+    <!-- Cards -->
+    <dimen name="card_corner_radius">3dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+
+</resources>

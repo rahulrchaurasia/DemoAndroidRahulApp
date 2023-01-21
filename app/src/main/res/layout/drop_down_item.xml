@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@color/bg_dashboard"
+android:orientation="horizontal">
+
+<ImageView
+    android:id="@+id/icon"
+    android:layout_width="42dp"
+    android:layout_height="42dp"
+    android:layout_gravity="center"
+    android:src="@drawable/ic_bank_24"
+    android:padding="10dp"
+    />
+
+<TextView
+
+    android:id="@+id/lbl_name"
+    android:layout_marginTop="@dimen/twelve"
+    android:layout_marginLeft="@dimen/eight"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/icon"
+    android:textColor="@color/black"
+    android:text="Strawberry"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:minLines="1"
+    android:layout_marginRight="@dimen/four"
+    android:textSize="14sp" />
+
+</LinearLayout>
