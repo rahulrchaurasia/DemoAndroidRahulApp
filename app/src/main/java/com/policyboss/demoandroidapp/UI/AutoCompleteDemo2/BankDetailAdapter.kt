@@ -4,12 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.policyboss.demoandroidapp.DataModel.BankEntity
+import com.policyboss.demoandroidapp.DataModel.BankModel.BankEntity
 import com.policyboss.demoandroidapp.databinding.ListitemsLayoutBinding
 
 class BankDetailAdapter(private var context : Context,
-                           private var listMenu: List<BankEntity>,
-                           private var onItemClick : ((menu : BankEntity) -> Unit )
+                        private var listMenu: List<BankEntity>,
+                        private var onItemClick : ((menu : BankEntity) -> Unit )
 ) :
     RecyclerView.Adapter<BankDetailAdapter.BankDataHolder>(){
 

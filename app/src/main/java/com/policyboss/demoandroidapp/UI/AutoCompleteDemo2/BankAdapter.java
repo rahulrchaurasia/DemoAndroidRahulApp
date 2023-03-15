@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 
-import com.policyboss.demoandroidapp.DataModel.BankEntity;
+import com.policyboss.demoandroidapp.DataModel.BankModel.BankEntity;
 import com.policyboss.demoandroidapp.R;
 
 import java.util.ArrayList;

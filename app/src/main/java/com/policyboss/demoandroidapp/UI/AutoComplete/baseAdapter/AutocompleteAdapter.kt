@@ -8,12 +8,12 @@ import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import com.policyboss.demoandroidapp.DataModel.BankEntity
+import com.policyboss.demoandroidapp.DataModel.BankModel.BankEntity
 import com.policyboss.demoandroidapp.R
 
 class AutocompleteAdapter(context: Context,
                           private var list: List<BankEntity>,
-                         private var onItemClick : ((menu : BankEntity) -> Unit)
+                          private var onItemClick : ((menu : BankEntity) -> Unit)
                           ) : BaseAdapter(), Filterable {
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

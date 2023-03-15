@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.Constant
-import com.policyboss.demoandroidapp.DataModel.BankEntity
+import com.policyboss.demoandroidapp.DataModel.BankModel.BankEntity
 import com.policyboss.demoandroidapp.Repository.LoginRepository
 import com.policyboss.demoandroidapp.RetrofitHelper
 import com.policyboss.demoandroidapp.UI.AutoComplete.baseAdapter.AutocompleteAdapter

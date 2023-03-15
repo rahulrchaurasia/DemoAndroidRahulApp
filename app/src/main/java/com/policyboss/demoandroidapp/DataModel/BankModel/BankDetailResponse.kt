@@ -1,4 +1,4 @@
-package com.policyboss.demoandroidapp.DataModel
+package com.policyboss.demoandroidapp.DataModel.BankModel
 
 data class BankDetailResponse(
     val data: List<BankEntity>,

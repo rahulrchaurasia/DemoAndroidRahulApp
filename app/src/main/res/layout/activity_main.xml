@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.AutoCompleteDemo2.MainActivity"
+    tools:context=".UI.AutoCompleteDemo2.AutoCompDemo2Activity"
     android:orientation="vertical">
 
     <TextView

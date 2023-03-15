@@ -1,7 +1,7 @@
 package com.example.jetpackdemo.LoginModule.API
 
 
-import com.policyboss.demoandroidapp.DataModel.BankDetailResponse
+import com.policyboss.demoandroidapp.DataModel.BankModel.BankDetailResponse
 
 import retrofit2.Response
 import retrofit2.http.*

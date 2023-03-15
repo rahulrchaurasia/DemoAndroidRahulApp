@@ -16,7 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.Constant
-import com.policyboss.demoandroidapp.DataModel.BankEntity
+import com.policyboss.demoandroidapp.DataModel.BankModel.BankEntity
 import com.policyboss.demoandroidapp.Repository.LoginRepository
 import com.policyboss.demoandroidapp.RetrofitHelper
 import com.policyboss.demoandroidapp.UI.AutoComplete.AutoCompleteActivity
@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.launch
 
 
-class MainActivity : AppCompatActivity() {
+class AutoCompDemo2Activity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityMainBinding
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(Constant.TAG, "HHHHHHHH " + it.bankid + it.bankname)
 
-             binding.txtData.text = it.bankname + "" + it.bankid +
+             binding.txtData.text = it.bankname + "" + it.bankid
 
 
             getSelectedItemFomList(bankEntity = it)
@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvBank.apply {
 
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@AutoCompDemo2Activity)
             adapter = bankDetailAdapter
         }
     }
@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity() {
         //  bankAdapter = ArrayAdapter<String>(this@MainActivity, R.layout.simple_spinner_item, bankList)
 
         bankAdapter = BankAdapter(
-            this@MainActivity,
+            this@AutoCompDemo2Activity,
             binding.root.id, ArrayList()
         )
 

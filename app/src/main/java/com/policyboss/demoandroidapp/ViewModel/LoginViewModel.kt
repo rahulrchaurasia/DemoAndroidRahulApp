@@ -1,19 +1,16 @@
 package com.policyboss.demoandroidapp.ViewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.Constant
-import com.policyboss.demoandroidapp.DataModel.BankDetailResponse
+import com.policyboss.demoandroidapp.DataModel.BankModel.BankDetailResponse
 import com.policyboss.demoandroidapp.Repository.LoginRepository
 
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LoginViewModel (var loginRepository: LoginRepository) : ViewModel(){
