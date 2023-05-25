@@ -1,19 +1,63 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.DemoAndroidApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.DemoAndroidApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
+
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
+
+
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+<!--        <item name="android:statusBarColor">@color/purple_500</item>-->
+        <item name="android:statusBarColor">@color/appBase</item>
         <!-- Customize your theme here. -->
+
+<!--        <item name="fontFamily">@font/inter_regular</item>-->
+<!--        <item name="bottomSheetDialogTheme">@style/OvalBottomSheetDialogTheme</item>-->
+
+<!--          for bottomsheet Dialog apply-->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
+<!--     For Handling Toolbar in Fragmnet of Navigation Comp weneed to remove default NoActionBar theme  -->
+    <style name="Theme.DemoAndroidApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+     <!--  for bottomsheet Dialog Theme  -->
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/oval_dialog_background</item>
+    </style>
+
+<!--    <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog">-->
+
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+
+<!--        <item name="android:windowAnimationStyle">@style/CustomDialogAnimation</item>-->
+<!--        &lt;!&ndash;            <item name="android:windowBackground">@color/transparent_color</item>&ndash;&gt;&ndash;&gt;-->
+
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowIsFloating">true</item>-->
+<!--        <item name="android:backgroundDimEnabled">true</item>-->
+
+<!--        <item name="android:colorBackgroundCacheHint">@null</item>-->
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+<!--        &lt;!&ndash;        <item name="android:windowAnimationStyle">@android:style/Animation</item>&ndash;&gt;-->
+
+
+<!--    </style>-->
 
     <style name="TextInputMaterialStyleDropDown" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name ="boxBackgroundMode">filled</item>
@@ -72,4 +116,90 @@
         <item name="endIconMode">clear_text</item>
 
     </style>
+
+
+
+
+    <!--Dialog style   we can add custom dialog functinality here..-->
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <!--body text color -->
+        <item name="colorOnSurface">@color/primary_text_color</item>
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <!--title text color-->
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text
+        </item>
+        <!-- <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+         <item name="buttonBarNeutralButtonStyle">@style/Widget.App.Button</item>
+         <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button.Negative</item>-->
+    </style>
+
+
+
+    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="materialThemeOverlay">
+            @style/Widget.MaterialComponents.Button.TextButton.Dialog
+        </item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Widget.App.Button.Negative" parent="Widget.App.Button">
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+
+    <style name="card_view" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">4dp</item>
+        <item name="android:radius">10dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">16dp</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
+        <item name="cardCornerRadius">16dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">32dp</item>
+        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+
+    </style>
+
+    <style name="top_round_card_view" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_custom_corners</item>
+    </style>
+
+
+    <style name="ImageView.Corner" parent="Widget.MaterialComponents.CardView">
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
 </resources>

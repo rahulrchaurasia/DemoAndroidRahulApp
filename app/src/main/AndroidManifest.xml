@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name=".BaseApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,7 +22,60 @@
         android:theme="@style/Theme.DemoAndroidApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".HiltDemo.HiltDemoActivity"
+            android:parentActivityName=".UI.HomeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DesignPattern.DesignPatternDemoActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.HomeActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.NavigationComponent.advanceDemo.NavigationAdvanceActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.NavigationComponent.NavigationDemoMainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.NavigationComponent.BasicDemo.NavigationBasicActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.NavigationComponent.NavigationDemoMainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.NavigationComponent.NavigationDemoMainActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.HomeActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.HomeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.TextRecognizer.TextRecognizerActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".UI.AutoComplete.AutoCompleteActivity"
             android:exported="false">

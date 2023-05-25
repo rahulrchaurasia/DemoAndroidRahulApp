@@ -20,6 +20,7 @@ import com.policyboss.demoandroidapp.DataModel.BankModel.BankEntity
 import com.policyboss.demoandroidapp.Repository.LoginRepository
 import com.policyboss.demoandroidapp.RetrofitHelper
 import com.policyboss.demoandroidapp.UI.AutoComplete.AutoCompleteActivity
+import com.policyboss.demoandroidapp.Utility.hideKeyboard
 import com.policyboss.demoandroidapp.ViewModel.LoginViewModel
 import com.policyboss.demoandroidapp.ViewModel.LoginViewModelFactory
 import com.policyboss.demoandroidapp.databinding.ActivityMainBinding
@@ -41,16 +42,19 @@ class AutoCompDemo2Activity : AppCompatActivity() {
     var autoFlag : Boolean = false
 
     private var textWatcher : TextWatcher? = null
-
+  lateinit var layout : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+        layout = binding.root
         init()
        // initUI()
        bindRecyclerView()
 
+        hideKeyboard(layout)
         setListener()
 
         binding.autoText.addTextChangedListener(textWatcher)

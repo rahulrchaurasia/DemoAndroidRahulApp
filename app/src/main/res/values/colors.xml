@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary_light_color">#C5CAE9</color>
 
+    <color name="orange">#FF6600</color>
+
     <color name="black_shade_1">#292D36</color>
     <color name="yellow">#ffa500</color>
 
@@ -442,7 +444,18 @@
     <color name="Black">#5a6a6a</color>
 
 
+    <color name="disable">#B6B6B6</color>
+    <color name="error">#FF0000</color>
 
+    <color name="sky_blue">#85D9F3</color>
+    <color name="green_status">#5B9B5A</color>
+    <color name="red_status">#DD1818</color>
+    <color name="light_grey">#F9F9F9</color>
+
+
+    <color name="light_orange">#FFF5EF</color>
+    <color name="third_text_color">#313131</color>
+    <color name="hint_text_color">#D6D6D6</color>
 
     <color name="transparent_black_hex_1">#11000000</color>
     <color name="transparent_black_hex_2">#22000000</color>

@@ -4,13 +4,17 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
+
+var TAG = "DEMOAPP"
+
+
 object Constant {
 
     val TAG_HILT : String = "HiltDEMO"
 
     val TAG_KOTLIN : String = "KotlinDEMO"
 
-    val TAG : String = "BANKDATA"
+    val TAG : String = "DEMOAPP"
 
     val TAG_WEBVIEW : String = "WebViewDEMO"
 
@@ -33,6 +37,8 @@ object Constant {
     val PUSH_BROADCAST_ACTION : String = "com.example.jetpackdemo.callDialog"
 
     val REQUEST_ID_MULTIPLE_PERMISSIONS = 111
+
+    val bundl_name_key = "bundl_name_key"
 
     fun hideKeyBoard(view: View?, context: Context) {
         if (view != null) {

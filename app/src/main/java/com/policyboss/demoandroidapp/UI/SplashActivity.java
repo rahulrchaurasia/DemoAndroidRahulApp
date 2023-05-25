@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -11,8 +13,13 @@ import android.widget.ImageView;
 import com.policyboss.demoandroidapp.R;
 import com.policyboss.demoandroidapp.UI.AutoCompleteDemo2.AutoCompDemo2Activity;
 
+import kotlin.coroutines.CoroutineContext;
+
 public class SplashActivity extends AppCompatActivity {
     ImageView imageView;
+
+    private long SPLASH_DISPLAY_LENGTH = 2000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         final Animation animation2=AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
 
 
-
+        /*
         imageView.setAnimation(animation1);
 
         animation1.setAnimationListener(new Animation.AnimationListener() {
@@ -62,7 +69,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation)
             {
                 finish();
-                Intent intent=new Intent(SplashActivity.this, AutoCompDemo2Activity.class);
+                Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
 
@@ -72,5 +79,23 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         });
+
+         */
+        delaySometimes();
+    }
+
+    private void delaySometimes(){
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                startActivity(new Intent(SplashActivity.this, HomeActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK  | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
+            }
+        }, SPLASH_DISPLAY_LENGTH);
+
     }
 }

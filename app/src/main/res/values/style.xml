@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+
+
+    <!--button started -->
+
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">32dp</item>
+        <item name="android:paddingRight">32dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/bg_primary_rect</item>
+        <item name="backgroundTint">@color/orange_button</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:minHeight">42dp</item>
+
+
+    </style>
+
+    <style name="text_button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:radius">0dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <!-- <item name="android:textAppearance">@style/subtitle_textview_secondary_14</item>-->
+        <item name="textAllCaps">false</item>
+        <item name="iconGravity">textStart</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="rippleColor">@color/hint_text_color</item>
+    </style>
+
+
+    <style name="solid_button" parent="Widget.MaterialComponents.Button">
+        <item name="android:height">?attr/actionBarSize</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="textAllCaps">true</item>
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:radius">0dp</item>
+        <item name="android:backgroundTint">@color/blue</item>
+    </style>
+
+    <style name="outlined_button" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:height">?attr/actionBarSize</item>
+        <item name="android:radius">0dp</item>
+        <item name="strokeColor">@color/blue</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="customGreenButton" parent="Widget.MaterialComponents.Button">
+        <!--these all styles are implemented outside, because to get all the overridden attributes easily-->
+
+        <item name="android:minHeight">42dp</item>
+        <item name="android:paddingLeft">32dp</item>
+        <item name="android:paddingRight">32dp</item>
+        <item name="android:background">@drawable/bg_lightgreen_rect</item>
+        <item name="backgroundTint">@color/green_descent</item>
+<!--        <item name="shapeAppearance">@style/customContainedButtonTheme</item>-->
+        <item name="android:textAppearance">@style/myCustomTextForMaterialButtons</item>
+
+    </style>
+
+    <!--button finished-->
+
+    <style name="customContainedButtonTheme">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="myCustomTextForMaterialButtons">
+        <item name="fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <!--        <item name="android:background">@drawable/bg_lightblue_rect</item>-->
+        <!--        <item name="android:textColor">#FFFFFFFF</item>-->
+    </style>
+
+
+
+    <!--Textview started-->
+
+    <!--textview header 24-->
+    <style name="header_textview_24" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <style name="semibold_regular_white" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="semibold_regular_white_18" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="semibold_regular_black_18" parent="semibold_regular_white_18">
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <!--text size 14-->
+    <style name="semibold_regular_black" parent="semibold_regular_white">
+        <item name="android:textColor">@color/secondary_text_color</item>
+    </style>
+
+    <style name="semibold_regular_orange_14" parent="semibold_regular_white">
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="semibold_regular_primary_black_14" parent="semibold_regular_black">
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+    <!--text size 16-->
+    <style name="regular_primary_16" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/secondary_text_color</item>
+    </style>
+
+    <style name="semibold_primary_16" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+
+    <style name="primary_bold_16" parent="regular_primary_16">
+        <item name="fontFamily">@font/inter_bold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <style name="primary_white_16" parent="regular_primary_16">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <!--text size 14-->
+    <style name="regular_primary_14" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <style name="regular_secondary_14" parent="regular_primary_14">
+        <item name="android:textColor">@color/secondary_text_color</item>
+    </style>
+
+    <style name="regular_primary_third_14" parent="regular_primary_14">
+        <item name="android:textColor">@color/third_text_color</item>
+    </style>
+
+    <style name="orange_bold_14" parent="regular_primary_14">
+        <item name="fontFamily">@font/inter_bold</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="primary_bold_14_black" parent="regular_primary_14">
+        <item name="fontFamily">@font/inter_bold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+
+    <!--text size 12-->
+    <style name="section_primary_textview_12" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <style name="section_textview_12" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/secondary_text_color</item>
+    </style>
+
+
+    <!--text size 12-->
+    <style name="sub_textview_bold_12" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/inter_semibold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
+    <style name="sub_textview_12" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/hint_text_color</item>
+    </style>
+
+
+    <style name="sub_textview_white_12" parent="sub_textview_12">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="sub_textview_orange_12" parent="sub_textview_12">
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <!--textview end-->
+
+    <!--Dialog theme-->
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--status bar color-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@null</item>
+        <!--   <item name="windowBackground">@android:color/transparent</item>-->
+    </style>
+
+
+    <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog">
+
+        <item name="android:windowIsTranslucent">true</item>
+
+        <item name="android:windowAnimationStyle">@style/CustomDialogAnimation</item>
+        <!--            <item name="android:windowBackground">@color/transparent_color</item>&ndash;&gt;-->
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--        <item name="android:windowAnimationStyle">@android:style/Animation</item>-->
+
+
+    </style>
+    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="CustomTransLucent" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+
+    </style>
+
+    <style name="CustomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_left</item>
+        <item name="android:windowExitAnimation">@anim/slide_right</item>
+    </style>
+
+
+
+</resources>
