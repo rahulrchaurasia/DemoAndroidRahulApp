@@ -39,7 +39,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UI.NavigationComponent.advanceDemo.NavigationAdvanceActivity"
+            android:name=".UI.NavigationComponent.advanceDemo.activity.NavigationAdvanceActivity"
             android:exported="false"
             android:parentActivityName=".UI.NavigationComponent.NavigationDemoMainActivity">
             <meta-data

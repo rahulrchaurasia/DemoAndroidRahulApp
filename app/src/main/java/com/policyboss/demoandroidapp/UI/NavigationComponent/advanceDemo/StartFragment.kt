@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.databinding.FragmentStartBinding
@@ -16,6 +17,8 @@ class StartFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
     private var _binding : FragmentStartBinding? = null
+
+    private lateinit var bottomNavigationView : BottomNavigationView
 
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +43,8 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        bottomNavigationView = requireActivity().findViewById(R.id.bottom_nav_view)
+        bottomNavigationView.visibility = View.GONE
         binding.btnStart.setOnClickListener {
 
             val action = StartFragmentDirections.actionStartFragmentToHomeDashBoardFragment()

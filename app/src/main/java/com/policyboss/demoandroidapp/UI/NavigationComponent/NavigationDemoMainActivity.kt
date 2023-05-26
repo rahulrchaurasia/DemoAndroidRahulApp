@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.NavigationComponent.BasicDemo.NavigationBasicActivity
-import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.NavigationAdvanceActivity
+import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activity.NavigationAdvanceActivity
 import com.policyboss.demoandroidapp.databinding.ActivityNavigationDemoBinding
 
 class NavigationDemoMainActivity : AppCompatActivity()  , View.OnClickListener {

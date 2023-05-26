@@ -9,6 +9,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.UI.NavigationComponent.BasicDemo.FirstFragment
@@ -20,15 +21,14 @@ class HomeDashBoardFragment : Fragment() , OnClickListener {
 
 
     private var _binding : FragmentHomeDashBoardBinding? = null
+    private lateinit var bottomNavigationView : BottomNavigationView
 
     lateinit var navController : NavController
     lateinit var layout : View
 
     private val binding get() = _binding!!
 
-    init {
-        setHasOptionsMenu(false)
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,14 +42,23 @@ class HomeDashBoardFragment : Fragment() , OnClickListener {
 
         Log.d(Constant.TAG,"Home Fragment onCreateView triggered..")
         _binding = FragmentHomeDashBoardBinding.inflate(inflater,container,false)
-         layout =  binding.root
-         navController =  findNavController()
 
-         requireContext().hideKeyboard(layout)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        layout =  binding.root
+        navController =  findNavController()
+
+        bottomNavigationView = requireActivity().findViewById(R.id.bottom_nav_view)
+        bottomNavigationView.visibility = View.VISIBLE
+
+        requireContext().hideKeyboard(layout)
 
         setOnClickListener()
 
-        return binding.root
     }
 
     override fun onResume() {
@@ -62,6 +71,9 @@ class HomeDashBoardFragment : Fragment() , OnClickListener {
         binding.btnViewBalance.setOnClickListener(this)
         binding.btnTransaction.setOnClickListener(this)
     }
+
+
+
 
     companion object {
 

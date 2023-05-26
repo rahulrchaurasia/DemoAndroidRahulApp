@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.databinding.FragmentViewBalanceBinding
+/************************************************************************
+  popBackStack()
+  This method is used to pop the topmost fragment from the back stack, essentially
+  going back to the previous fragment
 
+************************************************************************/
 
 class ViewBalanceFragment : Fragment() {
 
@@ -36,10 +41,24 @@ class ViewBalanceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         binding.btnDone.setOnClickListener{
+           // region popBackStack
+           /*
+            This method is used to pop the topmost fragment from the back stack, essentially
+            going back to the previous fragment
+
+            */
+          //  findNavController().popBackStack()
+         //  findNavController().popBackStack(R.id.homeDashBoardFragment,true)
+
+            findNavController().popBackStack(R.id.homeDashBoardFragment,false)
 
 
         }
+
+       // requireActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(false)
     }
 
     companion object {

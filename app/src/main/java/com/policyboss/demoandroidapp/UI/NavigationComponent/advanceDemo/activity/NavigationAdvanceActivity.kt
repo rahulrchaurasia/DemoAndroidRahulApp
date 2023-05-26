@@ -1,4 +1,4 @@
-package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo
+package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,10 +10,8 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
+import com.policyboss.demoandroidapp.NavGraphDirections
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.Utility.showAlerDialog
 import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBinding
@@ -89,16 +87,33 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 
          */
 
-
+          // Mark : optional use toolbar or setupActionBarWithNavController
        // binding.toolbar.setupWithNavController(navController)
 
 
-        setupActionBarWithNavController(navController)
+        // 1>Mark : use Below or if req. appBar Configuration than add in param
+       // setupActionBarWithNavController(navController)
+
+      //  or with appBar use below { Note : we need this bec at bottom navigation we dont need
+        // toolbar up button hence to remove this we add below
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.homeDashBoardFragment, R.id.settingFragment, R.id.notificationFragment),
+            binding.drawerLayout    // Adding drawerLayout in App bar
+        )
+       // or   2>
+        setupActionBarWithNavController(navController,appBarConfiguration)
+
+        // For Bottom nav connect to navController
+        binding.bottomNavView.setupWithNavController(navController)
+
+        // For Drawer layout
+        binding.navDrawer.setupWithNavController(navController )
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return  navController.navigateUp() || super.onSupportNavigateUp()
+        return  navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -109,7 +124,18 @@ class NavigationAdvanceActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+
+      return when(item.itemId) {
+
+          R.id.item_about_app -> {
+
+              val action = NavGraphDirections.actionGlobalAboutAppFragment()
+              navController.navigate(action)
+
+              return true
+          }
+          else -> item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+      }
     }
     private fun setupNavigationViews() {
         navController = findNavController(R.id.nav_host_fragment)
