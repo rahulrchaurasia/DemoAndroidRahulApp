@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -14,6 +15,7 @@ import androidx.navigation.ui.*
 import com.policyboss.demoandroidapp.NavGraphDirections
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.Utility.showAlerDialog
+import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBinding
 
 /*********************************setupActionBarWithNavController *******************/
@@ -57,6 +59,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
    // For Toolbar in Navigation Controller
    private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var listener: NavController.OnDestinationChangedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +81,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         // Get the NavController associated with the NavHostFragmen
         navController = navHostFragment.navController
 
+
         /*
         // Create an AppBarConfiguration with the top-level destinations in your graph
         val appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -92,6 +96,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 
 
         // 1>Mark : use Below or if req. appBar Configuration than add in param
+//        /********************** use this **********************************/
        // setupActionBarWithNavController(navController)
 
       //  or with appBar use below { Note : we need this bec at bottom navigation we dont need
@@ -110,7 +115,84 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         // For Drawer layout
         binding.navDrawer.setupWithNavController(navController )
 
+
+
+        listener =  NavController.OnDestinationChangedListener{contoller, destination , argument ->
+
+            when(destination.id){
+
+                R.id.startFragment -> {
+                   setHomeToolbar()
+                   // showToast("Home")
+                }
+                R.id.homeDashBoardFragment -> {
+                    includeBottomNavigation()
+                }
+                R.id.homeDashBoardFragment -> {
+                    includeBottomNavigation()
+                }
+                R.id.homeDashBoardFragment -> {
+                    includeBottomNavigation()
+                }
+                else -> {
+                    excludeBottomNavigation()
+                   // showToast("Other")
+                }
+            }
+        }
     }
+
+    private fun setHomeToolbar() {
+        binding.toolbar.let {
+            it.logo = ContextCompat.getDrawable(this, R.drawable.ic_bank_24)
+            it.title = "Hi,"
+            it.setTitleTextAppearance(this, R.style.semibold_regular_white)
+            it.subtitle = "subtitle Data"
+            it.setSubtitleTextAppearance(this, R.style.sub_textview_white_12)
+            it.background = ContextCompat.getDrawable(this, R.color.blue)
+            it.setTitleMargin(80, 0, 0, 0)
+        }
+    }
+
+    private fun excludeBottomNavigation() {
+        hideBottomNavigation()
+
+        binding.toolbar.let {
+            //it.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_backarrow)
+            it.subtitle = null
+            it.logo = null
+            it.setTitleTextAppearance(this, R.style.semibold_primary_16)
+            it.background = ContextCompat.getDrawable(this, R.color.red_custom)
+            it.setTitleMargin(0, 0, 0, 0)
+            // it.setNavigationOnClickListener {
+            // val action = MobileRechargeStatusFragmentDirections.actionPopToHome()
+            // navController.navigate(action)
+
+            // onBackPressed()
+            // }
+        }
+    }
+
+    private fun includeBottomNavigation() {
+        showBottomNavigation()
+
+        binding.toolbar.let {
+            it.subtitle = null
+            it.logo = null
+            it.setTitleTextAppearance(this, R.style.semibold_primary_16)
+            it.background = ContextCompat.getDrawable(this, R.color.red_custom)
+            it.setTitleMargin(0, 0, 0, 0)
+        }
+    }
+
+    fun hideBottomNavigation() {
+        binding.bottomNavView.visibility = View.GONE
+    }
+    fun showBottomNavigation() {
+        binding.bottomNavView.visibility = View.VISIBLE
+    }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         return  navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -137,38 +219,22 @@ class NavigationAdvanceActivity : AppCompatActivity() {
           else -> item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
       }
     }
-    private fun setupNavigationViews() {
-        navController = findNavController(R.id.nav_host_fragment)
-
-      //  or
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//        navController = navHostFragment.navController
 
 
-        // For Bottom Navigation
-        // binding.bottomNavView.setupWithNavController(navController)
+    override fun onResume() {
+        navController.addOnDestinationChangedListener(listener)
+        super.onResume()
+    }
 
-//        appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.startFragment,
-//                R.id.homeDashBoardFragment,
-//                R.id.chooseReceiverFragment,
-//                R.id.sendCashFragment
-//
-//            )
-//        )
-
-
-        appBarConfiguration = AppBarConfiguration(
-            navController.graph
-        )
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
+    override fun onPause() {
+        navController.removeOnDestinationChangedListener(listener)
+        super.onPause()
     }
 
       /*
         For handling Navigation back from Toolbar add below code
        */
+
 
     override fun onBackPressed() {
         if (getOnBackPressedDispatcher().hasEnabledCallbacks()) {
@@ -181,4 +247,6 @@ class NavigationAdvanceActivity : AppCompatActivity() {
             this.finish()
         }
     }
+
+
 }
