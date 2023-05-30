@@ -25,7 +25,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.demoandroidapp.R
 
-/**************** For Snackbar *********************************************/
+/**************** For Toast *********************************************/
 fun Context.showToast(msg: String) {
 
     Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()

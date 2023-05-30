@@ -45,13 +45,18 @@ class StartFragment : Fragment() {
 
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_nav_view)
         bottomNavigationView.visibility = View.GONE
+
+
         binding.btnStart.setOnClickListener {
 
             val action = StartFragmentDirections.actionStartFragmentToHomeDashBoardFragment()
 
             findNavController().navigate(action)
+
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

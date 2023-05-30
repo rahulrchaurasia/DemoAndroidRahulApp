@@ -134,6 +134,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
                 R.id.homeDashBoardFragment -> {
                     includeBottomNavigation()
                 }
+
                 else -> {
                     excludeBottomNavigation()
                    // showToast("Other")

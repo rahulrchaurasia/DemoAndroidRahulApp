@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcher
 import androidx.navigation.NavArgs
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.policyboss.demoandroidapp.Constant
@@ -99,7 +100,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
             // .addCallback(viewLifecycleOwner,callback)
              .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
                  override fun handleOnBackPressed() {
-                     findNavController().popBackStack(R.id.homeDashBoardFragment,false)
+                     binding.root.findNavController().popBackStack(R.id.homeDashBoardFragment,false)
 
                  }
 
