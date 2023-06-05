@@ -23,9 +23,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".HiltDemo.HiltDemoActivity"
-            android:parentActivityName=".UI.HomeActivity"
+            android:name=".FlowDemo.FlowDemoActivity"
+            android:theme="@style/Theme.DemoAndroidApp"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".HiltDemo.HiltDemoActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.HomeActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

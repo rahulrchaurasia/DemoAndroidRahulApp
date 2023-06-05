@@ -87,7 +87,7 @@ public class SplashActivity extends AppCompatActivity {
     private void delaySometimes(){
 
 
-        new Handler().postDelayed(new Runnable() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
 
@@ -96,6 +96,8 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         }, SPLASH_DISPLAY_LENGTH);
+
+
 
     }
 }

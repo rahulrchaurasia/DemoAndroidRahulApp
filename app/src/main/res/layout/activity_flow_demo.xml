@@ -4,28 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.HomeActivity">
+    tools:context=".FlowDemo.FlowDemoActivity">
 
-
-
-    <TextView
-        android:id="@+id/txtReceiver"
-        android:text="Home"
-        android:textSize="24sp"
-        android:fontFamily="@font/inter_bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="0dp"
+        android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="@dimen/twenty_four"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
+
+            app:title="xsx" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/childparent"
         android:layout_marginTop="@dimen/_40dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtReceiver"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginHorizontal="@dimen/twenty_four"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,22 +38,22 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnHilt"
+            android:id="@+id/btnFixedFlow"
             app:layout_constraintTop_toTopOf="@+id/childparent"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Hilt Basic"
-           style="@style/outlined_button"
+            android:text="Fixed Flow"
+            style="@style/outlined_button"
             android:textColor="@color/Brown"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNavComp"
-            app:layout_constraintTop_toBottomOf="@+id/btnHilt"
+            android:id="@+id/btnCollection"
+            app:layout_constraintTop_toBottomOf="@+id/btnFixedFlow"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-           android:text="Navigation Component"
+            android:text="Flow Collection"
 
             android:textColor="@color/Brown"
             style="@style/outlined_button"
@@ -58,44 +63,40 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFlow"
-            app:layout_constraintTop_toBottomOf="@+id/btnNavComp"
+            android:id="@+id/btnlembda"
+            app:layout_constraintTop_toBottomOf="@+id/btnCollection"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Flow Demo"
+            android:text="Flow Lembda"
 
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnChannel"
+            android:layout_marginTop="@dimen/eight"
+            app:layout_constraintTop_toBottomOf="@+id/btnlembda"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Flow Channel"
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFlowChain"
+            app:layout_constraintTop_toBottomOf="@+id/btnChannel"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Flow Chain"
             style="@style/solid_button"
 
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/eight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDesignPattern"
-            android:layout_marginTop="@dimen/eight"
-            app:layout_constraintTop_toBottomOf="@+id/btnFlow"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Design Pattern"
-            style="@style/customGreenButton"
-
-            android:textColor="@color/white"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnTextRecog"
-            app:layout_constraintTop_toBottomOf="@+id/btnDesignPattern"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Text Recognizer"
-            android:backgroundTint="@color/colorPrimaryDark"
             android:textColor="@color/white"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

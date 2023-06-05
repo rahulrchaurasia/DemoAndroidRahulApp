@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.DesignPattern.DesignPatternDemoActivity
+import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
 import com.policyboss.demoandroidapp.HiltDemo.HiltDemoActivity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
 import com.policyboss.demoandroidapp.UI.TextRecognizer.TextRecognizerActivity
@@ -53,6 +54,7 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         binding.btnTextRecog.setOnClickListener(this)
         binding.btnNavComp.setOnClickListener(this)
         binding.btnDesignPattern.setOnClickListener(this)
+        binding.btnFlow.setOnClickListener(this)
     }
 
     suspend fun flowDemo(){
@@ -96,6 +98,11 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 
             }
 
+            binding.btnFlow.id -> {
+
+                startActivity(Intent(this, FlowDemoActivity::class.java))
+
+            }
 
             binding.btnDesignPattern.id -> {
 
