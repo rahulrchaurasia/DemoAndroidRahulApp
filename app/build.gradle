@@ -106,6 +106,11 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    //Use Phone or device Selector API in Android
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+    // Image Cropper
+    implementation 'com.github.yalantis:ucrop:2.2.6'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

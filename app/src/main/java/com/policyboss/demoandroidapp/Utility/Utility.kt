@@ -38,13 +38,13 @@ object Utility {
         }
     }
 
-
+    @JvmStatic
      fun createImageUri(context: Context) : Uri {
 
         val image = File(context.filesDir,"camera_photo.png")
 
         return FileProvider.getUriForFile(context.applicationContext,
-            "com.example.jetpackdemo.fileprovider",
+            "com.policyboss.demoandroidapp.fileprovider",
             image
         )
 

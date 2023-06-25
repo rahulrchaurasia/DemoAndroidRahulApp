@@ -3,7 +3,6 @@ package com.policyboss.demoandroidapp.FlowDemo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +21,8 @@ import kotlinx.coroutines.launch
   Refer below link for flow
  */
 //https://www.youtube.com/watch?v=r6bhNDB3J9Y&list=PLdFC34ba_zA46uv1QteVWur1nHs6iTSIJ&index=5
+//https://www.youtube.com/watch?v=_1xH9d7w_tA&t=353s
+
 
 class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
 
@@ -65,9 +66,21 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
         binding.btnChannel.setOnClickListener(this)
         binding.btnFlowChain.setOnClickListener(this)
 
+        binding.btnFlowAdv1.setOnClickListener(this)
+        binding.btnFlowAdv2.setOnClickListener(this)
+        binding.btnFlowAdv3.setOnClickListener(this)
+        binding.btnFlowAdv4.setOnClickListener(this)
+        binding.btnFlowAdv5 .setOnClickListener(this)
+
+        binding.btnFlowAdv6.setOnClickListener(this)
+        binding.btnFlowAdv7 .setOnClickListener(this)
+        binding.btnFlowAdv8.setOnClickListener(this)
+        binding.btnFlowAdv9.setOnClickListener(this)
+        binding.btnFlowAdv10.setOnClickListener(this)
+
     }
 
-    //region create flow
+    //region create Basic flow
     private  fun  setupFixedFlow(){
 
        fixedFlow = flowOf(1,2,3,4,5).onEach {
@@ -110,7 +123,7 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
 
     //////// Collect ////////////////
 
-    //region collect Flow
+    //region collect  BasicFlow
     private fun collectFixedFlow(){
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -163,12 +176,20 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
             ( 0..10).forEach(){ value ->
 
                 delay(1000)
+                Log.d(Constant.TAG,Thread.currentThread().name)
                 emit(value)
            }
 
-        }.collect{
+        }.flowOn(Dispatchers.IO)
+            /*
+           // Mark : createFlowChain() is called in .launch(Dispatchers.Main)
+           hence by default collect called in main Thread no need to agin switch it in
+           main thread like withContext(Dispatchers.Io)like in courotines.
+              */
+            .collect{
 
-            Log.d(Constant.TAG,"$it")
+            Log.d(Constant.TAG,"in Collect "+ Thread.currentThread().name)
+            Log.d(Constant.TAG,"Flow Chain $it")
 
         }
     }
@@ -190,6 +211,232 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
 
     //endregion
 
+
+    ////// Advance Flow ////////////////
+
+    // region Advance Flow
+
+    private fun producer() : Flow<Int>{
+
+        return  flow {
+
+            val list = listOf(1,2,3,4,5,6)
+
+            list.forEach {
+                delay(1000)
+                emit(it)
+            }
+        }
+    }
+
+    private fun callAdvanceFlow1(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            producer()
+                .onStart {
+                    emit(-1)
+                    Log.d(Constant.TAG, "Starting Out")
+                }
+                .onCompletion {
+                    emit(7 )
+                    Log.d(Constant.TAG, "Completed")
+                }
+
+                .onEach {
+                    Log.d(Constant.TAG, "About to Emit..$it")
+                }
+                .collect{
+                    Log.d(Constant.TAG, "Collect..${it.toString()}")
+                }
+        }
+    }
+
+    private fun callAdvanceFlow2(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            producer()
+                .map {
+                    it*2
+                }
+                .filter {
+                    it <8
+                }.flowOn(Dispatchers.IO)
+                .collect{
+
+                    Log.d(Constant.TAG, "Flow Advance 2 op:- $it")
+                }
+
+        }
+
+    }
+
+    private fun callAdvanceFlow3(){
+
+
+
+        lifecycleScope.launch (Dispatchers.Main){
+
+            getNotes()
+                .map {
+                   // FormattedNote(it.isActive,it.title.uppercase(),it.description,)
+                    FormattedNote(isActive = it.isActive, title = it.title.uppercase(),
+
+                        area = it.description +" MH-State"
+                        )
+
+                }
+                .filter {
+                    it.isActive && it.title.length < 5
+                }
+                .flowOn(Dispatchers.IO)
+                .buffer(2)
+                .collect{
+                    Log.d(Constant.TAG, "Flow Advance 3 Use OF map and filter op:-  ${it.toString()}")
+
+                }
+        }
+    }
+
+    //endregion
+
+    //region Basic Intermidiate Opertor
+    private fun callTakeFlow(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            flowOf(1, 2, 3, 4, 5, 6)
+
+                .take(3)
+                .collect {
+
+                    Log.d(Constant.TAG, "Flow take op:- $it")
+                }
+        }
+
+    }
+
+    private fun callTakeWhileFlow(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            flowOf(1, 2, 3, 4, 5, 6)
+
+                .takeWhile { it < 3 }
+                .collect {
+
+                    Log.d(Constant.TAG, "Flow take op:- $it")
+                }
+        }
+    }
+
+    private fun calltransformFlow(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            flowOf(1, 2, 3, 4, 5, 6)
+
+                .transform{
+
+                    emit("First${it}")
+                    emit("Second ${it*2}")
+                    emit("Third ${it+1}")
+                }
+                .collect {
+
+                    Log.d(Constant.TAG, "Flow take op:- $it")
+                }
+        }
+    }
+
+    private fun callDistincUntilChangedFlow(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            flowOf(1,1, 2, 3,3, 4, 5, 6,1,4)
+
+                .distinctUntilChanged()
+                .collect {
+
+                    Log.d(Constant.TAG, "Flow take op:- $it")
+                }
+        }
+    }
+
+    private fun callSequentiallDemoFlow(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+
+            val flow = flow {
+
+                (1..5).forEach(){
+                    Log.d(Constant.TAG, "Emitter Start Cooking Pancacke:- $it")
+
+                    delay(1000)
+                    Log.d(Constant.TAG, "Emitter Pancake  $it ready:-")
+                    emit(it)
+
+                }
+
+            }
+
+
+            flow.collect{
+                Log.d(Constant.TAG, "Collector Start eating Pancake:- $it")
+                delay(3000)
+                Log.d(Constant.TAG, "Collector Finished eating  Pancake  $it ")
+            }
+        }
+    }
+
+    private fun callBufferDemoFlow(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+
+            val flow = flow {
+
+                repeat(5){
+                    Log.d(Constant.TAG, "Emitter Start Cooking Pancacke:- $it")
+
+                    delay(1000)
+                    Log.d(Constant.TAG, "Emitter Pancake  $it ready:-")
+                    emit(it)
+
+                }
+
+            }.buffer()
+
+
+            flow.collect{
+                Log.d(Constant.TAG, "Collector Start eating Pancake:- $it")
+                delay(3000)
+                Log.d(Constant.TAG, "Collector Finished eating  Pancake  $it ")
+            }
+        }
+    }
+    //endregion
+
+
+    fun MutableStateFlowDemo(){
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            val flow = MutableStateFlow(0)
+
+      // Emit values to the Flow
+            flow.value = 1
+            flow.value = 2
+            flow.value = 3
+
+           // Collect the Flow and print the latest value
+            flow.collect { value ->
+
+                Log.d(Constant.TAG, "Collector Finished eating  Pancake  $value ")
+            }
+        }
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -230,14 +477,97 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
             }
 
             binding.btnFlowChain.id -> {
-
-                lifecycleScope.launch(Dispatchers.IO) {
-
+                lifecycleScope.launch(Dispatchers.Main) {
                     createFlowChain()
                 }
+            }
+            binding.btnFlowAdv1.id -> {
+
+                callAdvanceFlow1()
 
             }
+            binding.btnFlowAdv2.id -> {
+
+                callAdvanceFlow2()
+            }
+            binding.btnFlowAdv3.id -> {
+                callAdvanceFlow3()
+
+            }
+            binding.btnFlowAdv4.id -> {
+
+                callTakeFlow()
+
+            }
+
+            binding.btnFlowAdv5.id -> {
+
+                callTakeWhileFlow()
+
+            }
+
+            binding.btnFlowAdv6.id -> {
+
+                calltransformFlow()
+
+            }
+
+            binding.btnFlowAdv7.id -> {
+
+                callDistincUntilChangedFlow()
+
+            }
+            binding.btnFlowAdv8.id -> {
+
+                callSequentiallDemoFlow()
+
+            }
+            binding.btnFlowAdv9.id -> {
+
+                callBufferDemoFlow()
+
+            }
+            binding.btnFlowAdv10.id -> {
+
+                MutableStateFlowDemo()
+
+            }
+
         }
     }
 
+    private fun getNotes1() = flow<Note>{
+
+
+        val list = listOf(
+
+            Note(id = 1, isActive = true, title = "First ", description = "First description") ,
+             Note(id = 2, isActive = false, title = "Second ", description = "Second description"),
+            Note(id = 3, isActive = false, title = "Third ", description = "Third description"),
+            Note(id = 4, isActive = true, title = "Four ", description = "Four description"),
+            Note(id = 5, isActive = true, title = "Five ", description = "Five description"),
+           Note(id = 6, isActive = true, title = "Six ", description = "Six description")
+        )
+         list.asFlow()
+    }
+
+    private fun getNotes() : Flow<Note>
+    {
+
+
+        val list = listOf(
+
+            Note(id = 1, isActive = true, title = "First ", description = "First description") ,
+            Note(id = 2, isActive = false, title = "Second ", description = "Second description"),
+            Note(id = 3, isActive = false, title = "Third ", description = "Third description"),
+            Note(id = 4, isActive = true, title = "Four ", description = "Four description"),
+            Note(id = 5, isActive = true, title = "Five ", description = "Five description"),
+            Note(id = 6, isActive = true, title = "Six ", description = "Six description")
+        )
+        return list.asFlow()
+    }
 }
+
+data class Note(val id : Int, val isActive : Boolean ,val title : String, val description : String)
+
+data class FormattedNote( val isActive : Boolean ,val title : String, val area : String)

@@ -2,14 +2,18 @@ package com.policyboss.demoandroidapp.UI
 
 import android.Manifest
 import android.content.Intent
+import android.net.wifi.hotspot2.pps.Credential
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.auth.api.credentials.Credential.EXTRA_KEY
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.DesignPattern.DesignPatternDemoActivity
+import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
 import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
 import com.policyboss.demoandroidapp.HiltDemo.HiltDemoActivity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
@@ -20,13 +24,17 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-
 class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 
     var CAMERA_PERMISSION_REQUEST_CODE = 101
     lateinit var binding: ActivityHomeBinding
 
     val numbers = flowOf(1, 2, 3, 4, 5)
+
+    companion object {
+        var CREDENTIAL_PICKER_REQUEST = 1
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +50,10 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         )
         setOnClickListener()
 
-        lifecycleScope.launch {
-
-            flowDemo()
-        }
+//        lifecycleScope.launch {
+//
+//            flowDemo()
+//        }
     }
 
     fun setOnClickListener(){
@@ -55,6 +63,9 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         binding.btnNavComp.setOnClickListener(this)
         binding.btnDesignPattern.setOnClickListener(this)
         binding.btnFlow.setOnClickListener(this)
+        binding.btnDeviceNo.setOnClickListener(this)
+        binding.btnFileUpload.setOnClickListener(this)
+
     }
 
     suspend fun flowDemo(){
@@ -81,6 +92,35 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
     }
 
 
+    /*
+    private fun phoneSelection() {
+        // To retrieve the Phone Number hints, first, configure
+        // the hint selector dialog by creating a HintRequest object.
+        val hintRequest = HintRequest.Builder()
+            .setPhoneNumberIdentifierSupported(true)
+            .build()
+
+        val options = CredentialsOptions.Builder()
+            .forceEnableSaveDialog()
+            .build()
+
+        // Then, pass the HintRequest object to
+        // credentialsClient.getHintPickerIntent()
+        // to get an intent to prompt the user to
+        // choose a phone number.
+        val credentialsClient = Credentials.getClient(applicationContext, options)
+        val intent = credentialsClient.getHintPickerIntent(hintRequest)
+        try {
+            startIntentSenderForResult(
+                intent.intentSender,
+                CREDENTIAL_PICKER_REQUEST, null, 0, 0, 0, Bundle()
+            )
+        } catch (e: IntentSender.SendIntentException) {
+            e.printStackTrace()
+        }
+    }
+
+     */
     override fun onClick(view: View?) {
 
 
@@ -109,12 +149,40 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
                 startActivity(Intent(this, DesignPatternDemoActivity::class.java))
 
             }
+            binding.btnDeviceNo.id -> {
+
+                startActivity(Intent(this, DesignPatternDemoActivity::class.java))
+
+            }
 
             binding.btnTextRecog.id -> {
 
                startActivity(Intent(this, TextRecognizerActivity::class.java))
 
             }
+
+            binding.btnFileUpload.id -> {
+
+                startActivity(Intent(this, FileUploadActivity::class.java))
+
+            }
         }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == CREDENTIAL_PICKER_REQUEST && resultCode == RESULT_OK) {
+//
+//            // get data from the dialog which is of type Credential
+//            val credential: Credential? = data?.getParcelableExtra(Credential.EXTRA_KEY)
+//
+//            // set the received data t the text view
+//            credential?.apply {
+//              //  tv1.text = credential.id
+//            }
+//        } else if (requestCode == CREDENTIAL_PICKER_REQUEST && resultCode == CredentialsApi.ACTIVITY_RESULT_NO_HINTS_AVAILABLE) {
+//            Toast.makeText(this, "No phone numbers found", Toast.LENGTH_LONG).show();
+//        }
     }
 }
