@@ -11,7 +11,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
 
-        jcenter()
+       // Added For Image Crop : Required in yalantis:ucrop library
         maven { url "https://jitpack.io" }
     }
 }

@@ -16,8 +16,10 @@ import com.policyboss.demoandroidapp.DesignPattern.DesignPatternDemoActivity
 import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
 import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
 import com.policyboss.demoandroidapp.HiltDemo.HiltDemoActivity
+import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
 import com.policyboss.demoandroidapp.UI.TextRecognizer.TextRecognizerActivity
+import com.policyboss.demoandroidapp.UI.TextRecognizerDemo.CameraTextDetectActivity
 import com.policyboss.demoandroidapp.databinding.ActivityHomeBinding
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -50,6 +52,24 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         )
         setOnClickListener()
 
+        val fruit = FruitModel(
+            id = 1,
+            title = FruitTitle.APPLE,
+            image = "apple_image.jpg",
+            price = "$1.99",
+            color = "red"
+        )
+
+        val titleValue = fruit.title.name   // This will give you "APPLE"
+
+        val color = CardType.GOLD.color
+        Log.d(TAG, titleValue + " "+color)
+
+
+        val currency = Currency.EUR
+        Log.d(TAG,"Currency Name: ${currency.name}")
+        Log.d(TAG,"Currency Code: ${currency.code}")
+        Log.d(TAG,"Currency Symbol: ${currency.symbol}")
 //        lifecycleScope.launch {
 //
 //            flowDemo()
@@ -157,7 +177,7 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 
             binding.btnTextRecog.id -> {
 
-               startActivity(Intent(this, TextRecognizerActivity::class.java))
+               startActivity(Intent(this, CameraTextDetectActivity::class.java))
 
             }
 
@@ -185,4 +205,32 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 //            Toast.makeText(this, "No phone numbers found", Toast.LENGTH_LONG).show();
 //        }
     }
+}
+
+enum class FruitTitle {
+    APPLE, BANANA, CHERRY, CITRUS, GRAPES,
+    GREEN_APPLE, ORANGE, PAPAYA, PEACH, PEACH1, PINEAPPLE, PUMPKIN, RASPBERRY, WATERMELON
+}
+
+data class FruitModel(
+    var id: Int,
+    var title: FruitTitle,
+    var image: String,
+    var price: String,
+    var color: String
+)
+
+// Initializing Enum Constants
+enum class CardType(val color: String) {
+    SILVER("gray"),
+    GOLD("yellow"),
+    PLATINUM("black")
+}
+
+enum class Currency(val code: String, val symbol: String) {
+    USD("USD", "$"),
+    EUR("EUR", "€"),
+    GBP("GBP", "£"),
+    JPY("JPY", "¥"),
+    INR("INR", "₹")
 }
