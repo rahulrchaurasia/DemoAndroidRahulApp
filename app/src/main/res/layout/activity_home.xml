@@ -21,107 +21,143 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="txtReceiver"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        -->
+<!--       >-->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/childparent"
-        android:layout_marginTop="@dimen/_40dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtReceiver"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="@dimen/twenty_four"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/childparent"
+            android:layout_marginTop="@dimen/_40dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtReceiver"
+            app:layout_constraintStart_toStartOf="parent"
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnHilt"
-            app:layout_constraintTop_toTopOf="@+id/childparent"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Hilt Basic"
-           style="@style/outlined_button"
-            android:textColor="@color/Brown"
+            android:layout_marginHorizontal="@dimen/twenty_four"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNavComp"
-            app:layout_constraintTop_toBottomOf="@+id/btnHilt"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-           android:text="Navigation Component"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAutoComplete"
+                app:layout_constraintTop_toTopOf="@+id/childparent"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Auticomplete DropDown"
+                style="@style/outlined_button"
+                android:textColor="@color/Brown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
-            android:textColor="@color/Brown"
-            style="@style/outlined_button"
-            android:layout_marginTop="@dimen/eight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAPI"
+                app:layout_constraintTop_toBottomOf="@+id/btnAutoComplete"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="API Call"
+                style="@style/outlined_button"
+                android:textColor="@color/Brown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFlow"
-            app:layout_constraintTop_toBottomOf="@+id/btnNavComp"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Flow Demo"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHilt"
+                app:layout_constraintTop_toBottomOf="@+id/btnAPI"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Hilt Basic"
+                style="@style/outlined_button"
+                android:textColor="@color/Brown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
-            style="@style/solid_button"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNavComp"
+                app:layout_constraintTop_toBottomOf="@+id/btnHilt"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Navigation Component"
 
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/eight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDesignPattern"
-            android:layout_marginTop="@dimen/eight"
-            app:layout_constraintTop_toBottomOf="@+id/btnFlow"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Design Pattern"
-            style="@style/customGreenButton"
 
-            android:textColor="@color/white"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFlow"
+                app:layout_constraintTop_toBottomOf="@+id/btnNavComp"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Demo"
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDeviceNo"
-            android:layout_marginTop="@dimen/eight"
-            app:layout_constraintTop_toBottomOf="@+id/btnDesignPattern"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Get Phone Number"
-            style="@style/customGreenButton"
+                style="@style/solid_button"
 
-            android:textColor="@color/white"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnTextRecog"
-            app:layout_constraintTop_toBottomOf="@+id/btnDeviceNo"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Text Recognizer"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/white"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDesignPattern"
+                android:layout_marginTop="@dimen/eight"
+                app:layout_constraintTop_toBottomOf="@+id/btnFlow"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Design Pattern"
+                style="@style/customGreenButton"
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFileUpload"
-            style="@style/outlined_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/eight"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
-            android:text="File Upload"
-            android:textColor="@color/Brown"
-            app:layout_constraintEnd_toEndOf="@+id/childparent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/childparent"
-            app:layout_constraintTop_toBottomOf="@+id/btnTextRecog" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDeviceNo"
+                android:layout_marginTop="@dimen/eight"
+                app:layout_constraintTop_toBottomOf="@+id/btnDesignPattern"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Get Phone Number"
+                style="@style/customGreenButton"
+
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGetPhotoFromContact"
+                app:layout_constraintTop_toBottomOf="@+id/btnDeviceNo"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Read Photo from Contact"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFileUpload"
+                style="@style/outlined_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/eight"
+
+                android:text="File Upload"
+                android:textColor="@color/Brown"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintTop_toBottomOf="@+id/btnGetPhotoFromContact" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </ScrollView>-->
+
+
 
 
 

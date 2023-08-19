@@ -237,16 +237,19 @@ class NavigationAdvanceActivity : AppCompatActivity() {
        */
 
 
+
     override fun onBackPressed() {
-        if (getOnBackPressedDispatcher().hasEnabledCallbacks()) {
-            super.onBackPressed()  // dispatch event to custom callback, which implemented in fragment
-        } else {
-            // use activity backPressed if there is no callback          added to mOnBackPressedDispatcher
 
-            Toast.makeText(this@NavigationAdvanceActivity,"Back press from activity", Toast.LENGTH_SHORT).show()
-
-            this.finish()
-        }
+        onBackPressedDispatcher.onBackPressed()
+//        if (getOnBackPressedDispatcher().hasEnabledCallbacks()) {
+//            super.onBackPressed()  // dispatch event to custom callback, which implemented in fragment
+//        } else {
+//            // use activity backPressed if there is no callback          added to mOnBackPressedDispatcher
+//
+//            Toast.makeText(this@NavigationAdvanceActivity,"Back press from activity", Toast.LENGTH_SHORT).show()
+//
+//            this.finish()
+//        }
     }
 
 

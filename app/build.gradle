@@ -36,7 +36,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
+
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -44,9 +47,11 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
+
+
 
     // Gson to Json
     implementation 'com.google.code.gson:gson:2.9.0'
@@ -59,21 +64,23 @@ dependencies {
 
 
     // LiveData lifeCycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    //implementation "android.arch.lifecycle:extensions:1.1.1"
 
     // ViewModel ktx [For Factory method its handle its self]
-    implementation "androidx.activity:activity-ktx:1.6.1"
-    implementation "androidx.fragment:fragment-ktx:1.5.5"
+    implementation "androidx.activity:activity-ktx:1.7.2"
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
 
     // coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    def coroutines_version = "1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
 
 
       //Navigation Graph
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
 
     //Hilt - Dependency Injection
     //*************************************************************
@@ -115,8 +122,12 @@ dependencies {
     // Image Cropper
     implementation 'com.github.yalantis:ucrop:2.2.6'
 
-    implementation 'com.webengage:android-sdk:3.+'
+
  //   implementation 'com.google.android.gms:play-services-ads:22.2.0'
+
+    // Contact Details
+//    implementation 'com.github.vestrel00.contacts-android:core:0.3.0'
+//    implementation 'com.github.vestrel00.contacts-android:async:0.3.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

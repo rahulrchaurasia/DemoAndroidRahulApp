@@ -183,7 +183,7 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
         }.flowOn(Dispatchers.IO)
             /*
            // Mark : createFlowChain() is called in .launch(Dispatchers.Main)
-           hence by default collect called in main Thread no need to agin switch it in
+           hence by default collect called in main Thread no need to again switch it in
            main thread like withContext(Dispatchers.Io)like in courotines.
               */
             .collect{
