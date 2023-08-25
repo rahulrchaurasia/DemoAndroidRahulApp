@@ -1,7 +1,6 @@
 package com.policyboss.demoandroidapp.UI
 
 import android.Manifest
-import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
@@ -14,22 +13,34 @@ import android.os.ParcelFileDescriptor
 import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+
+
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.DesignPattern.DesignPatternDemoActivity
 import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
 import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
 import com.policyboss.demoandroidapp.HiltDemo.HiltDemoActivity
+import com.policyboss.demoandroidapp.KotlinDemo.KotlinDemoActivity
 import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.AutoCompleteDemo2.AutoCompDemo2Activity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
+import com.policyboss.demoandroidapp.Utility.Utility
 import com.policyboss.demoandroidapp.databinding.ActivityHomeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 
@@ -93,7 +104,7 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         binding.btnFlow.setOnClickListener(this)
         binding.btnDeviceNo.setOnClickListener(this)
         binding.btnFileUpload.setOnClickListener(this)
-
+        binding.btnKotlinDemo.setOnClickListener(this)
     }
 
     suspend fun flowDemo(){
@@ -158,6 +169,8 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
             binding.btnAPI.id -> {
 
                // startActivity(Intent(this, Log::class.java))
+                downloadPDF(this@HomeActivity)
+              //  shareText(this@HomeActivity)
 
             }
             binding.btnAutoComplete.id -> {
@@ -198,11 +211,18 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
             binding.btnGetPhotoFromContact.id -> {
 
                 getPhotoFromDevice(this@HomeActivity)
+
+
             }
 
             binding.btnFileUpload.id -> {
 
                 startActivity(Intent(this, FileUploadActivity::class.java))
+
+            }
+            binding.btnKotlinDemo.id -> {
+
+                startActivity(Intent(this, KotlinDemoActivity::class.java))
 
             }
         }
@@ -258,14 +278,99 @@ enum class Currency(val code: String, val symbol: String) {
 // Function to open a contact's display photo as Bitmap by display name
 
 
+
+ fun downloadPDF(context: Context){
+
+     val context = context.applicationContext // Replace with your context
+
+     val url = "https://origin-cdnh.policyboss.com/fmweb/policyboss-pro/uploads/sales_materialpb/814concern.jpg"
+     val url1 = "https://origin-cdnh.policyboss.com/fmweb/policyboss-pro/uploads/salesmaterial/motor.png"
+     val url2 = "https://www.africau.edu/images/default/sample.pdf" // Replace with your file URL
+   //  val mimeType = "application/pdf" // Replace with the appropriate MIME type
+     val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+     val filename = "sampleDD"+ timeStamp // Replace with your desired filename
+
+   CoroutineScope(Dispatchers.IO).launch {
+
+       val mimeType = Utility.getMimeTypeFromUrl(url2)
+
+       val downloadedUritemp = async {
+           Utility.downloadFileFromUri(context, url2, mimeType, filename)
+       }
+
+      val downloadedUri =  downloadedUritemp.await()
+      withContext(Dispatchers.Main) {
+           if (downloadedUri != null) {
+
+               Toast.makeText(context,"Fille Downloaded",Toast.LENGTH_LONG).show()
+               shareDara(context, fileUri =downloadedUri,mimeType = mimeType )
+              // shareText(context)
+           } else {
+               // File download failed
+               Toast.makeText(context,"Fille Downloaded Failed",Toast.LENGTH_LONG).show()
+           }
+       }
+
+   }
+
+ }
+
+
+fun shareDara(context: Context,fileUri: Uri, mimeType: String){
+
+
+    val shareIntent = Intent(Intent.ACTION_SEND)
+    shareIntent.type = mimeType // Set the MIME type based on the file type
+   // shareIntent.type = "image/*"
+    shareIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    shareIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+    shareIntent.putExtra(Intent.EXTRA_TEXT, "Text Message")
+// Set the URI as the content to share
+    shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+
+// Optionally set a subject for the shared content
+    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Sharing Content")
+
+// Start the sharing activity
+
+    context.startActivity(Intent.createChooser(shareIntent, "Share File"))
+
+}
+
+fun shareText(context: Context){
+
+
+    val shareIntent = Intent(Intent.ACTION_SEND)
+
+    shareIntent.type = "text/plain" // Set the MIME type for plain text
+    shareIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    shareIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+
+
+    shareIntent.putExtra(Intent.EXTRA_TEXT, "Text Message")
+// Set the URI as the content to share
+ //   shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+
+// Optionally set a subject for the shared content
+    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Sharing Content")
+
+// Start the sharing activity
+
+    context.startActivity(Intent.createChooser(shareIntent, "Share File"))
+
+}
  fun getPhotoFromDevice(context: Context){
 
-     val contactIdsWithPhotos = getAllContactIdsWithPhotos(context )
+     val contactIdsWithPhotos = getAllContactsWithPhotos(context )
 
 
      val myData  = mutableListOf<Bitmap>()
      for (contactId in contactIdsWithPhotos) {
-         val inputStream = openPhoto(context, contactId)
+         val inputStream = openPhoto(context, contactId.contactId)
 
          //val inputStream = openDisplayPhoto(context, contactId)
          val bitmap = BitmapFactory.decodeStream(inputStream)
@@ -301,7 +406,7 @@ enum class Currency(val code: String, val symbol: String) {
 
 
 // Function to retrieve all contact IDs with photos
-fun getAllContactIdsWithPhotos(context: Context): List<Long> {
+fun getAllContactsWithPhotos1(context: Context): List<Long> {
     val contactIdsWithPhotos = mutableListOf<Long>()
 
     val projection = arrayOf(ContactsContract.Contacts._ID)
@@ -324,6 +429,55 @@ fun getAllContactIdsWithPhotos(context: Context): List<Long> {
     return contactIdsWithPhotos
 }
 
+
+fun getAllContactsWithPhotos(context: Context): List<ContactInfo> {
+    val contactsWithPhotos = mutableListOf<ContactInfo>()
+
+    val projection = arrayOf(
+        ContactsContract.Contacts._ID,
+        ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
+    )
+    val selection = "${ContactsContract.Contacts.PHOTO_URI} IS NOT NULL"
+    val selectionArgs = null
+
+    context.contentResolver.query(
+        ContactsContract.Contacts.CONTENT_URI,
+        projection,
+        selection,
+        selectionArgs,
+        null
+    )?.use { cursor ->
+        while (cursor.moveToNext()) {
+            val contactId = cursor.getLong(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID))
+            val displayName = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY))
+
+            val mobileNumbers = mutableListOf<String>()
+
+            val phoneProjection = arrayOf(
+                ContactsContract.CommonDataKinds.Phone.NUMBER
+            )
+            val phoneSelection = "${ContactsContract.CommonDataKinds.Phone.CONTACT_ID} = ?"
+            val phoneSelectionArgs = arrayOf(contactId.toString())
+
+            context.contentResolver.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                phoneProjection,
+                phoneSelection,
+                phoneSelectionArgs,
+                null
+            )?.use { phoneCursor ->
+                while (phoneCursor.moveToNext()) {
+                    val phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                    mobileNumbers.add(phoneNumber)
+                }
+            }
+
+            contactsWithPhotos.add(ContactInfo(contactId, displayName, mobileNumbers))
+        }
+    }
+
+    return contactsWithPhotos
+}
 
 fun openPhoto(context: Context, contactId: Long): InputStream? {
     val contactUri: Uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId)
@@ -526,3 +680,10 @@ fun getAllContactIdsAndPhotoUris(context: Context): List<Pair<Long, Uri?>> {
 
     return contactList
 }
+
+
+data class ContactInfo(
+    val contactId: Long,
+    val displayName: String,
+    val mobileNumbers: List<String>
+)

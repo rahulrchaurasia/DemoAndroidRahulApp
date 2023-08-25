@@ -1,23 +1,22 @@
 package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo
 
+//import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
-import androidx.navigation.NavArgs
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.dataModel.SampleData
-import com.policyboss.demoandroidapp.databinding.FragmentChooseReceiverBinding
+import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.FragmentSendCashBinding
-import java.util.Objects
+
 
 /*
 Back navigation in Fragment :---
@@ -40,6 +39,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
     private val callback = object : OnBackPressedCallback(true){
 
         override fun handleOnBackPressed() {
+
             findNavController().popBackStack(R.id.homeDashBoardFragment,false)
         }
 
@@ -62,7 +62,6 @@ class sendCashFragment : Fragment()  , OnClickListener{
         _binding = FragmentSendCashBinding.inflate(inflater,container,false)
 
 
-
         setOnClickListener()
 
         return binding.root
@@ -70,6 +69,18 @@ class sendCashFragment : Fragment()  , OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+
+        val toolbar = requireActivity().findViewById<Toolbar>(com.policyboss.demoandroidapp.R.id.toolbar)
+
+//        toolbar.setNavigationOnClickListener {
+//
+//
+//            binding.root.findNavController().popBackStack(R.id.homeDashBoardFragment,false)
+//
+//        }
 
         // *************** Receiver Using Bundle  ***************
 
@@ -82,6 +93,18 @@ class sendCashFragment : Fragment()  , OnClickListener{
 
        //  binding.etAmount.setText(SampleData.defaultAmount.value.toString())
 
+
+        // region BackPressHandling Use this or below both are same
+//        val callback = object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                // Your custom back navigation logic here
+//                // For example:
+//                Toast.makeText(requireContext(), "Custom back press in fragment", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+        //endregion
         SampleData.defaultAmount.observe(viewLifecycleOwner){
 
             binding.etAmount.setText(it.toString())
@@ -108,6 +131,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
 
     }
 
+
     fun setOnClickListener(){
 
         binding.btnSend.setOnClickListener(this)
@@ -120,7 +144,10 @@ class sendCashFragment : Fragment()  , OnClickListener{
         callback.remove()
     }
 
+    override fun onResume() {
+        super.onResume()
 
+    }
 
     override fun onClick(view: View?) {
 

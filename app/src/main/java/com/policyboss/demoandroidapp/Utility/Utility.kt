@@ -186,5 +186,13 @@ object Utility {
     }
 
 
+    fun getMimeTypeFromUrl(url: String): String {
+        return when {
+            url.endsWith(".pdf", ignoreCase = true) -> "application/pdf"
+            url.endsWith(".jpg", ignoreCase = true) || url.endsWith(".jpeg", ignoreCase = true) -> "image/jpeg"
+            url.endsWith(".png", ignoreCase = true) -> "image/png"
+            else -> "application/octet-stream" // Default MIME type for unknown file types
+        }
+    }
 
 }

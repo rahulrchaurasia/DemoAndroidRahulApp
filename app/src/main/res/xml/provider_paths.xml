@@ -1,30 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    
-    <files-path
-        name="camera_photo"
-        path="."/>
-
-    <external-path name="external_files" path="." />
-
-
-    <external-cache-path
-        name="external_cache_files"
-        path="." />
-    <external-files-path
-        name="external_files_files"
-        path="." />
-
-    <external-files-path
-        name="files_root"
-        path="/" />
-
-
-
-    <external-path name="appdownloads" path="Download/" />
-    <external-path name="files" path="/" />
-    <root-path name="root" path="." />
-
 
     <external-path name="external_files" path="." />
 
@@ -34,8 +9,41 @@
     <external-files-path
         name="external_files_files"
         path="." />
+<!--    <files-path-->
+<!--        name="camera_photo"-->
+<!--        path="."/>-->
 
-    <external-files-path
-        name="files_root"
-        path="/" />
+<!--    <external-path name="external_files" path="." />-->
+
+
+<!--    <external-cache-path-->
+<!--        name="external_cache_files"-->
+<!--        path="." />-->
+<!--    <external-files-path-->
+<!--        name="external_files_files"-->
+<!--        path="." />-->
+
+<!--    <external-files-path-->
+<!--        name="files_root"-->
+<!--        path="/" />-->
+
+
+
+<!--    <external-path name="appdownloads" path="Download/" />-->
+<!--    <external-path name="files" path="/" />-->
+<!--    <root-path name="root" path="." />-->
+
+
+<!--    <external-path name="external_files" path="." />-->
+
+<!--    <external-cache-path-->
+<!--        name="external_cache_files"-->
+<!--        path="." />-->
+<!--    <external-files-path-->
+<!--        name="external_files_files"-->
+<!--        path="." />-->
+
+<!--    <external-files-path-->
+<!--        name="files_root"-->
+<!--        path="/" />-->
 </paths>

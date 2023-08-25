@@ -2,19 +2,24 @@ package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.postDelayed
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.policyboss.demoandroidapp.NavGraphDirections
 import com.policyboss.demoandroidapp.R
+import com.policyboss.demoandroidapp.Utility.hideKeyboard
 import com.policyboss.demoandroidapp.Utility.showAlerDialog
+import com.policyboss.demoandroidapp.Utility.showSnackbar
 import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBinding
 
@@ -31,6 +36,9 @@ import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBindin
 
   3> add  setupActionBarWithNavController(navController)
 
+
+    onBackPressedDispatcher.hasEnabledCallbacks()
+    This checks if there are any callbacks registered with the onBackPressedDispatcher
  */
 
 ///***********************  toolbar  *******************/
@@ -61,6 +69,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var listener: NavController.OnDestinationChangedListener
 
+    private var backPressedOnce = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -116,6 +125,18 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         binding.navDrawer.setupWithNavController(navController )
 
 
+        binding.toolbar.setNavigationOnClickListener {
+
+            when(navController.currentDestination?.id){
+                R.id.sendCashFragment -> {
+                    if (onBackPressedDispatcher.hasEnabledCallbacks())
+                        onBackPressedDispatcher.onBackPressed()
+                    else
+                        navController.navigateUp()
+                }
+                else -> navController.navigateUp()
+            }
+        }
 
         listener =  NavController.OnDestinationChangedListener{contoller, destination , argument ->
 
@@ -199,28 +220,35 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         return  navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    // region Menu WHen Apply on Activity
+    /*
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//
+//        menuInflater.inflate(R.menu.main_menu,menu)
+//        return super.onCreateOptionsMenu(menu)
+//
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//
+//      return when(item.itemId) {
+//
+//
+//
+//          R.id.item_about_app -> {
+//
+//              val action = NavGraphDirections.actionGlobalAboutAppFragment()
+//              navController.navigate(action)
+//
+//              return true
+//          }
+//
+//          else -> item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+//      }
+//    }
 
-        menuInflater.inflate(R.menu.main_menu,menu)
-        return super.onCreateOptionsMenu(menu)
-
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-      return when(item.itemId) {
-
-          R.id.item_about_app -> {
-
-              val action = NavGraphDirections.actionGlobalAboutAppFragment()
-              navController.navigate(action)
-
-              return true
-          }
-          else -> item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-      }
-    }
-
+*/
+    //endregion
 
     override fun onResume() {
         navController.addOnDestinationChangedListener(listener)
@@ -240,7 +268,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-        onBackPressedDispatcher.onBackPressed()
+        // onBackPressedDispatcher.onBackPressed()
 //        if (getOnBackPressedDispatcher().hasEnabledCallbacks()) {
 //            super.onBackPressed()  // dispatch event to custom callback, which implemented in fragment
 //        } else {
@@ -250,6 +278,55 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 //
 //            this.finish()
 //        }
+
+
+
+//        if (supportFragmentManager.backStackEntryCount > 0) {
+//            // Handle fragment back navigation
+//            supportFragmentManager.popBackStack()
+//        } else {
+//            // Handle activity back navigation
+//            onBackPressedDispatcher.onBackPressed()  // This checks if there are any callbacks registered with the onBackPressedDispatcher
+//        }
+
+        if(onBackPressedDispatcher.hasEnabledCallbacks()){  //// This checks if there are any callbacks registered with the onBackPressedDispatcher
+
+            onBackPressedDispatcher.onBackPressed()
+        }else{
+
+            navController.navigateUp()
+        }
+
+
+        //region using backpress Handle Fragment : But we can also handle via that fragment callback
+        // supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+//        val navController = findNavController(R.id.nav_host_fragment)
+//
+//        // Check if the current destination is actually the start destination (Home screen)
+//        if (navController.graph.startDestinationId == navController.currentDestination?.id) {
+//            // Check if back is already pressed. If yes, then exit the app.
+//            if (backPressedOnce) {
+//                //super.onBackPressed()
+//                onBackPressedDispatcher.onBackPressed()
+//                return
+//            }
+//
+//            backPressedOnce = true
+//            hideKeyboard(binding.root)
+//            showSnackbar(binding.root, "Press back again to Exit")
+//
+//            Handler(Looper.getMainLooper()).postDelayed(2000) {
+//                backPressedOnce = false
+//            }
+//        }
+//
+//        else if(navController.currentDestination?.id == R.id.sendCashFragment){
+//            var prevId = 0
+//            prevId = navController.previousBackStackEntry?.destination?.id ?: 0
+//
+//            showToast("Fom Toolbar")
+//        }
+        //endregion
     }
 
 

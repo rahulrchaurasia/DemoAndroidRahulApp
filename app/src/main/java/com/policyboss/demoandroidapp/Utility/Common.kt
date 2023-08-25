@@ -6,9 +6,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import java.math.RoundingMode
 import java.net.Inet4Address
 import java.net.NetworkInterface
 import java.net.SocketException
+import java.text.DecimalFormat
 import java.util.*
 
 
@@ -53,3 +55,9 @@ fun Context.getLocalIpAddress(): String? {
 }
 
 fun Context.getUniqueID(): String = UUID.randomUUID().toString()
+
+fun Context.twoDecimalFormat(value: Double): String {
+    val df = DecimalFormat("#.##")
+    df.roundingMode = RoundingMode.DOWN
+    return df.format(value)
+}

@@ -9,15 +9,15 @@
         app:showAsAction="ifRoom|withText"
         android:visible="true"
         android:iconTint="@color/white"
-        android:title="Setting"/>
+        android:title="Camera"/>
 
 
     <item
         android:id="@+id/action_second"
         android:icon="@drawable/common_full_open_on_phone"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"
-        android:title="Setting"/>
+        app:showAsAction="collapseActionView"
+        android:title="About App"/>
 
 
 

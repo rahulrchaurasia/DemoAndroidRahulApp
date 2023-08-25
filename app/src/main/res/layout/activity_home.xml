@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".UI.HomeActivity">
 
 
@@ -16,31 +17,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+
         android:layout_marginTop="@dimen/twenty_four"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="txtReceiver"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        -->
-<!--       >-->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtReceiver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/_40dp"
+       >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/childparent"
-            android:layout_marginTop="@dimen/_40dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtReceiver"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/twenty_four">
+<!--            app:layout_constraintTop_toBottomOf="@+id/txtReceiver"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
 
-            android:layout_marginHorizontal="@dimen/twenty_four"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+<!--            android:layout_marginHorizontal="@dimen/twenty_four"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAutoComplete"
@@ -58,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btnAutoComplete"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="API Call"
+                android:text="Download PDF and Share"
                 style="@style/outlined_button"
                 android:textColor="@color/Brown"
                 android:layout_width="0dp"
@@ -115,9 +121,9 @@
 
                 android:textColor="@color/white"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="48dp"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeviceNo"
                 android:layout_marginTop="@dimen/eight"
                 app:layout_constraintTop_toBottomOf="@+id/btnDesignPattern"
@@ -128,7 +134,7 @@
 
                 android:textColor="@color/white"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="48dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnGetPhotoFromContact"
@@ -154,8 +160,24 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintTop_toBottomOf="@+id/btnGetPhotoFromContact" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnKotlinDemo"
+                style="@style/outlined_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/eight"
+
+                android:text="Kotlin Demo"
+                android:textColor="@color/Brown"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintTop_toBottomOf="@+id/btnFileUpload" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-<!--    </ScrollView>-->
+   </ScrollView>
 
 
 

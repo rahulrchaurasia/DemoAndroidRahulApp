@@ -3,12 +3,23 @@ package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
 import com.policyboss.demoandroidapp.Constant
+import com.policyboss.demoandroidapp.NavGraphDirections
 import com.policyboss.demoandroidapp.R
+import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.FragmentChooseReceiverBinding
 import com.policyboss.demoandroidapp.databinding.FragmentHomeDashBoardBinding
 import com.policyboss.demoandroidapp.databinding.FragmentViewTransactionBinding
@@ -37,6 +48,7 @@ class ChooseReceiverFragment : Fragment() {
 
         _binding = FragmentChooseReceiverBinding.inflate(inflater,container,false)
 
+
         return binding.root
     }
 
@@ -44,6 +56,7 @@ class ChooseReceiverFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        setupMenu()
 
         binding.btnNext.setOnClickListener{
 
@@ -75,6 +88,46 @@ class ChooseReceiverFragment : Fragment() {
         }
     }
 
+
+    fun setupMenu(){
+
+        // For Creating Menu
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider{
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.demo_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+
+                when(menuItem.itemId){
+
+                    R.id.action_camera ->{
+
+                        requireActivity().showToast("action_camera")
+                    }
+                    R.id.action_second ->{
+
+                        val action = NavGraphDirections.actionGlobalAboutAppFragment()
+                        findNavController().navigate(action)
+                        requireActivity().showToast("action_second")
+                    }
+                }
+                return false
+            }
+
+
+
+        },viewLifecycleOwner,Lifecycle.State.RESUMED)
+    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.demo_menu, menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return NavigationUI.onNavDestinationSelected(item!!,
+//            requireView().findNavController())
+//                || super.onOptionsItemSelected(item)
+//    }
    fun getNavOption() : NavOptions {
 
      return  NavOptions.Builder()
@@ -95,6 +148,8 @@ class ChooseReceiverFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
     }
+
 
 }
