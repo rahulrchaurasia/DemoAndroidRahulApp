@@ -23,6 +23,7 @@ class ConfirmDialogFragment : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setCancelable(false)    // for prevent dialog to dismiss.
     }
 
     override fun onCreateView(

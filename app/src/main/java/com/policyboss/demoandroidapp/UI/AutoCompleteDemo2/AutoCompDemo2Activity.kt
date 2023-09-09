@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.RoundedCorner
 import android.view.View
 import android.view.View.GONE
 import android.widget.ArrayAdapter
@@ -14,9 +15,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.DataModel.BankModel.BankEntity
+import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.Repository.LoginRepository
 import com.policyboss.demoandroidapp.RetrofitHelper
 import com.policyboss.demoandroidapp.UI.AutoComplete.AutoCompleteActivity
@@ -26,6 +31,7 @@ import com.policyboss.demoandroidapp.ViewModel.LoginViewModelFactory
 import com.policyboss.demoandroidapp.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.launch
+import okhttp3.internal.concurrent.formatDuration
 
 
 class AutoCompDemo2Activity : AppCompatActivity() {
@@ -60,7 +66,17 @@ class AutoCompDemo2Activity : AppCompatActivity() {
         binding.autoText.addTextChangedListener(textWatcher)
         binding.customerTextView.addTextChangedListener(textWatcher)
 
-       // setListenerForRecycler()
+        binding.imgLogo.load("https://via.placeholder.com/300.png") {
+
+            placeholder(R.drawable.camera_new)
+            crossfade(true)
+           crossfade(800 )
+          // transformations(RoundedCornersTransformation(30f))
+            transformations(CircleCropTransformation())
+
+
+        }
+        // setListenerForRecycler()
 
         lifecycleScope.launch{
 
