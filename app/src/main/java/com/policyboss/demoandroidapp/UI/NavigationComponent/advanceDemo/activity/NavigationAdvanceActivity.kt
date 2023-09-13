@@ -85,6 +85,9 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         // For Showing Toolbar in Fragment
         // Find FragmentContainerView using its  id here nav_host_fragment  and set it in setupActionBarWithNavController
         // Get the NavHostFragment
+
+        //  navController = findNavController(R.id.nav_host_fragment)
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         // Get the NavController associated with the NavHostFragmen
@@ -113,9 +116,9 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.homeDashBoardFragment, R.id.settingFragment, R.id.notificationFragment),
-            binding.drawerLayout    // Adding drawerLayout in App bar
+            binding.drawerLayout    // Adding drawerLayout in App bar ie for Hamburger icon to show
         )
-       // or   2>
+       // or   2>add navController and appBar which have bottom nav and Navigattion Drawer  into toolbar
         setupActionBarWithNavController(navController,appBarConfiguration)
 
         // For Bottom nav connect to navController
@@ -218,6 +221,8 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return  navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+
+        // Note : we added (appBarConfiguration) bec it used to click on default hamburger icon
     }
 
     // region Menu WHen Apply on Activity

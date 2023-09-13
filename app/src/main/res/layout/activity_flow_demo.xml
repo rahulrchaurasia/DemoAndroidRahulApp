@@ -21,7 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:elevation="0dp"
-
+            android:contentInsetStart="0dp"
+            android:contentInsetEnd="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="xsx" />
 
     </com.google.android.material.appbar.AppBarLayout>

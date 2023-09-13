@@ -21,7 +21,7 @@
         <item name="backgroundTint">@color/orange_button</item>
         <item name="android:focusable">true</item>
         <item name="android:textSize">17sp</item>
-        <item name="android:minHeight">38dp</item>
+
 
 
     </style>

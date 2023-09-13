@@ -98,6 +98,12 @@ dependencies {
      implementation 'io.coil-kt:coil:2.3.0'
 
 
+    // location
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+//    implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
     // Add CameraX dependencies
     implementation 'androidx.camera:camera-core:1.2.3'
 

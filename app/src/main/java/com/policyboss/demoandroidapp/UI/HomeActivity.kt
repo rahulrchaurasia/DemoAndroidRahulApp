@@ -24,6 +24,7 @@ import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
 import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
 import com.policyboss.demoandroidapp.HiltDemo.HiltDemoActivity
 import com.policyboss.demoandroidapp.KotlinDemo.KotlinDemoActivity
+import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.AutoCompleteDemo2.AutoCompDemo2Activity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
@@ -94,6 +95,8 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 
     fun setOnClickListener(){
 
+
+        binding.btnDashBoard.setOnClickListener(this)
         binding.btnAPI.setOnClickListener(this)
         binding.btnAutoComplete.setOnClickListener(this)
         binding.btnAutoComplete.setOnClickListener(this)
@@ -172,6 +175,12 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
                 downloadPDF(this@HomeActivity)
               //  shareText(this@HomeActivity)
 
+            }
+            binding.btnDashBoard.id -> {
+
+                startActivity(Intent
+                    (this, DashboardActivity::class.java)
+                    .putExtra("csc","scw"))
             }
             binding.btnAutoComplete.id -> {
 

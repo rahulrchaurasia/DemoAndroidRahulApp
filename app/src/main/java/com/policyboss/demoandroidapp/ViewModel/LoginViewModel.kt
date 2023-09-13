@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel (var loginRepository: LoginRepository) : ViewModel(){
 
-
     private val loginMutableStateFlow  :  MutableStateFlow<APIState<BankDetailResponse>> =  MutableStateFlow<APIState<BankDetailResponse>>(APIState.Empty())
 
     val LoginStateFlow : StateFlow<APIState<BankDetailResponse>>

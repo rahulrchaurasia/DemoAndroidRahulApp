@@ -19,6 +19,11 @@
         app:showAsAction="collapseActionView"
         android:title="About App"/>
 
-
+    <item
+        android:id="@+id/settingFragment"
+        android:title="Setting"
+        android:menuCategory="secondary"
+        app:showAsAction="never"
+        />
 
 </menu>
