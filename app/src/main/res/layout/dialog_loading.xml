@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center">
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="25dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            >
+
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/PBarTheme"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"/>
+
+            <TextView
+                android:id="@+id/txtMessage"
+                android:text="Please Wait..."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"
+                />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

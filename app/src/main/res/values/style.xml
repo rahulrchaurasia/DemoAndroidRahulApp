@@ -5,6 +5,11 @@
 
 
 
+    <style name="PBarTheme">
+
+        <item name="colorSecondary">@color/red_custom</item>
+
+    </style>
 
     <!--button started -->
 
@@ -199,6 +204,8 @@
     <style name="sub_textview_orange_12" parent="sub_textview_12">
         <item name="android:textColor">@color/orange</item>
     </style>
+
+
 
     <!--textview end-->
 

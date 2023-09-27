@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.databinding.ActivityKotlinDemoBinding
 
@@ -29,6 +30,8 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
     fun setOnClickListener(){
 
         binding.btnCompanionDemo.setOnClickListener(this)
+        binding.btnMap.setOnClickListener(this)
+        binding.btnClose.setOnClickListener(this)
     }
 
 
@@ -41,6 +44,16 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
 
                calledCompanion()
            }
+
+            binding.btnMap.id -> {
+
+                mapDemo()
+            }
+
+            binding.btnClose.id -> {
+
+                this.finish()
+            }
 
         }
     }
@@ -58,8 +71,32 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
         Log.d(TAG, ""+StudentData.SCHOOL_NAME)
     }
 
+    fun mapDemo(){
+
+
+        val emp: List<Employee> = listOf(
+            Employee(1, "John"),
+            Employee(2, "Alice"),
+            Employee(3, "Bob")
+        )
+
+        val empDetail: List<EmployeeDetail> = emp.map { employee ->
+            // Create EmployeeDetail objects using the data from the emp list
+            EmployeeDetail(
+                id = employee.id,
+                name = employee.name,
+                detail = "Default Detail", // You can replace this with the actual detail value
+                mob = "Default Mobile"     // You can replace this with the actual mobile value
+            )
+        }
+
+        Log.d(Constant.TAG,empDetail.toString())
+    }
+
 }
 
+data class Employee(val id: Int, val name: String)
+data class EmployeeDetail(val id: Int, val name: String, val detail: String, val mob: String)
 
 
 /*

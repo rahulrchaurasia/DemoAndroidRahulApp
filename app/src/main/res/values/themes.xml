@@ -25,8 +25,11 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
-<!--     For Handling Toolbar in Fragmnet of Navigation Comp weneed to remove default NoActionBar theme  -->
+<!--     For Handling Toolbar in Fragmnet of Navigation Comp we need to remove default NoActionBar theme  -->
     <style name="Theme.DemoAndroidApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.DemoAndroidApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
      <!--  for bottomsheet Dialog Theme  -->
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
