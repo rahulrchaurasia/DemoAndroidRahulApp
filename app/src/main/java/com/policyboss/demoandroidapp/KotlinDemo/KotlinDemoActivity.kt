@@ -80,6 +80,8 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
             Employee(3, "Bob")
         )
 
+
+
         val empDetail: List<EmployeeDetail> = emp.map { employee ->
             // Create EmployeeDetail objects using the data from the emp list
             EmployeeDetail(
@@ -93,9 +95,27 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
         Log.d(Constant.TAG,empDetail.toString())
     }
 
+    fun filterData(){
+
+        val emp: List<Employee> = listOf(
+            Employee(1, "John"),
+            Employee(2, "Alice"),
+            Employee(3, "Bob"),
+            Employee(2, "Alice 2")
+
+        )
+
+        val selectedEmp =  Employee(2, "Alice")
+
+        val index = emp.indexOfFirst { it.id == selectedEmp.id }
+        if (index != -1) {
+            emp[index].isSlected = !emp[index].isSlected
+        }
+    }
+
 }
 
-data class Employee(val id: Int, val name: String)
+data class Employee(val id: Int, val name: String , var  isSlected : Boolean = false)
 data class EmployeeDetail(val id: Int, val name: String, val detail: String, val mob: String)
 
 

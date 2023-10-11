@@ -62,32 +62,59 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:id="@+id/btnCollection"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/btnFixedFlow"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/childparent"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/childparent"-->
-<!--                android:text="Flow Collection"-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSingleSelect"
+                app:layout_constraintTop_toBottomOf="@+id/btnLocationDemo"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="SingleSelect Recyclerview"
 
-<!--                android:textColor="@color/Brown"-->
-<!--                style="@style/outlined_button"-->
-<!--                android:layout_marginTop="@dimen/eight"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"/>-->
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
 
-<!--            <com.google.android.material.button.MaterialButton-->
-<!--                android:id="@+id/btnlembda"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/btnCollection"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/childparent"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/childparent"-->
-<!--                android:text="Flow Lembda"-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMultiSelect"
+                app:layout_constraintTop_toBottomOf="@+id/btnSingleSelect"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Lembda"
 
-<!--                android:textColor="@color/Brown"-->
-<!--                style="@style/outlined_button"-->
-<!--                android:layout_marginTop="@dimen/eight"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"/>-->
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPermission"
+                app:layout_constraintTop_toBottomOf="@+id/btnMultiSelect"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Lembda"
+
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLauncher"
+                app:layout_constraintTop_toBottomOf="@+id/btnPermission"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Lembda"
+
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

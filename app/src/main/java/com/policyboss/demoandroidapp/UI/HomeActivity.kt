@@ -234,6 +234,9 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
                 startActivity(Intent(this, KotlinDemoActivity::class.java))
 
             }
+
+            ///
+
         }
     }
 

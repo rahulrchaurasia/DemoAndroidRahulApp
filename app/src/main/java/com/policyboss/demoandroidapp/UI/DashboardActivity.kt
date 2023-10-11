@@ -4,6 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
+import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
+import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
+import com.policyboss.demoandroidapp.KotlinDemo.KotlinDemoActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
@@ -35,6 +39,14 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
         binding.btnLocationDemo.setOnClickListener(this)
 
+        binding.btnSingleSelect.setOnClickListener(this)
+
+        binding.btnMultiSelect.setOnClickListener(this)
+
+        binding.btnPermission.setOnClickListener(this)
+
+        binding.btnLauncher.setOnClickListener(this)
+
     }
 
     override fun onClick(view: View?) {
@@ -49,6 +61,28 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
                 }
 
                 startActivity(intent)
+            }
+
+            binding.btnSingleSelect.id -> {
+
+                //startActivity(Intent(this, FileUploadActivity::class.java))
+
+            }
+            binding.btnMultiSelect.id -> {
+
+                //startActivity(Intent(this, KotlinDemoActivity::class.java))
+
+            }
+            binding.btnPermission.id -> {
+
+
+                startActivity(Intent(this, MultiplePermissionActivity::class.java))
+
+            }
+            binding.btnLauncher.id -> {
+
+
+                startActivity(Intent(this, ActivityResultLauncherDemoActivity::class.java))
             }
         }
     }
