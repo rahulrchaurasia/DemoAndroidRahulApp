@@ -125,7 +125,7 @@ object AppModuleTwo{
 object PrefManager {
     private lateinit var pref: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-
+    private val TOKEN: String = "token"
     // shared pref mode
 
 
@@ -142,5 +142,9 @@ object PrefManager {
         editor.putString(key, value).apply()
     }
 
+    fun saveToken(token: String) {
+        editor.putString(TOKEN, token).apply()
+    }
 
+    fun getToken() = pref.getString(TOKEN, "")
 }

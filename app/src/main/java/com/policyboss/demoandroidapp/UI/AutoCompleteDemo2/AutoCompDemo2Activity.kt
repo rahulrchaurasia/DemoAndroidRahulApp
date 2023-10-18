@@ -139,6 +139,7 @@ class AutoCompDemo2Activity : AppCompatActivity() {
 
                         }
 
+                        else -> {}
                     }
                 }
             }

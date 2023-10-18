@@ -13,6 +13,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
 
+
         <!-- Status bar color. -->
 <!--        <item name="android:statusBarColor">@color/purple_500</item>-->
         <item name="android:statusBarColor">@color/appBase</item>
@@ -23,6 +24,12 @@
 
 <!--          for bottomsheet Dialog apply-->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+        <!-- edittext style-->
+        <item name="textInputStyle">@style/outlined_edittext</item>
+
+        <item name="android:windowBackground">@color/bg</item>
+
     </style>
 
 <!--     For Handling Toolbar in Fragmnet of Navigation Comp we need to remove default NoActionBar theme  -->
@@ -62,6 +69,35 @@
 
 
 <!--    </style>-->
+
+    <!--Style Edit text-->
+    <style name="outlined_edittext" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeWidth">0.6dp</item> <!--before focused width-->
+        <item name="boxStrokeWidthFocused">1dp</item><!--after focused width-->
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeColor">@color/secondary_text_color</item>
+
+        <!--icon color inside box-->
+        <item name="endIconTint">@color/secondary_text_color</item>
+        <!--box color when error -->
+        <item name="boxStrokeErrorColor">@color/error</item>
+        <!--text color-->
+        <item name="android:textColor">@color/primary_text_color</item>
+        <!--after selecting edittext header text color-->
+        <item name="hintTextColor">@color/primary_text_color</item>
+        <!--before hint text color-->
+        <item name="android:textColorHint">@color/secondary_text_color</item>
+
+        <!--Error show specific to edittext with error message-->
+        <item name="errorEnabled">true</item>
+        <item name="errorTextColor">@color/error</item>
+
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:lines">1</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
 
     <style name="TextInputMaterialStyleDropDown" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name ="boxBackgroundMode">filled</item>

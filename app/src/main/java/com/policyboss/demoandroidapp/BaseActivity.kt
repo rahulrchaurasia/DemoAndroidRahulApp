@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.demoandroidapp.databinding.ActivityBaseBinding
 import com.policyboss.demoandroidapp.databinding.DialogLoadingBinding
+import com.policyboss.demoandroidapp.databinding.LayoutLoadingBinding
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -34,7 +36,7 @@ open class BaseActivity : AppCompatActivity() {
             bindingMain = ActivityBaseBinding.inflate(layoutInflater)
             setContentView(bindingMain.root)
 
-             dialog = Dialog(this)
+           //  dialog = Dialog(this)     // first check if its null than initialize it
 
 
         }
@@ -69,6 +71,64 @@ open class BaseActivity : AppCompatActivity() {
 
 
         }
+
+
+
+    /////////////////   Use below for Loader ////////////////
+
+    //region progress dialog
+
+    fun displayLoadingWithText(
+        view: View,
+        text: String? = "",
+        subText: String? = "",
+        cancelable: Boolean? = false,
+    ) { // function -- context(parent (reference))
+
+        var loadingLayout: LayoutLoadingBinding? = null
+        try {
+            if (!this::dialog.isInitialized) {
+                dialog = Dialog(this)
+                val requestWindowFeature = dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                if (dialog.window != null) {
+
+                    dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+
+                }
+                loadingLayout = LayoutLoadingBinding.inflate(layoutInflater)
+                dialog.setContentView(loadingLayout.root)
+                // dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.setCancelable(cancelable ?: false)
+
+            }
+
+            loadingLayout?.txtMessage?.text = text
+            loadingLayout?.txtDesc?.text = subText
+
+            //hide keyboard
+            //view.context.hideKeyboard(view)
+
+            dialog.let {
+                if (!it.isShowing) {
+                    it.show()
+                }
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun hideLoading() {
+        try {
+            if (this.dialog != null) {
+                dialog.dismiss()
+            }
+        } catch (e: Exception) {
+        }
+    }
+
+    //endregion
 
 
         fun showAlert(msg : String){

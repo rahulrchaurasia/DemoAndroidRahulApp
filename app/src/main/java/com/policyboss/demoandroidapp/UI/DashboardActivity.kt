@@ -10,6 +10,8 @@ import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
 import com.policyboss.demoandroidapp.KotlinDemo.KotlinDemoActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.R
+import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivity
+import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
 import com.policyboss.demoandroidapp.databinding.ActivityFlowDemoBinding
 
@@ -29,10 +31,11 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
             it.setDisplayShowHomeEnabled(true)
             it.title = "DashBoard"
 
-            setClickListener()
+
         }
 
 
+        setClickListener()
     }
 
     fun setClickListener() {
@@ -46,6 +49,10 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
         binding.btnPermission.setOnClickListener(this)
 
         binding.btnLauncher.setOnClickListener(this)
+
+        binding.btnLogin.setOnClickListener(this)
+
+        binding.btnCollapsing.setOnClickListener(this)
 
     }
 
@@ -83,6 +90,17 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
 
                 startActivity(Intent(this, ActivityResultLauncherDemoActivity::class.java))
+            }
+
+            binding.btnLogin.id -> {
+
+
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+            binding.btnCollapsing.id -> {
+
+
+                startActivity(Intent(this, CollapsingToolbarLayoutActivity::class.java))
             }
         }
     }

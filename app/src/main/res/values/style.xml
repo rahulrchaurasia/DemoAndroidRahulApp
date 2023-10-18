@@ -11,6 +11,11 @@
 
     </style>
 
+
+    <style name="semibold_regular_14" parent="semibold_regular_white">
+        <item name="android:textColor">@color/primary_text_color</item>
+    </style>
+
     <!--button started -->
 
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
