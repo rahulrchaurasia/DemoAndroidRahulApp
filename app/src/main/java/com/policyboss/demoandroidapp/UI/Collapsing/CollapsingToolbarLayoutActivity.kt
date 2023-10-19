@@ -2,11 +2,13 @@ package com.policyboss.demoandroidapp.UI.Collapsing
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
+import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.databinding.ActivityCollapsingToolbarLayoutBinding
 import com.policyboss.demoandroidapp.databinding.ActivityMainBinding
@@ -18,7 +20,9 @@ import kotlinx.coroutines.launch
 class CollapsingToolbarLayoutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCollapsingToolbarLayoutBinding
-   // private var offsetChangedListener: AppBarLayout.OnOffsetChangedListener? = null
+//    private var offsetChangedListener: AppBarLayout.OnOffsetChangedListener? = null
+    private lateinit var offsetChangedListenerProperty: AppBarLayout.OnOffsetChangedListener
+
 
     var  thresholdOffset = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +51,67 @@ class CollapsingToolbarLayoutActivity : AppCompatActivity() {
         binding.imgBack.visibility = View.GONE
 
         getCollapseToolbarHeight()
-        handlingVerticalOffset()
+       // handlingVerticalOffset()
+
+        //region Comment
+
+        /*
+        val offsetChangedListener = AppBarLayout.OnOffsetChangedListener({ appBarLayout, verticalOffset ->
+
+            binding.offset.text = " thresholdOffset ${thresholdOffset} verticalOffset  ${verticalOffset} "
+            // Set the elevation to the pinnedLinearLayout
+            // binding.pinnedLayut.elevation = elevation.toFloat()
+            lifecycleScope.launch(Dispatchers.Main) {
+                if (verticalOffset <=  thresholdOffset) {
+                    // Vertical offset is zero, which means content is at the top
+
+                    //delay(1000) // Introduce a 1-second delay
+
+                    binding.pinnedLayut.elevation = 40f // Set the elevation to 40dp
+                    binding.pinnedLayut.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this@CollapsingToolbarLayoutActivity!!,
+                            R.color.off_white
+                        )
+                    ) // Change the background color
+
+                    binding.imgBack.visibility = View.VISIBLE
+
+
+                } else  {
+
+                    //delay(1000)
+                    binding.pinnedLayut.elevation = 0f // Set the elevation to 0dp
+                    binding.pinnedLayut.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this@CollapsingToolbarLayoutActivity!!,
+                            R.color.lightGrey
+                        )
+                    ) // Restore the original background color
+                    binding.imgBack.visibility = View.GONE
+
+
+                }
+            }
+
+        })
+
+        binding.appBar.addOnOffsetChangedListener(offsetChangedListener)
+        Log.d(Constant.TAG,"onCreate: Added Callback")
+        // Store the listener as a property of your activity
+        offsetChangedListenerProperty = offsetChangedListener
+
+         */
+
+        //endRegion
+
     }
 
 
 
-
+    /*
+      here we add directly OffsetChangedListener to abbBar using addOnOffsetChangedListener
+    */
     private fun  handlingVerticalOffset(){
 
 
@@ -132,11 +191,74 @@ class CollapsingToolbarLayoutActivity : AppCompatActivity() {
 
     }
 
-//    override fun onStop() {
-//        super.onStop()
-//        // Removing the listener stored as a property
-//        offsetChangedListener?.let {
+    override fun onStart() {
+        super.onStart()
+
+        val offsetChangedListener = AppBarLayout.OnOffsetChangedListener({ appBarLayout, verticalOffset ->
+
+            binding.offset.text = " thresholdOffset ${thresholdOffset} verticalOffset  ${verticalOffset} "
+            // Set the elevation to the pinnedLinearLayout
+            // binding.pinnedLayut.elevation = elevation.toFloat()
+            lifecycleScope.launch(Dispatchers.Main) {
+                if (verticalOffset <=  thresholdOffset) {
+                    // Vertical offset is zero, which means content is at the top
+
+                    //delay(1000) // Introduce a 1-second delay
+
+                    binding.pinnedLayut.elevation = 40f // Set the elevation to 40dp
+                    binding.pinnedLayut.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this@CollapsingToolbarLayoutActivity!!,
+                            R.color.off_white
+                        )
+                    ) // Change the background color
+
+                    binding.imgBack.visibility = View.VISIBLE
+
+
+                } else  {
+
+                    //delay(1000)
+                    binding.pinnedLayut.elevation = 0f // Set the elevation to 0dp
+                    binding.pinnedLayut.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this@CollapsingToolbarLayoutActivity!!,
+                            R.color.lightGrey
+                        )
+                    ) // Restore the original background color
+                    binding.imgBack.visibility = View.GONE
+
+
+                }
+            }
+
+        })
+
+        binding.appBar.addOnOffsetChangedListener(offsetChangedListener)
+        Log.d(Constant.TAG,"onStart: Added Callback")
+        // Store the listener as a property of your activity
+        offsetChangedListenerProperty = offsetChangedListener
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // Removing the listener stored as a property
+        offsetChangedListenerProperty?.let {
+            binding.appBar.removeOnOffsetChangedListener(it)
+
+            Log.d(Constant.TAG,"OnStop: Remove Callback")
+        }
+    }
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//
+//
+//        // Check if the listener is not null before removing it
+//        offsetChangedListenerProperty?.let {
 //            binding.appBar.removeOnOffsetChangedListener(it)
+//
+//            Log.d(Constant.TAG,"onDestroy: Remove Callback")
 //        }
 //    }
 }

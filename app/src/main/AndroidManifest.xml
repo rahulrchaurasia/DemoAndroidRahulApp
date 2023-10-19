@@ -28,6 +28,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UI.TextScanner.AutoTextReaderActivity"
+            android:theme="@style/Theme.DemoAndroidApp"
+            android:exported="false" />
+        <activity
             android:name=".UI.Collapsing.CollapsingToolbarLayoutActivity"
             android:exported="false" />
         <activity

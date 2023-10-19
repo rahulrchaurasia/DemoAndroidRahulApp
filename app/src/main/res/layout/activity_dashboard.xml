@@ -75,11 +75,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSingleSelect"
+                android:id="@+id/btn_auto_text_reader"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="SingleSelect Recyclerview"
+                android:text="Auto Text Reader"
 
                 android:textColor="@color/Brown"
                 style="@style/outlined_button"
@@ -90,7 +90,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMultiSelect"
-                app:layout_constraintTop_toBottomOf="@+id/btnSingleSelect"
+                app:layout_constraintTop_toBottomOf="@+id/btn_auto_text_reader"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
                 android:text="Flow Lembda"
