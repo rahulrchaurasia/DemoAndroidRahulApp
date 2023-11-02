@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/custom_spinner_layout.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/eight"
+
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/spinner_text"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:text=""
+        style="@style/header_textview_24"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="#000000" 
+
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:maxLines="1"
+
+    android:layout_gravity="center_vertical" />
+
+
+
+</LinearLayout>

@@ -8,6 +8,7 @@ import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncher
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivity
+import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
 import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderActivity
 import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
@@ -41,7 +42,7 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
         binding.btnAutoTextReader.setOnClickListener(this)
 
-        binding.btnMultiSelect.setOnClickListener(this)
+        binding.btnCropImage.setOnClickListener(this)
 
         binding.btnPermission.setOnClickListener(this)
 
@@ -72,9 +73,11 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
                 startActivity(Intent(this, AutoTextReaderActivity::class.java))
 
             }
-            binding.btnMultiSelect.id -> {
+            binding.btnCropImage.id -> {
 
                 //startActivity(Intent(this, KotlinDemoActivity::class.java))
+
+                startActivity(Intent(this, CameraCropImageActivity::class.java))
 
             }
             binding.btnPermission.id -> {

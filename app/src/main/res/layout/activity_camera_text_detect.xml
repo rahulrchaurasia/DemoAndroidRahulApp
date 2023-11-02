@@ -4,14 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.TextRecognizerDemo.CameraTextDetectActivity">
-    <TextureView
-        android:id="@+id/viewFinder"
+    android:background="@color/black"
+    tools:context=".UI.CropImage.CameraCropImageActivity">
+
+
+    <ImageView
+
+        android:id="@+id/imgClose"
+        android:src="@drawable/ic_close_white"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginLeft="@dimen/_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="@dimen/_40dp"
+        android:layout_height="@dimen/_40dp"/>
+    <androidx.camera.view.PreviewView
+        android:id="@+id/cameraView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/overlayView"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+
+        android:background="@drawable/overlay_rectangle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/image_edit"
+            android:padding="@dimen/_8dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        style="@style/solid_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Submit"
+
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="16dp"
+        android:textSize="28sp"
+        android:text="hello"
+        style="@style/header_textview_24"
+        android:textColor="#FFFFFF"
+       app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

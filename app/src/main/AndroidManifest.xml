@@ -27,15 +27,31 @@
         android:theme="@style/Theme.DemoAndroidApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".UI.TextScanner.AutoTextReaderActivity"
+            android:name=".LoginModule.UI.HomeDashboardActivity"
             android:theme="@style/Theme.DemoAndroidApp"
             android:exported="false" />
+        <activity
+            android:name=".OpenAnotherApp.OpenAnotherActivity"
+            android:theme="@style/Theme.DemoAndroidApp"
+            android:exported="false" />
+        <activity
+            android:name=".UI.CustomSpinner.CustomSpinnerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.TextScanner.AutoTextReaderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".UI.Collapsing.CollapsingToolbarLayoutActivity"
             android:exported="false" />
         <activity
             android:name=".UI.Login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".LoginModule.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.DemoAndroidApp" />
         <activity
@@ -78,7 +94,7 @@
             android:name=".ShareData.ShareActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.TextRecognizerDemo.CameraTextDetectActivity"
+            android:name=".UI.CropImage.CameraCropImageActivity"
             android:exported="false"
             android:parentActivityName=".UI.HomeActivity">
             <meta-data

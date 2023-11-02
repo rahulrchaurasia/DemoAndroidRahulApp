@@ -3,7 +3,7 @@ package com.policyboss.demoandroidapp.ViewModel
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetpackdemo.LoginModule.API.APIService
+import com.policyboss.demoandroidapp.LoginModule.API.APIService
 import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.Repository.UserRepository

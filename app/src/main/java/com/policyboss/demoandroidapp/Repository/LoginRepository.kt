@@ -1,7 +1,7 @@
 package com.policyboss.demoandroidapp.Repository
 
 import android.content.Context
-import com.example.jetpackdemo.LoginModule.API.APIService
+import com.policyboss.demoandroidapp.LoginModule.API.APIService
 
 import com.squareup.okhttp.internal.Util
 import kotlinx.coroutines.Dispatchers

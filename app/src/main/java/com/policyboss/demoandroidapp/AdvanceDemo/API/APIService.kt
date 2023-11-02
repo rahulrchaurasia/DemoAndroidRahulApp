@@ -1,4 +1,4 @@
-package com.example.jetpackdemo.LoginModule.API
+package com.policyboss.demoandroidapp.LoginModule.API
 
 
 import com.policyboss.demoandroidapp.DataModel.BankModel.BankDetailResponse

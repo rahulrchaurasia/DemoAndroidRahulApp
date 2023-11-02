@@ -1,6 +1,6 @@
 package com.policyboss.demoandroidapp
 
-import com.example.jetpackdemo.LoginModule.API.APIService
+import com.policyboss.demoandroidapp.LoginModule.API.APIService
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

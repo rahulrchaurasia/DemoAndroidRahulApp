@@ -34,7 +34,7 @@ object Constant {
 
     val NetworkError : String = "No Inerenet Connection!!"
 
-    val PUSH_BROADCAST_ACTION : String = "com.example.jetpackdemo.callDialog"
+    val PUSH_BROADCAST_ACTION : String = "com.policyboss.demoandroidapp.callDialog"
 
     val REQUEST_ID_MULTIPLE_PERMISSIONS = 111
 
