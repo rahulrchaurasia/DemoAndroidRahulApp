@@ -105,19 +105,33 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
-
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnFlow"
+                android:id="@+id/btnCoroutine"
                 app:layout_constraintTop_toBottomOf="@+id/btnNavComp"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Flow Demo"
+                android:text="Coroutine Demo"
 
                 style="@style/solid_button"
 
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/eight"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFlow"
+                app:layout_constraintTop_toBottomOf="@+id/btnCoroutine"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Demo"
+
+                style="@style/ButtonBlue"
+
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:minHeight="48dp"
                 android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatButton

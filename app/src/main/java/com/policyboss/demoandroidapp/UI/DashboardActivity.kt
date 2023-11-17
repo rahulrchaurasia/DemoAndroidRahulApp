@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.policyboss.demoandroidapp.AlertDialog.AlertDialogDemo
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
@@ -11,6 +12,8 @@ import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivi
 import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
 import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderActivity
+
+import com.policyboss.demoandroidapp.Utility.PopupViewTop
 import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
 
 class DashboardActivity : AppCompatActivity() , View.OnClickListener{
@@ -51,6 +54,14 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
         binding.btnLogin.setOnClickListener(this)
 
         binding.btnCollapsing.setOnClickListener(this)
+
+        binding.btnCalander.setOnClickListener(this)
+
+        binding.btnAlertDemo.setOnClickListener(this)
+
+        binding.btnPopOverlayTop.setOnClickListener(this)
+
+
 
     }
 
@@ -102,6 +113,29 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
                 startActivity(Intent(this, CollapsingToolbarLayoutActivity::class.java))
             }
+            binding.btnCalander.id -> {
+
+
+                startActivity(Intent(this, CalanderActivity::class.java))
+            }
+            binding.btnAlertDemo.id ->{
+
+
+
+                startActivity(Intent(this, AlertDialogDemo::class.java))
+
+
+            }
+
+            binding.btnPopOverlayTop.id ->{
+
+
+                val popupView = PopupViewTop(context = this@DashboardActivity)
+                popupView.show()
+
+
+            }
+
         }
     }
 }

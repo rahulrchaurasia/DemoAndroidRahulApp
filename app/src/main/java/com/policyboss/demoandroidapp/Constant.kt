@@ -42,7 +42,7 @@ object Constant {
 
        val TAG_Coroutine : String = "COROUTINE"
 
-
+    var DEMO_MESSAGE = "demo_message"
 
 
     fun hideKeyBoard(view: View?, context: Context) {

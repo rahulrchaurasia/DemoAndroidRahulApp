@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.DashboardActivity">
+    tools:context=".AlertDialog.AlertDialogDemo">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -27,8 +28,29 @@
             android:contentInsetEnd="0dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="" />
+            app:title="" >
 
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/menuButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
+                    android:src="@drawable/ic_menu"
+                    android:contentDescription="menu item"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="8dp"/>
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -51,114 +73,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btnLocationDemo"
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPopOverlay"
                 app:layout_constraintTop_toTopOf="@+id/childparent"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="get Location"
-
-                android:textColor="@color/Brown"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
-                app:layout_constraintTop_toBottomOf="@+id/btnLocationDemo"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Login Using Hilt"
-
-                android:textColor="@color/Brown"
-                style="@style/outlined_button"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_auto_text_reader"
-                app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Auto Text Reader"
-
-                android:textColor="@color/Brown"
-                style="@style/outlined_button"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_crop_image"
-                app:layout_constraintTop_toBottomOf="@+id/btn_auto_text_reader"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="CropImage Fro View"
-
-                android:textColor="@color/Brown"
-                style="@style/outlined_button"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPermission"
-                app:layout_constraintTop_toBottomOf="@+id/btn_crop_image"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Flow Lembda"
-
-                android:textColor="@color/Brown"
-                style="@style/outlined_button"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLauncher"
-                app:layout_constraintTop_toBottomOf="@+id/btnPermission"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Flow Lembda"
-
-                android:textColor="@color/Brown"
-                style="@style/outlined_button"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCollapsing"
-                app:layout_constraintTop_toBottomOf="@+id/btnLauncher"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Collapsing Layoout"
-
-                android:textColor="@color/Brown"
-                style="@style/outlined_button"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCalander"
-                app:layout_constraintTop_toBottomOf="@+id/btnCollapsing"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Calandr Demo"
-
-                android:textColor="@color/Brown"
-                style="@style/outlined_button"
-                android:layout_marginTop="@dimen/eight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_alert_demo"
-                app:layout_constraintTop_toBottomOf="@+id/btnCalander"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Custom Alert/Dialog Demo"
+                android:text="Full Screen Overlay"
 
                 android:textColor="@color/Brown"
                 style="@style/outlined_button"
@@ -168,11 +91,50 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPopOverlayTop"
-                app:layout_constraintTop_toBottomOf="@+id/btn_alert_demo"
+                app:layout_constraintTop_toBottomOf="@+id/btnPopOverlay"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text=""
-                android:visibility="gone"
+                android:text="PopUp on Top of Screen"
+
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnTransluent"
+                app:layout_constraintTop_toBottomOf="@+id/btnPopOverlayTop"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Transluent Dialog"
+
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPopUpAlert"
+                app:layout_constraintTop_toBottomOf="@+id/btnTransluent"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Custom PopUpView Window"
+
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSimplePopUp"
+                app:layout_constraintTop_toBottomOf="@+id/btnPopUpAlert"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Simple PopUpView Window"
+
                 android:textColor="@color/Brown"
                 style="@style/outlined_button"
                 android:layout_marginTop="@dimen/eight"

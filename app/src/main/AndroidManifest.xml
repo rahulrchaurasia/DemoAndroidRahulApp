@@ -13,6 +13,7 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".BaseApplication"
@@ -26,16 +27,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoAndroidApp"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31" >
 
         <activity
+            android:name=".ActivityLifecycle.ActivityLifeCycleActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.DashboardActivity"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".CoroutineDemo.CoroutineDemo1Activity"
+            android:exported="false"
+            android:parentActivityName=".UI.DashboardActivity"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".AlertDialog.AlertDialogDemo"
+            android:exported="false"
+            android:parentActivityName=".UI.DashboardActivity"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".UI.CalanderActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
             android:name=".LoginModule.UI.HomeDashboardActivity"
-            android:theme="@style/Theme.DemoAndroidApp"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".OpenAnotherApp.OpenAnotherActivity"
-            android:theme="@style/Theme.DemoAndroidApp"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".UI.CustomSpinner.CustomSpinnerActivity"
             android:exported="false" />
@@ -45,7 +65,8 @@
             android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".UI.Collapsing.CollapsingToolbarLayoutActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".UI.Login.LoginActivity"
             android:exported="false"
@@ -195,7 +216,7 @@
         <activity
             android:name=".UI.SplashActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan|adjustResize">
+            android:windowSoftInputMode="adjustPan|adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -211,7 +232,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.policyboss.demoandroidapp.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />

@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 
 
 import com.policyboss.demoandroidapp.Constant
+import com.policyboss.demoandroidapp.CoroutineDemo.CoroutineDemo1Activity
 import com.policyboss.demoandroidapp.DesignPattern.DesignPatternDemoActivity
 import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
 import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
@@ -108,6 +109,7 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         binding.btnDeviceNo.setOnClickListener(this)
         binding.btnFileUpload.setOnClickListener(this)
         binding.btnKotlinDemo.setOnClickListener(this)
+        binding.btnCoroutine.setOnClickListener(this)
     }
 
     suspend fun flowDemo(){
@@ -203,6 +205,12 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
             binding.btnFlow.id -> {
 
                 startActivity(Intent(this, FlowDemoActivity::class.java))
+
+            }
+            binding.btnCoroutine.id -> {
+
+                startActivity(Intent(this@HomeActivity, CoroutineDemo1Activity::class.java))
+
 
             }
 
