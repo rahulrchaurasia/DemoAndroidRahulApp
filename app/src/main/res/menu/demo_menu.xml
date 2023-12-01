@@ -11,6 +11,15 @@
         android:iconTint="@color/white"
         android:title="Camera"/>
 
+    <item
+        android:id="@+id/action_dialog"
+        android:icon="@drawable/ic_call_24"
+        android:orderInCategory="80"
+        app:showAsAction="ifRoom|withText"
+        android:visible="true"
+        android:iconTint="@color/white"
+        android:title="Camera"/>
+
 
     <item
         android:id="@+id/action_second"

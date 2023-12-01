@@ -14,6 +14,7 @@ import androidx.core.os.postDelayed
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.policyboss.demoandroidapp.NavGraphDirections
 import com.policyboss.demoandroidapp.R
@@ -47,19 +48,28 @@ import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBindin
       setSupportActionBar(binding.toolbar)
 
       For Handing Toolbar default button ie <----
-      2> and 3> Step we have two option
-      2> Use either
+       Step we have two option
+      1> Use either
        binding.toolbar.setupWithNavController(navController)
 
-       3> or
+       2> or
        setupActionBarWithNavController(navController)
 
        override fun onSupportNavigateUp(): Boolean {
         return  navController.navigateUp() || super.onSupportNavigateUp()
        }
+
+       // dont know much below
+
+         NavigationUI.setupActionBarWithNavController(this, navController)
  */
 
-class NavigationAdvanceActivity : AppCompatActivity() {
+
+interface NavigationAdvanceCallback {
+    fun hideAppBar()
+    fun showAppBar()
+}
+class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback {
 
    private lateinit var binding : ActivityNavigationAdvanceBinding
    private lateinit var layout: View
@@ -82,6 +92,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+
         // For Showing Toolbar in Fragment
         // Find FragmentContainerView using its  id here nav_host_fragment  and set it in setupActionBarWithNavController
         // Get the NavHostFragment
@@ -93,9 +104,13 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         // Get the NavController associated with the NavHostFragmen
         navController = navHostFragment.navController
 
+        //or
+      //  navController = navHostFragment.findNavController()
 
+
+        //region Create an AppBarConfiguration with the top-level destinations in your graph
         /*
-        // Create an AppBarConfiguration with the top-level destinations in your graph
+
         val appBarConfiguration = AppBarConfiguration(navController.graph)
 
         // Set up the action bar with the NavController and AppBarConfiguration
@@ -103,23 +118,32 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 
          */
 
-          // Mark : optional use toolbar or setupActionBarWithNavController
+        //endregion
+
+        // region Mark : optional use toolbar or setupActionBarWithNavController
+
        // binding.toolbar.setupWithNavController(navController)
 
 
         // 1>Mark : use Below or if req. appBar Configuration than add in param
 //        /********************** use this **********************************/
        // setupActionBarWithNavController(navController)
+        /*
+           above code is ways to set up the toolbar back button to navigate up the back stack in a Navigation graph.
+         */
+        //endregion
+
 
       //  or with appBar use below { Note : we need this bec at bottom navigation we dont need
-        // toolbar up button hence to remove this we add below
+      //                              toolbar up button hence to remove this we add below}
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeDashBoardFragment, R.id.settingFragment, R.id.notificationFragment),
+            setOf(R.id.homeDashBoardFragment, R.id.settingFragment, R.id.notificationFragment),     // for removing  toolbar up button arrow we add this
             binding.drawerLayout    // Adding drawerLayout in App bar ie for Hamburger icon to show
         )
        // or   2>add navController and appBar which have bottom nav and Navigattion Drawer  into toolbar
         setupActionBarWithNavController(navController,appBarConfiguration)
+
 
         // For Bottom nav connect to navController
         binding.bottomNavView.setupWithNavController(navController)
@@ -128,10 +152,14 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         binding.navDrawer.setupWithNavController(navController )
 
 
+        // For NavigationUp Handling Using Toolbar
         binding.toolbar.setNavigationOnClickListener {
 
             when(navController.currentDestination?.id){
                 R.id.sendCashFragment -> {
+
+                    //Note : here we check sendCashFragment has any onBackPressedDispatcher
+                    // if has than handle by its onBackPressedDispatcher callback written in sendCashFragment
                     if (onBackPressedDispatcher.hasEnabledCallbacks())
                         onBackPressedDispatcher.onBackPressed()
                     else
@@ -140,6 +168,8 @@ class NavigationAdvanceActivity : AppCompatActivity() {
                 else -> navController.navigateUp()
             }
         }
+
+
 
         listener =  NavController.OnDestinationChangedListener{contoller, destination , argument ->
 
@@ -152,10 +182,10 @@ class NavigationAdvanceActivity : AppCompatActivity() {
                 R.id.homeDashBoardFragment -> {
                     includeBottomNavigation()
                 }
-                R.id.homeDashBoardFragment -> {
+                R.id.settingFragment -> {
                     includeBottomNavigation()
                 }
-                R.id.homeDashBoardFragment -> {
+                R.id.notificationFragment -> {
                     includeBottomNavigation()
                 }
 
@@ -297,6 +327,7 @@ class NavigationAdvanceActivity : AppCompatActivity() {
         if(onBackPressedDispatcher.hasEnabledCallbacks()){  //// This checks if there are any callbacks registered with the onBackPressedDispatcher
 
             onBackPressedDispatcher.onBackPressed()
+           // moveTaskToBack(true)
         }else{
 
             navController.navigateUp()
@@ -332,6 +363,14 @@ class NavigationAdvanceActivity : AppCompatActivity() {
 //            showToast("Fom Toolbar")
 //        }
         //endregion
+    }
+
+    override fun hideAppBar() {
+        binding.appBarLayout?.visibility = View.GONE
+    }
+
+    override fun showAppBar() {
+        binding.appBarLayout?.visibility = View.VISIBLE
     }
 
 

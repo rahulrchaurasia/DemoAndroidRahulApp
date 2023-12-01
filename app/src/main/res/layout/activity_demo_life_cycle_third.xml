@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#659EC7"
+    tools:context=".ActivityLifecycle.FragmentDemoLifeCycleActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.DemoAndroidApp.AppBarOverlay">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:background="@color/red_custom"
+        tools:context=".YourActivity">
+
+        <LinearLayout
+            android:id="@+id/lychild"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtmessage"
+                android:layout_marginTop="@dimen/_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/_16dp"
+                android:textSize="18sp"
+                style="@style/TextViewStyle.BannerLarge"
+                android:text="Add Fragment"
+                android:layout_alignParentBottom="true"/>
+
+            <Button
+                style="@style/solid_button"
+                android:layout_gravity="center_vertical|center"
+                android:gravity="center"
+                android:id="@+id/btnAddFrag"
+                android:text="Add Fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                style="@style/myCustomButton"
+                android:layout_gravity="center_vertical|center"
+                android:gravity="center"
+                android:id="@+id/btn_replace_anotherd_frag"
+                android:text="Rep by Another Fragment"
+                android:layout_width="wrap_content"
+                android:minHeight="48dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                style="@style/solid_button"
+                android:layout_gravity="center_vertical|center"
+                android:gravity="center"
+                android:id="@+id/btnCloseFrag"
+                android:text="Close Fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Container for fragments -->
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_8dp"
+            android:layout_below="@+id/lychild"
+            android:layout_above="@id/txtDemo" />
+
+        <!-- Optional: Add a BottomNavigationView or other UI elements if needed -->
+       <TextView
+           android:id="@+id/txtDemo"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+          android:paddingBottom="@dimen/_16dp"
+           android:textSize="28sp"
+           style="@style/TextViewStyle.BannerLarge"
+           android:text="Bottom Of Activity"
+           android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

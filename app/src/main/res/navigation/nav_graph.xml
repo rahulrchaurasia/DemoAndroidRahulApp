@@ -101,6 +101,9 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/homeDashBoardFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_sendCashFragment_to_customToolbarFragment"
+            app:destination="@id/customToolbarFragment" />
         <!--        android:defaultValue="11L"-->
     </fragment>
     <dialog
@@ -147,4 +150,10 @@
         android:name="com.policyboss.demoandroidapp.NotificationFragment"
         android:label="Notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/customToolbarFragment"
+        android:name="com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.customToolbarFragment"
+        android:label="fragment_custom_toolbar"
+        tools:layout="@layout/fragment_custom_toolbar" />
+
 </navigation>

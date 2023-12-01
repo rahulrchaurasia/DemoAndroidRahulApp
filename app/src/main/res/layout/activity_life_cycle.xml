@@ -50,7 +50,7 @@
 
         <EditText
             android:id="@+id/etName"
-            android:contentDescription="Name"
+            android:contentDescription="enter Name"
             android:minHeight="48dp"
             style="@style/outlined_edittext"
             android:hint="enter name"
@@ -84,7 +84,20 @@
                 android:layout_weight="1"
                 android:text="Next" />
 
+
+
         </LinearLayout>
+        <Button
+            android:id="@+id/btnFragment"
+            android:layout_marginTop="@dimen/_16dp"
+            style="@style/ButtonBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:minHeight="48dp"
+
+            android:text="Fragment LifeCycle Demo" />
+
 
         <TextView
             android:id="@+id/txtMessage"

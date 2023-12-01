@@ -99,5 +99,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
+    <Button
+        android:id="@+id/btnCustomToolBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:text="Custom ToolBar"
+        android:textColor="@color/white"
+        style="@style/myCustomButton"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDone" />
+
+    <Button
+        android:id="@+id/btnGlobalAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:minHeight="48dp"
+        android:text="Handle Global Action"
+        android:textColor="@color/white"
+        style="@style/myCustomGreenButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCustomToolBar" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

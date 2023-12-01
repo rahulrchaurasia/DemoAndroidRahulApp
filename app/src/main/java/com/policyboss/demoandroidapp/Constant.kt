@@ -44,6 +44,11 @@ object Constant {
 
     var DEMO_MESSAGE = "demo_message"
 
+    const val   NOTIFICATION_EXTRA = "NOTIFICATION_EXTRA"
+    const val   NOTIFICATION_PROGRESS = "NOTIFICATION_PROGRESS"
+    const val   NOTIFICATION_MAX = "NOTIFICATION_MAX"
+    const val   NOTIFICATION_MESSAGE = "NOTIFICATION_MESSAGE"
+
 
     fun hideKeyBoard(view: View?, context: Context) {
         if (view != null) {

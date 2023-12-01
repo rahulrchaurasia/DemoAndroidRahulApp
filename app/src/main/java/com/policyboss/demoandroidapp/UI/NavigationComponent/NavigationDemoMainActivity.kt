@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.NavigationComponent.BasicDemo.NavigationBasicActivity
+import com.policyboss.demoandroidapp.UI.NavigationComponent.NavgraphViewPagger.NavGraphViewpagerActivity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activity.NavigationAdvanceActivity
 import com.policyboss.demoandroidapp.databinding.ActivityNavigationDemoBinding
 
@@ -40,6 +41,7 @@ class NavigationDemoMainActivity : AppCompatActivity()  , View.OnClickListener {
 
         binding.btnBasicDemo.setOnClickListener(this)
         binding.btnDemoAdvance.setOnClickListener(this)
+        binding.btnDemoViewpagger.setOnClickListener(this)
     }
 
 
@@ -134,6 +136,12 @@ class NavigationDemoMainActivity : AppCompatActivity()  , View.OnClickListener {
             binding.btnDemoAdvance.id -> {
 
                 startActivity(Intent(this, NavigationAdvanceActivity::class.java))
+
+            }
+
+            binding.btnDemoViewpagger.id -> {
+
+                startActivity(Intent(this, NavGraphViewpagerActivity::class.java))
 
             }
         }

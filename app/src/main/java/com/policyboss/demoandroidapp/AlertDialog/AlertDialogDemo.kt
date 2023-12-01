@@ -62,6 +62,8 @@ class AlertDialogDemo : AppCompatActivity() , View.OnClickListener{
         binding.btnPopUpAlert.setOnClickListener(this)
 
         binding.btnSimplePopUp.setOnClickListener(this)
+
+        binding.btnCustomActivityAlert.setOnClickListener(this)
     }
 
    fun showPopupWindow(anchorView: View) {
@@ -122,6 +124,13 @@ class AlertDialogDemo : AppCompatActivity() , View.OnClickListener{
                 showPopupWindow(anchorView = binding.menuButton)
             }
 
+            binding.btnCustomActivityAlert.id ->{
+
+                startActivity(Intent(this, customActivityAsDialog::class.java))
+
+            }
         }
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.policyboss.demoandroidapp.UI.Collapsing
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.AppBarLayout
 import com.policyboss.demoandroidapp.Constant
+import com.policyboss.demoandroidapp.LoginModule.UI.HomeDashboardActivity
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.databinding.ActivityCollapsingToolbarLayoutBinding
 import com.policyboss.demoandroidapp.databinding.ActivityMainBinding
@@ -105,6 +107,12 @@ class CollapsingToolbarLayoutActivity : AppCompatActivity() {
 
         //endRegion
 
+        binding.flBaicCollpsingLy.setOnClickListener{
+
+            startActivity(Intent(this,BasicCollapsingActivity::class.java))
+
+        }
+
     }
 
 
@@ -112,6 +120,8 @@ class CollapsingToolbarLayoutActivity : AppCompatActivity() {
     /*
       here we add directly OffsetChangedListener to abbBar using addOnOffsetChangedListener
     */
+
+    // region comment
     private fun  handlingVerticalOffset(){
 
 
@@ -159,6 +169,8 @@ class CollapsingToolbarLayoutActivity : AppCompatActivity() {
         })
 
     }
+
+    //endregion
 
 
     private fun getCollapseToolbarHeight(){

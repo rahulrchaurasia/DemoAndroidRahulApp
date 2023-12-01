@@ -141,6 +141,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_8dp"
+                android:background="@color/red_custom"
+                app:layout_constraintTop_toBottomOf="@+id/btnSimplePopUp"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Simple PopUpView Window"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCustomActivityAlert"
+                app:layout_constraintTop_toBottomOf="@+id/btnPopUpAlert"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Activity As  AlertDialog"
+
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

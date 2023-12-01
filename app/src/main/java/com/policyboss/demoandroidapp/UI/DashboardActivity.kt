@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.policyboss.demoandroidapp.ActivityLifecycle.ActivityLifeCycleActivity
 import com.policyboss.demoandroidapp.AlertDialog.AlertDialogDemo
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
@@ -59,7 +60,7 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
         binding.btnAlertDemo.setOnClickListener(this)
 
-        binding.btnPopOverlayTop.setOnClickListener(this)
+        binding.btnActivityLifecycle.setOnClickListener(this)
 
 
 
@@ -127,11 +128,10 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
             }
 
-            binding.btnPopOverlayTop.id ->{
+            binding.btnActivityLifecycle.id ->{
 
 
-                val popupView = PopupViewTop(context = this@DashboardActivity)
-                popupView.show()
+                startActivity(Intent(this, ActivityLifeCycleActivity::class.java))
 
 
             }

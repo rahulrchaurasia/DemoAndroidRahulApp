@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UI.NavigationComponent.advanceDemo.customToolbarFragment">
 
-    tools:context=".UI.Collapsing.CollapsingToolbarLayoutActivity">
-
+    <!-- TODO: Update blank fragment layout -->
+<!--   <include layout="@layout/custom_toolbar"-->
+<!--       android:id="@+id/custom_toolbar"-->
+<!--       />-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,37 +29,37 @@
 
 
             <!-- Additional views for the title header can be added here (They will scroll) -->
-           <FrameLayout
+            <FrameLayout
 
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-
-
-            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="fitXY"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7"
-                android:src="@drawable/a3"/>
-
-            <TextView
-
-                android:layout_marginTop="@dimen/_16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:text="Additional Text" />
-           </FrameLayout>
+                android:layout_height="wrap_content">
 
 
-<!--            <androidx.appcompat.widget.Toolbar-->
-<!--                android:id="@+id/toolbar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize"-->
-<!--                app:layout_collapseMode="pin"-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="fitXY"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.7"
+                    android:src="@drawable/a3"/>
 
-<!--                app:popupTheme="@style/Theme.DemoAndroidApp.PopupOverlay" />-->
+                <TextView
+
+                    android:layout_marginTop="@dimen/_16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue"
+                    android:text="Additional Text" />
+            </FrameLayout>
+
+
+            <!--            <androidx.appcompat.widget.Toolbar-->
+            <!--                android:id="@+id/toolbar"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="?attr/actionBarSize"-->
+            <!--                app:layout_collapseMode="pin"-->
+
+            <!--                app:popupTheme="@style/Theme.DemoAndroidApp.PopupOverlay" />-->
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -90,7 +93,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
 
-              />
+                />
 
 
             <TextView
@@ -100,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="Title Header"
                 style="@style/header_textview_24"
-               app:layout_constraintStart_toEndOf="@id/imgBack"
+                app:layout_constraintStart_toEndOf="@id/imgBack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
 
@@ -113,7 +116,7 @@
                 android:id="@+id/offset"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-              app:layout_constraintTop_toBottomOf="@id/txtHeader"
+                app:layout_constraintTop_toBottomOf="@id/txtHeader"
 
                 app:layout_constraintStart_toStartOf="@id/txtHeader"
 
@@ -236,15 +239,5 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/flBaicCollpsingLy"
-        android:src="@drawable/ic_call_24"
-        android:tint="@color/white"
-       android:contentDescription="move to Basic Collapselay"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_gravity="end|bottom"/>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

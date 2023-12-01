@@ -89,6 +89,7 @@ class ChooseReceiverFragment : Fragment() {
     }
 
 
+    // Add Menu in fragment
     fun setupMenu(){
 
         // For Creating Menu

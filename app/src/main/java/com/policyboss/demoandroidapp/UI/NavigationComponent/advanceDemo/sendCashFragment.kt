@@ -36,16 +36,18 @@ class sendCashFragment : Fragment()  , OnClickListener{
     private val args: sendCashFragmentArgs by navArgs()     // Declare Nav argument
 
 
-    private val callback = object : OnBackPressedCallback(true){
+    //regioncomment no need here
+//    private val callback = object : OnBackPressedCallback(true){
+//
+//        override fun handleOnBackPressed() {
+//
+//            findNavController().popBackStack(R.id.homeDashBoardFragment,false)
+//        }
+//
+//
+//    }
 
-        override fun handleOnBackPressed() {
-
-            findNavController().popBackStack(R.id.homeDashBoardFragment,false)
-        }
-
-
-    }
-
+    //endregion
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +77,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
 
         val toolbar = requireActivity().findViewById<Toolbar>(com.policyboss.demoandroidapp.R.id.toolbar)
 
+        //region commented
 //        toolbar.setNavigationOnClickListener {
 //
 //
@@ -93,6 +96,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
 
        //  binding.etAmount.setText(SampleData.defaultAmount.value.toString())
 
+        //endregion
 
         // region BackPressHandling Use this or below both are same
 //        val callback = object : OnBackPressedCallback(true) {
@@ -137,11 +141,13 @@ class sendCashFragment : Fragment()  , OnClickListener{
         binding.btnSend.setOnClickListener(this)
         binding.btnCancel.setOnClickListener(this)
         binding.btnDone.setOnClickListener(this)
+        binding.btnCustomToolBar.setOnClickListener(this)
+        binding.btnGlobalAction.setOnClickListener(this)
     }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        callback.remove()
+       // callback.remove()
     }
 
     override fun onResume() {
@@ -184,6 +190,21 @@ class sendCashFragment : Fragment()  , OnClickListener{
             binding.btnDone.id ->{
 
                 val action = sendCashFragmentDirections.actionSendCashFragmentToHomeDashBoardFragment()
+
+                findNavController().navigate(action)
+
+
+
+            }
+
+            binding.btnGlobalAction.id->{
+
+                val action = sendCashFragmentDirections.actionGlobalAboutAppFragment()
+               findNavController().navigate(action)
+            }
+            binding.btnCustomToolBar.id -> {
+
+                val action = sendCashFragmentDirections.actionSendCashFragmentToCustomToolbarFragment()
 
                 findNavController().navigate(action)
 

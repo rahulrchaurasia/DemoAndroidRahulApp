@@ -60,10 +60,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDemoViewpagger"
+            app:layout_constraintTop_toBottomOf="@+id/btnBasicDemo"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Navigation Viewpagger"
+            style="@style/myCustomButton"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDemoAdvance"
             style="@style/solid_button"
-            app:layout_constraintTop_toBottomOf="@+id/btnBasicDemo"
+            app:layout_constraintTop_toBottomOf="@+id/btnDemoViewpagger"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
             android:text="Navigation Advance Demo"

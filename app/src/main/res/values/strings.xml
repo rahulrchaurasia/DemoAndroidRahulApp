@@ -45,4 +45,13 @@
     Center text in box grrg rCenter text in box grrg rCenter text in box grrg rCenter text in box grrg r
     Center text in box grrg r Center text in box grrg r Center text in box grrg r Center text in box grrg r</string>
 
+
+    <string name="add_emp">Add Employee</string>
+
+    <string name="food">FRESH FOOD</string>
+    <string name="delivery">FAST DELIVERY</string>
+    <string name="payment">EASY PAYMENT</string>
+
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</string>
+
 </resources>
