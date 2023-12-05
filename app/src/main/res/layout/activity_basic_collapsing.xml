@@ -7,16 +7,19 @@
     tools:context=".UI.Collapsing.BasicCollapsingActivity">
     <!-- AppbarLayout contains the collapsing toolbar -->
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <!-- CollapsingToolbarLayout with the ImageView and Toolbar -->
+<!--        app:titleEnabled="false"   set the title by default position ie at top-->
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/red_custom"
+
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="@string/app_name">
 
@@ -42,6 +45,17 @@
                 app:contentInsetStartWithNavigation="0dp"
                 app:titleMarginStart="20dp"
                 app:title="Your Title" />
+
+            <!-- Menu item -->
+            <ImageView
+                android:id="@+id/menuItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu"
+               android:paddingTop="-16dp"
+                android:layout_gravity="bottom|right|end"
+                android:layout_marginEnd="16dp"/>
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -158,11 +172,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/flBaicCollpsingLy"
-        android:src="@drawable/ic_call_24"
+        android:src="@drawable/ic_email_24"
+        app:backgroundTint="@color/pink"
         android:tint="@color/white"
+        android:foregroundTint="@color/white"
         android:contentDescription="move to Basic Collapselay"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         android:layout_margin="@dimen/fab_margin"
         android:layout_gravity="end|bottom"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+
+        android:src="@drawable/ic_home_24"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|end" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

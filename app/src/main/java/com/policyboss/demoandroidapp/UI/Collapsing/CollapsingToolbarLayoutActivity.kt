@@ -209,6 +209,7 @@ class CollapsingToolbarLayoutActivity : AppCompatActivity() {
         val offsetChangedListener = AppBarLayout.OnOffsetChangedListener({ appBarLayout, verticalOffset ->
 
             binding.offset.text = " thresholdOffset ${thresholdOffset} verticalOffset  ${verticalOffset} "
+
             // Set the elevation to the pinnedLinearLayout
             // binding.pinnedLayut.elevation = elevation.toFloat()
             lifecycleScope.launch(Dispatchers.Main) {

@@ -43,7 +43,7 @@ class HiltDemoActivity : AppCompatActivity() {
         AppModuleTwo.mainTwo.getMainData()
 
 
-      //  car.startCar()
+        car.startCar()
 
 
        // engine.getStartService()
@@ -67,8 +67,11 @@ class Car @Inject constructor(val engine: Engine){
     }
 }
 
+/********************************************************************
+
 //// Constructor Injection
-//
+
+********************************************************************/
 class Engine @Inject constructor(val piston: Piston){
 
     fun  getStartService(){

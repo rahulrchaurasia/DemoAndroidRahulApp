@@ -66,6 +66,7 @@ class NetworkModule {
 
     //region api calling
 
+    // create APIService by Retrofit which is used by Repository
     @Singleton
     @Provides
     fun provideLoginAPI(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): APIService {
