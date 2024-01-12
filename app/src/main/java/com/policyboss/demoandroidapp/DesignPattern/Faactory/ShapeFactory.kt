@@ -1,5 +1,7 @@
 package com.policyboss.demoandroidapp.DesignPattern.Faactory
 
+import android.util.Log
+import com.policyboss.demoandroidapp.Constant
 
 
 interface Shape {
@@ -7,14 +9,14 @@ interface Shape {
 }
 class Circle : Shape {
     override fun draw() {
-        println("Drawing Circle")
+        Log.d(Constant.TAG,"Drawing Circle")
     }
 }
 
 
 class Square : Shape {
     override fun draw() {
-        println("Drawing Square")
+        Log.d(Constant.TAG,"Drawing Square")
     }
 }
 

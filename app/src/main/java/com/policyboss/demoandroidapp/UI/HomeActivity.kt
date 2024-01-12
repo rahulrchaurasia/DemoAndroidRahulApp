@@ -25,7 +25,7 @@ import com.policyboss.demoandroidapp.FileUpload.FileUploadActivity
 import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
 import com.policyboss.demoandroidapp.HiltDemo.HiltDemoActivity
 import com.policyboss.demoandroidapp.KotlinDemo.KotlinDemoActivity
-import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
+import com.policyboss.demoandroidapp.ShareData.ShareActivityMain
 import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.AutoCompleteDemo2.AutoCompDemo2Activity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
@@ -46,7 +46,8 @@ import java.util.Date
 
 class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 
-    var CAMERA_PERMISSION_REQUEST_CODE = 101
+    var CAMERA_STORAGE_PERMISSION_REQUEST_CODE = 101
+
     lateinit var binding: ActivityHomeBinding
 
     val numbers = flowOf(1, 2, 3, 4, 5)
@@ -65,8 +66,8 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(Manifest.permission.CAMERA),
-            CAMERA_PERMISSION_REQUEST_CODE
+            arrayOf(Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE),
+            CAMERA_STORAGE_PERMISSION_REQUEST_CODE
         )
         setOnClickListener()
 
@@ -102,6 +103,7 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         binding.btnAutoComplete.setOnClickListener(this)
         binding.btnAutoComplete.setOnClickListener(this)
         binding.btnHilt.setOnClickListener(this)
+        binding.btnShare.setOnClickListener(this)
         binding.btnGetPhotoFromContact.setOnClickListener(this)
         binding.btnNavComp.setOnClickListener(this)
         binding.btnDesignPattern.setOnClickListener(this)
@@ -176,6 +178,11 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
                // startActivity(Intent(this, Log::class.java))
                 downloadPDF(this@HomeActivity)
               //  shareText(this@HomeActivity)
+
+            }
+            binding.btnShare.id ->{
+
+                startActivity(Intent(this, ShareActivityMain::class.java))
 
             }
             binding.btnDashBoard.id -> {
@@ -336,7 +343,7 @@ enum class Currency(val code: String, val symbol: String) {
  }
 
 
-fun shareDara(context: Context,fileUri: Uri, mimeType: String){
+fun shareDara(context: Context,fileUri: Uri, mimeType: String ="image/*"){
 
 
     val shareIntent = Intent(Intent.ACTION_SEND)
@@ -347,7 +354,7 @@ fun shareDara(context: Context,fileUri: Uri, mimeType: String){
     shareIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
     shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-    shareIntent.putExtra(Intent.EXTRA_TEXT, "Text Message")
+    shareIntent.putExtra(Intent.EXTRA_TEXT, "*****official Link*****")
 // Set the URI as the content to share
     shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
 

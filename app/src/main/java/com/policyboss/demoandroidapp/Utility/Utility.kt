@@ -1,5 +1,7 @@
 package com.policyboss.demoandroidapp.Utility
 
+import android.content.ActivityNotFoundException
+import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -13,16 +15,21 @@ import android.provider.Settings
 import android.util.Base64
 import android.util.Base64.encodeToString
 import android.util.Log
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.policyboss.demoandroidapp.BuildConfig
+import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.File
+
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import java.io.FileDescriptor
+import java.io.File
 
 object Utility {
 
@@ -146,7 +153,7 @@ object Utility {
     /****************************************************************
     //Note : Download any Type of File and Images Using URL
     ****************************************************************/
-     fun downloadFileFromUri( context: Context, url: String,mimeType: String, filename: String?): Uri? {
+    open fun downloadFileFromUri( context: Context, url: String,mimeType: String, filename: String?): Uri? {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
             val contentValues = ContentValues().apply {
@@ -185,7 +192,70 @@ object Utility {
         }
     }
 
+   open fun saveBitmapToUri(context: Context, bitmap: Bitmap, filename: String?): Uri? {
+        val mimeType = "image/png"
 
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // For Android 10 (Q) and above
+
+
+            val contentValues = ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
+                put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+            }
+
+            val resolver = context.applicationContext.contentResolver
+            val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+
+            uri?.let {
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                val inputStream = ByteArrayInputStream(byteArrayOutputStream.toByteArray())
+
+                resolver.openOutputStream(uri).use { output ->
+                    inputStream.copyTo(output!!, DEFAULT_BUFFER_SIZE)
+                }
+            }
+
+            uri
+        } else {
+            // For devices running Android versions below Q
+            val target = File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                filename
+            )
+
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+            val inputStream = ByteArrayInputStream(byteArrayOutputStream.toByteArray())
+
+            FileOutputStream(target).use { output ->
+                inputStream.copyTo(output)
+            }
+
+            target.toUri()
+        }
+    }
+
+    fun getPathFromUri(context: Context, uri: Uri): String? {
+        if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
+            val projection = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = context.contentResolver.query(uri, projection, null, null, null)
+            cursor?.let {
+                if (cursor.moveToFirst()) {
+                    val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+
+
+                    return cursor.getString(columnIndex)
+                }
+                cursor.close()
+            }
+        } else if (uri.scheme == ContentResolver.SCHEME_FILE) {
+            return uri.path
+        }
+        return null
+    }
     fun getMimeTypeFromUrl(url: String): String {
         return when {
             url.endsWith(".pdf", ignoreCase = true) -> "application/pdf"
@@ -195,4 +265,94 @@ object Utility {
         }
     }
 
+
+    fun shareDara(context: Context,fileUri: Uri, mimeType: String ="image/*"){
+
+
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "image/*" // Set the MIME type based on the file type
+        // shareIntent.type = "image/*"
+        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        shareIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "*****official Link*****")
+// Set the URI as the content to share
+        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+
+// Optionally set a subject for the shared content
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Sharing Content")
+
+// Start the sharing activity
+
+        context.startActivity(Intent.createChooser(shareIntent, "Share File"))
+
+    }
+    open fun shareImageToGmail1(context: Context, imageUri: Uri) {
+        // Try to get path first
+        val imagePath = getPathFromUri(context, imageUri)
+
+        if (imagePath != null) {
+            // Share using image path directly
+           // shareImageToGmail(context, imagePath) // Use the previous code
+        }
+        else
+        {
+            // Handle content URI directly
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_STREAM, imageUri)
+         }
+            try {
+                context.startActivity(Intent.createChooser(intent, "Share Image via Email"))
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error sharing image", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun shareImageToGmail(context: Context, imageUri: Uri) {
+
+        val imagePath = getPathFromUri(context, imageUri)
+        val imageFile = File(imagePath)
+
+        if (imageFile.exists()) {
+            val uri: Uri
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                uri = FileProvider.getUriForFile(
+                    context,
+                   // context.packageName + ".fileprovider",
+                    "com.policyboss.demoandroidapp.fileprovider",
+                    imageFile
+                )
+            } else {
+                uri = Uri.fromFile(imageFile)
+            }
+
+            // Grant read permission to the content URI
+            context.grantUriPermission(
+                "com.google.android.gm",
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                setDataAndType(uri, "image/*") // Set data and MIME type
+                putExtra(Intent.EXTRA_STREAM, uri)
+                putExtra(Intent.EXTRA_SUBJECT, "Customer Details")
+                 putExtra(Intent.EXTRA_TEXT, "Please find custome Detail in attached file")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) // Grant read permission
+            }
+
+            try {
+                context.startActivity(Intent.createChooser(shareIntent, "Share Image"))
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error sharing image", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(context, "Image file not found", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

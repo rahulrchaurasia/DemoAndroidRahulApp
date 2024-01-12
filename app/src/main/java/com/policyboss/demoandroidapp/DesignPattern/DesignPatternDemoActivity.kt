@@ -45,7 +45,6 @@ class DesignPatternDemoActivity : AppCompatActivity(), View.OnClickListener {
 
 
 
-
         val person = Person.Builder()
             .setFirstName("Rahul")
             .setLastName("Chaurasia")
@@ -77,6 +76,9 @@ class DesignPatternDemoActivity : AppCompatActivity(), View.OnClickListener {
 
         val shapeFactory = ShapeFactory()
         val circle = shapeFactory.getShape("circle")
+        circle?.let {
+            it.draw()
+        }
 
     }
     override fun onClick(view: View?) {
