@@ -75,12 +75,15 @@ class ShareViwAsActivity : BaseActivity() , OnClickListener{
                 val uri = getUriFile(bitmap)
 
                 if (uri != null) {
-                   // shareDara(this@ShareViwAsActivity, fileUri = uri)
-                   // shareUriToGmail(this@ShareViwAsActivity, uri = uri)
-                    Utility.shareImageToGmail(context = this@ShareViwAsActivity,
-                        imageUri = uri)
 
-                 //   Utility.shareDara(this@ShareViwAsActivity, fileUri = uri)
+//                    Utility.shareImageToGmail(context = this@ShareViwAsActivity,
+//                        imageUri = uri)
+
+                    Utility.shareImage(context = this@ShareViwAsActivity,
+                        imageUri = uri,
+                        subject = "Product Details",
+                        message = "***Product Data***")
+
                 } else {
                     // Handle file saving failure
                     Toast.makeText(this@ShareViwAsActivity, "File saving failed", Toast.LENGTH_LONG).show()

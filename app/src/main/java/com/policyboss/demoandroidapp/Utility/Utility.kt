@@ -5,6 +5,7 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -56,8 +57,6 @@ object Utility {
         )
 
     }
-
-
 
 
 
@@ -266,7 +265,7 @@ object Utility {
     }
 
 
-    fun shareDara(context: Context,fileUri: Uri, mimeType: String ="image/*"){
+    fun shareData(context: Context,fileUri: Uri, mimeType: String ="image/*"){
 
 
         val shareIntent = Intent(Intent.ACTION_SEND)
@@ -289,6 +288,8 @@ object Utility {
         context.startActivity(Intent.createChooser(shareIntent, "Share File"))
 
     }
+
+    //not working
     open fun shareImageToGmail1(context: Context, imageUri: Uri) {
         // Try to get path first
         val imagePath = getPathFromUri(context, imageUri)
@@ -322,8 +323,8 @@ object Utility {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 uri = FileProvider.getUriForFile(
                     context,
-                   // context.packageName + ".fileprovider",
-                    "com.policyboss.demoandroidapp.fileprovider",
+                    context.packageName + ".fileprovider",
+                    //"com.policyboss.demoandroidapp.fileprovider",
                     imageFile
                 )
             } else {
@@ -340,6 +341,8 @@ object Utility {
             val shareIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 setDataAndType(uri, "image/*") // Set data and MIME type
+                setPackage("com.google.android.gm")
+                setType("message/rfc822")
                 putExtra(Intent.EXTRA_STREAM, uri)
                 putExtra(Intent.EXTRA_SUBJECT, "Customer Details")
                  putExtra(Intent.EXTRA_TEXT, "Please find custome Detail in attached file")
@@ -355,4 +358,49 @@ object Utility {
             Toast.makeText(context, "Image file not found", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+    fun shareImage(context: Context, imageUri: Uri, subject: String, message: String) {
+        val imagePath = getPathFromUri(context, imageUri)
+        val imageFile = File(imagePath)
+
+        if (imageFile.exists()) {
+            val uri: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                FileProvider.getUriForFile(
+                    context,
+                    context.packageName + ".fileprovider",
+                    imageFile
+                )
+            } else {
+                Uri.fromFile(imageFile)
+            }
+
+            // Grant read permission to the content URI
+            context.grantUriPermission("com.android.email", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            context.grantUriPermission("com.google.android.gm", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            context.grantUriPermission("com.whatsapp", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            context.grantUriPermission("org.telegram.messenger", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            context.grantUriPermission("org.thoughtcrime.securesms", uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) //For Signal
+
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                setDataAndType(uri, "image/*") // Set data and MIME type
+                putExtra(Intent.EXTRA_STREAM, uri)
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                putExtra(Intent.EXTRA_TEXT, message)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) // Grant read permission
+            }
+
+            try {
+                context.startActivity(Intent.createChooser(shareIntent, "Share Image"))
+            } catch (e: Exception) {
+                Toast.makeText(context, "Error sharing image", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(context, "Image file not found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
 }
