@@ -31,7 +31,7 @@
                 />
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/tvLatitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -48,12 +48,12 @@
                 android:layout_height="wrap_content"
                 android:text="Mihar Nayak"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/tvName"
+                app:layout_constraintBottom_toBottomOf="@id/tvLatitude"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="@id/tvName" />
+                app:layout_constraintTop_toTopOf="@id/tvLatitude" />
 
             <TextView
-                android:id="@+id/tvEmail"
+                android:id="@+id/tvLonitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -62,7 +62,7 @@
                 android:textColor="@color/primary_text_color"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvName" />
+                app:layout_constraintTop_toBottomOf="@id/tvLatitude" />
 
             <TextView
                 android:id="@+id/tvEmailValue"
@@ -73,9 +73,9 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/tvEmail"
+                app:layout_constraintBottom_toBottomOf="@id/tvLonitude"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="@id/tvEmail" />
+                app:layout_constraintTop_toTopOf="@id/tvLonitude" />
 
 
             <TextView
@@ -88,7 +88,7 @@
                 android:textColor="@color/primary_text_color"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+                app:layout_constraintTop_toBottomOf="@id/tvLonitude" />
 
             <TextView
                 android:id="@+id/tvMobValue"

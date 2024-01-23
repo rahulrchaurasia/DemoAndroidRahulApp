@@ -31,7 +31,6 @@ class ShareViwAsActivity : BaseActivity() , OnClickListener{
     lateinit var binding : ActivityShareViwAsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_share_viw_as)
 
         binding = ActivityShareViwAsBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -124,7 +124,7 @@ object Utility {
         }
     }
 
-   open  fun bitmapToBase64(bitmap: Bitmap): String {
+     fun bitmapToBase64(bitmap: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()

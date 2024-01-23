@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".ShareData.ShareViwAsActivity">
+    tools:context=".LocationBgService.LocationBackgrounDemActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clParent"
@@ -20,7 +19,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="60dp"
             android:gravity="center_horizontal"
-            android:text="Customer Details"
+            android:text="Location Background Demo"
             android:textSize="28dp"
 
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,12 +39,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:elevation="2dp"
+
             app:cardCornerRadius="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:padding="@dimen/eight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -64,17 +65,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="12dp"
-                    android:text="User Name:"
+                    android:text="Latitude:"
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvNameValue"
+                    android:id="@+id/txtLat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mihar Nayak"
+                    android:text="00"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/tvLatitude"
                     app:layout_constraintStart_toEndOf="@id/guideline"
@@ -86,18 +87,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="8dp"
-                    android:text="Email Id:"
+                    android:text="Longitude:"
                     android:textColor="@color/primary_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvLatitude" />
 
                 <TextView
-                    android:id="@+id/tvEmailValue"
+                    android:id="@+id/tvLon"
 
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="bankify2022@bankify.money"
+                    android:text="00"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
@@ -106,74 +107,8 @@
                     app:layout_constraintTop_toTopOf="@id/tvLonitude" />
 
 
-                <TextView
-                    android:id="@+id/tvMobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Mobile Number:"
-                    android:textColor="@color/primary_text_color"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvLonitude" />
 
-                <TextView
-                    android:id="@+id/tvMobValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+91 9854855529"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tvMobile"
-                    app:layout_constraintStart_toEndOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@id/tvMobile" />
 
-                <TextView
-                    android:id="@+id/tvCredit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Credit Amount"
-                    android:textColor="@color/primary_text_color"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvMobile" />
-
-                <TextView
-                    android:id="@+id/tvCreditValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3200 Rs"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@id/tvCredit"
-                    app:layout_constraintStart_toEndOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@id/tvCredit" />
-
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
-                    android:text="Status"
-                    android:textColor="@color/primary_text_color"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvCredit" />
-
-                <TextView
-                    android:id="@+id/tvStatusValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Active"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tvStatus"
-                    app:layout_constraintStart_toEndOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@id/tvStatus" />
 
 
 
@@ -181,26 +116,34 @@
 
         </androidx.cardview.widget.CardView>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStart"
+            app:layout_constraintTop_toBottomOf="@+id/childParent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Start Location"
+            style="@style/solid_button"
+           android:layout_marginHorizontal="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStop"
+            app:layout_constraintTop_toBottomOf="@+id/btnStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_marginHorizontal="@dimen/fab_margin"
+            style="@style/solid_button"
+
+            android:text="Stop Location"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fbShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:contentDescription="Share Image"
-        android:src="@drawable/ic_share_24"
-        android:tint="@color/white"
-        app:backgroundTint="@color/blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/white" />
 
     <ImageView
         android:id="@+id/ivClose"
@@ -210,6 +153,4 @@
         android:layout_margin="@dimen/_8dp"
         android:layout_width="42dp"
         android:layout_height="42dp"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

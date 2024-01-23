@@ -8,6 +8,7 @@ import com.policyboss.demoandroidapp.ActivityLifecycle.ActivityLifeCycleActivity
 import com.policyboss.demoandroidapp.AlertDialog.AlertDialogDemo
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
+import com.policyboss.demoandroidapp.LocationBgService.LocationBackgrounDemActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivity
 import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
@@ -62,6 +63,7 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
         binding.btnActivityLifecycle.setOnClickListener(this)
 
+        binding.btnLocatinInBg.setOnClickListener(this)
 
 
     }
@@ -78,6 +80,11 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
                 }
 
                 startActivity(intent)
+            }
+
+            binding.btnLocatinInBg.id -> {
+
+                startActivity(Intent(this, LocationBackgrounDemActivity::class.java))
             }
 
             binding.btnAutoTextReader.id -> {

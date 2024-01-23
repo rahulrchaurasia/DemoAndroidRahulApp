@@ -11,10 +11,13 @@ import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.databinding.ActivityFlowDemoBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
 import kotlinx.coroutines.flow.Flow
+
+
 import kotlinx.coroutines.launch
 
 /*
@@ -35,6 +38,8 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
     private lateinit var channelFlow : Flow<Int>
 
     private val list = listOf(1,2,3,4,5 )
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -77,9 +82,43 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
         binding.btnFlowAdv8.setOnClickListener(this)
         binding.btnFlowAdv9.setOnClickListener(this)
         binding.btnFlowAdv10.setOnClickListener(this)
+        binding.btnFlowAdv11.setOnClickListener(this)
 
     }
 
+     fun  getTapCountFlow(): Flow<Int> = callbackFlow {
+        // Setup button click listener
+
+        var tapCount = 0
+        binding.btnFlowAdv12.setOnClickListener {
+
+             // Send updated count on click
+//            lifecycleScope.launch(Dispatchers.IO){
+//                emit(tapCount)
+//            }
+
+        }
+
+        // Cleanup when flow is closed
+        awaitClose {
+            tapCount  = 0
+            binding.btnFlowAdv12.setOnClickListener(null)
+        }
+    }
+
+    fun FlowcallBackDemo(){
+
+        lifecycleScope.launch(Dispatchers.Main){
+            val tapCountFlow = getTapCountFlow() // Get the flow instance
+
+            // Collect the flow and update a TextView with the count
+            tapCountFlow.collect { count ->
+
+               binding.txtflowAdv12.text = "Taps: $count"
+            }
+        }
+
+    }
     //region create Basic flow
     private  fun  setupFixedFlow(){
 
@@ -530,6 +569,11 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
             binding.btnFlowAdv10.id -> {
 
                 MutableStateFlowDemo()
+
+            }
+            binding.btnFlowAdv11.id -> {
+
+                FlowcallBackDemo()
 
             }
 
