@@ -37,6 +37,7 @@
             android:name=".LocationBgService.LocationBackgrounDemActivity"
             android:theme="@style/Theme.DemoAndroidApp"
             android:launchMode="singleTask"
+            android:noHistory="true"
             android:exported="false" />
         <activity
             android:name=".ShareData.ShareViwAsActivity"
