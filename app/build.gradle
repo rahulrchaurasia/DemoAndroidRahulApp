@@ -84,7 +84,7 @@ dependencies {
 
     // coroutines
     def coroutines_version = "1.6.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
 
 
@@ -127,9 +127,9 @@ dependencies {
 
 
     // location
-    implementation 'com.google.android.gms:play-services-auth:20.7.0'    //005 location here
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
 //    implementation 'com.google.android.gms:play-services:12.0.1'
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-location:21.0.1' //005 location here
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
 

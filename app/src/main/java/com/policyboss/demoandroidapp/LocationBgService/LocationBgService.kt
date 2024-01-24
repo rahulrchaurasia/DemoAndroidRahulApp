@@ -1,5 +1,7 @@
 package com.policyboss.demoandroidapp.LocationBgService
 
+import android.app.Notification
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
@@ -8,6 +10,7 @@ import android.content.Intent
 import android.location.LocationManager
 import android.os.Build
 import android.os.IBinder
+import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.LocationServices
@@ -77,6 +80,100 @@ class LocationBgService: Service() {
 
     private fun start() {
 
+        //  createNotificationChannel() // Create the notification channel {already used in BaseAppln hence no need here
+        val remoteViews = RemoteViews(applicationContext.packageName, R.layout.layout_push_notification)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val notification = buildNotification(remoteViews = remoteViews )
+        startForeground(1, notification)
+        locationClient
+            .getLocationUpdates(10000L)
+            .catch {
+                    e -> e.printStackTrace()
+            }
+            .onEach { location ->
+
+                val lat = location.latitude.toString()
+                val lon = location.longitude.toString()
+
+                // Update notification with new location data
+                remoteViews.setTextViewText(R.id.tv_latitude, lat)
+                remoteViews.setTextViewText(R.id.tv_longitude, lon)
+
+                // Rebuild and reissue notification with updated remoteViews
+                remoteViews.setTextViewText(R.id.tv_title, "Tracking location")
+                remoteViews.setTextViewText(R.id.tv_content, "Location:")
+                val updatedNotification = buildNotification(
+                    remoteViews = remoteViews,
+                    lat = lat,
+                    lon = lon
+                ) // Update notification with changed remoteViews
+                notificationManager.notify(1, updatedNotification)
+
+                //Send Broad Cast
+                val intent = Intent(LocationBgService.Location_UPDATE)
+                    .putExtra("lat", lat)
+                    .putExtra("lon", lon)
+                sendBroadcast(intent)
+            }
+            .launchIn(serviceScope)
+
+
+    }
+
+    // Handling Custom  Notification Builder
+    private fun buildNotification(remoteViews: RemoteViews ,lat : String = "", lon : String = ""): Notification {
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            Intent(this, LocationBackgrounDemActivity::class.java),
+            PendingIntent.FLAG_MUTABLE
+        )
+        val stopIntent = Intent(this, LocationBgService::class.java).apply {
+            action = ACTION_STOP
+        }
+        val stopPendingIntent = PendingIntent.getService(this, 0, stopIntent,  PendingIntent.FLAG_MUTABLE)
+
+        // Update text views with location data
+        remoteViews.setTextViewText(R.id.tv_title, "Tracking location...")
+        remoteViews.setTextViewText(R.id.tv_content, "Location: ")
+        remoteViews.setTextViewText(R.id.tvSpace,",")
+        remoteViews.setTextViewText(R.id.tv_latitude, lat) // Update with actual latitude
+        remoteViews.setTextViewText(R.id.tv_longitude, lon) // Update with actual longitude
+        remoteViews.setOnClickPendingIntent(R.id.iv_close, stopPendingIntent) // Set PendingIntent for close button
+
+        return NotificationCompat.Builder(this, "location")
+            .setSmallIcon(R.drawable.ic_notifications_24)
+            .setCustomContentView(remoteViews)
+            .setContentIntent(pendingIntent)  // click on notification Action
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+            .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Stop", stopPendingIntent)
+            .setOngoing(true)
+            .build()
+    }
+
+    // Notification Already Called by Base Application
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "location",
+                "Location Background Service",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
+                .createNotificationChannel(channel)
+        }
+    }
+
+    private fun stop() {
+        stopForeground(true)
+        stopSelf()
+    }
+
+    // Handling Default Notification Builder
+    private fun startOld() {
+
         val pendingIntent = PendingIntent.getActivity(
             this,
             0,
@@ -104,8 +201,6 @@ class LocationBgService: Service() {
                     e -> e.printStackTrace()
             }
             .onEach { location ->
-//                val lat = location.latitude.toString().takeLast(3)
-//                val long = location.longitude.toString().takeLast(3)
 
                 val lat = location.latitude.toString()
                 val long = location.longitude.toString()
@@ -123,11 +218,6 @@ class LocationBgService: Service() {
             .launchIn(serviceScope)
 
         startForeground(1, notification.build())
-    }
-
-    private fun stop() {
-        stopForeground(true)
-        stopSelf()
     }
 
     override fun onDestroy() {

@@ -270,6 +270,7 @@
                 android:value="" />
         </activity>
 
+        <!--    ///005 location here : for continuous background Works ////-->
         <service
             android:name=".LocationBgService.LocationBgService"
             android:foregroundServiceType="location" />

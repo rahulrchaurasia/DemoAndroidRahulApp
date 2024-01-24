@@ -29,7 +29,7 @@ class LocationHelper(private val context: Context, private val activity: Activit
 
     private val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     private val client: SettingsClient = LocationServices.getSettingsClient(context)
-
+    val REQUEST_CHECK_SETTINGS = 0x1
     fun checkDeviceLocationSettings(onLocationSettingsChecked: (Boolean) -> Unit) {
         val locationRequest = LocationRequest.create().apply {
             interval = 10000
@@ -58,7 +58,7 @@ class LocationHelper(private val context: Context, private val activity: Activit
                     val resolvable = exception as ResolvableApiException
                     resolvable.startResolutionForResult(
                         activity,
-                        LocationService.REQUEST_CHECK_SETTINGS
+                        REQUEST_CHECK_SETTINGS
                     )
                 } catch (sendEx: SendIntentException) {
                     // Ignore the error.
