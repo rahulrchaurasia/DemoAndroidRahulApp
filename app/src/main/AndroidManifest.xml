@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+<!--    ///005 location here ////-->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -29,9 +31,12 @@
         android:theme="@style/Theme.DemoAndroidApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <!--    ///005 location here ////-->
         <activity
             android:name=".LocationBgService.LocationBackgrounDemActivity"
             android:theme="@style/Theme.DemoAndroidApp"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".ShareData.ShareViwAsActivity"
