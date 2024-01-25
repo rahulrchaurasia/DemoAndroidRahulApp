@@ -153,7 +153,14 @@ class LocationBgService: Service() {
             .build()
     }
 
-    // Notification Already Called by Base Application
+
+
+    private fun stop() {
+        stopForeground(true)
+        stopSelf()
+    }
+
+    // region  Notification Already Called by Base Application
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -166,12 +173,9 @@ class LocationBgService: Service() {
         }
     }
 
-    private fun stop() {
-        stopForeground(true)
-        stopSelf()
-    }
+    //endregion
 
-    // Handling Default Notification Builder
+    //region Handling Default Notification Builder
     private fun startOld() {
 
         val pendingIntent = PendingIntent.getActivity(
@@ -219,6 +223,8 @@ class LocationBgService: Service() {
 
         startForeground(1, notification.build())
     }
+
+    //endregion
 
     override fun onDestroy() {
         super.onDestroy()

@@ -56,12 +56,12 @@
                     android:background="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent=".4"
+                    app:layout_constraintGuide_percent=".3"
                     />
 
                 <TextView
                     android:id="@+id/tvLatitude"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="12dp"
@@ -73,10 +73,11 @@
 
                 <TextView
                     android:id="@+id/txtLat"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/tvLatitude"
                     app:layout_constraintStart_toEndOf="@id/guideline"
                     app:layout_constraintTop_toTopOf="@id/tvLatitude" />
@@ -105,6 +106,32 @@
                     app:layout_constraintBottom_toBottomOf="@id/tvLonitude"
                     app:layout_constraintStart_toEndOf="@id/guideline"
                     app:layout_constraintTop_toTopOf="@id/tvLonitude" />
+
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Address:"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLonitude" />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvAddress"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="@id/tvAddress" />
 
 
 
