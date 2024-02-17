@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import com.policyboss.demoandroidapp.ActivityLifecycle.ActivityLifeCycleActivity
 import com.policyboss.demoandroidapp.AlertDialog.AlertDialogDemo
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
@@ -22,6 +23,13 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
     lateinit var binding : ActivityDashboardBinding
 
+    private val callback = object  : OnBackPressedCallback(enabled = true){
+        override fun handleOnBackPressed() {
+            this@DashboardActivity.finish()
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,6 +47,10 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
 
         setClickListener()
+
+        //BACKPRRESS EVENT
+        onBackPressedDispatcher.addCallback(this, callback)
+
     }
 
     fun setClickListener() {
@@ -64,6 +76,9 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
         binding.btnActivityLifecycle.setOnClickListener(this)
 
         binding.btnLocatinInBg.setOnClickListener(this)
+
+        binding.btnEditTextDemo.setOnClickListener(this)
+
 
 
     }
@@ -131,6 +146,10 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
 
                 startActivity(Intent(this, AlertDialogDemo::class.java))
+
+
+            }
+            binding.btnEditTextDemo.id -> {
 
 
             }

@@ -3,6 +3,7 @@ package com.policyboss.demoandroidapp.UI
 import android.Manifest
 import android.content.ContentUris
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.AssetFileDescriptor
 import android.graphics.Bitmap
@@ -14,8 +15,10 @@ import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.policyboss.demoandroidapp.BaseActivity
 
 
 import com.policyboss.demoandroidapp.Constant
@@ -44,7 +47,7 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class HomeActivity : AppCompatActivity() ,View.OnClickListener {
+class HomeActivity : BaseActivity() ,View.OnClickListener {
 
     var CAMERA_STORAGE_PERMISSION_REQUEST_CODE = 101
 
@@ -55,6 +58,7 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
     companion object {
         var CREDENTIAL_PICKER_REQUEST = 1
     }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +97,14 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
 //
 //            flowDemo()
 //        }
+
+        onBackPressedDispatcher.addCallback(this,object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+
+                exitOnBackPressed()
+            }
+
+        })
     }
 
     fun setOnClickListener(){
@@ -114,6 +126,28 @@ class HomeActivity : AppCompatActivity() ,View.OnClickListener {
         binding.btnCoroutine.setOnClickListener(this)
     }
 
+
+    fun exitOnBackPressed(){
+
+       showAlert("Exit","Do you want to exit!!") { type  : String, dialog : DialogInterface ->
+
+            when(type){
+                "Y" -> {
+                    // toast("Logout Successfully...!!")
+                    this@HomeActivity.finish()
+                }
+                "N" -> {
+                    dialog.dismiss()
+                    toast("Cancel Exit")
+                }
+
+            }
+
+
+
+        }
+
+    }
     suspend fun flowDemo(){
 
 //        numbers

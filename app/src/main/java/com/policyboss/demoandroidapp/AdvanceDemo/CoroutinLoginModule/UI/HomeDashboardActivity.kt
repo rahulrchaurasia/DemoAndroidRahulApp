@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,6 +70,13 @@ class HomeDashboardActivity : BaseActivity() {
 
     //endregion
 
+    private val callback = object  : OnBackPressedCallback(enabled = true){
+        override fun handleOnBackPressed() {
+            exitOnBackPressed()
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingRoot = ActivityHomeDashboardBinding.inflate(layoutInflater)
@@ -94,6 +102,7 @@ class HomeDashboardActivity : BaseActivity() {
         getUserConstantResponse()
 
 
+        onBackPressedDispatcher.addCallback(this, callback)
 
     }
 
@@ -123,17 +132,25 @@ class HomeDashboardActivity : BaseActivity() {
 //
     }
 
-    override fun onBackPressed() {
-      //  super.onBackPressed()
-
-      //  layout.showAlerDialog(this)
-
+//    @Deprecated("Deprecated in Java")
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//        //  super.onBackPressed()
+//
+//      //  layout.showAlerDialog(this)
+//
+//        //exitAlert(){
+//
+//       // this.finish()
+//    }
+//
+    fun exitOnBackPressed(){
 
         showAlert("Exit","Do you want to exit!!") { type  : String, dialog : DialogInterface ->
 
             when(type){
                 "Y" -> {
-                   // toast("Logout Successfully...!!")
+                    // toast("Logout Successfully...!!")
                     this@HomeDashboardActivity.finish()
                 }
                 "N" -> {
@@ -146,7 +163,7 @@ class HomeDashboardActivity : BaseActivity() {
 
 
         }
-       // this.finish()
+
     }
 
     override fun onDestroy() {
