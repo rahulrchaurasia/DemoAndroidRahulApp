@@ -14,9 +14,12 @@ import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivity
 import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
 import com.policyboss.demoandroidapp.UI.Login.LoginActivity
+import com.policyboss.demoandroidapp.UI.MaterialEditText.MaterialEditTextDemoActivity
 import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderActivity
+import com.policyboss.demoandroidapp.UI.circularProgress.CircularProgressActivity
 
 import com.policyboss.demoandroidapp.Utility.PopupViewTop
+import com.policyboss.demoandroidapp.ViewPagerDemo.ViewPagerMainActivity
 import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
 
 class DashboardActivity : AppCompatActivity() , View.OnClickListener{
@@ -79,6 +82,9 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
         binding.btnEditTextDemo.setOnClickListener(this)
 
+        binding.btnCircularProgress.setOnClickListener(this)
+
+        binding.btnViewPagerMain.setOnClickListener(this)
 
 
     }
@@ -102,6 +108,10 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
                 startActivity(Intent(this, LocationBackgrounDemActivity::class.java))
             }
 
+            binding.btnViewPagerMain.id -> {
+
+                startActivity(Intent(this, ViewPagerMainActivity::class.java))
+            }
             binding.btnAutoTextReader.id -> {
 
                 startActivity(Intent(this, AutoTextReaderActivity::class.java))
@@ -152,8 +162,14 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
             binding.btnEditTextDemo.id -> {
 
 
+                startActivity(Intent(this, MaterialEditTextDemoActivity::class.java))
             }
 
+            binding.btnCircularProgress.id -> {
+
+
+                startActivity(Intent(this, CircularProgressActivity::class.java))
+            }
             binding.btnActivityLifecycle.id ->{
 
 

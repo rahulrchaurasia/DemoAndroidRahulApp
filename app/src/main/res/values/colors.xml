@@ -41,6 +41,7 @@
     <color name="blue_menu">#d2f2fd</color>
     <color name="blue_bg_light">#e3f2fd</color>
     <color name="blue_bg">#ebf8ff</color>
+
     <color name="blue_card_bg">#afe2f5</color>
 
     <color name="yellow_color">#f9bf22</color>
@@ -121,6 +122,8 @@
 
     <!--region inspect-->
     <!--<color name="background">#e6e6e6</color>-->
+
+
     <color name="lightBlue">#3ab2d4</color>
     <!--<color name="white">#FFFFFF</color>-->
     <color name="blue_descent">#4b76c2</color>

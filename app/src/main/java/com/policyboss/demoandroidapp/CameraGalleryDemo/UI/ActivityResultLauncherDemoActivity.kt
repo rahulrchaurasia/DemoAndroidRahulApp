@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -21,7 +20,7 @@ import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.Utility.Utility
-import com.policyboss.demoandroidapp.Utility.showSnackbar
+import com.policyboss.demoandroidapp.Utility.ExtensionFun.showSnackbar
 import com.policyboss.demoandroidapp.databinding.ActivityResultLauncherDemoBinding
 
 class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {

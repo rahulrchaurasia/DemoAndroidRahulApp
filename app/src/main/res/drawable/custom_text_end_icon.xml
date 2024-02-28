@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-drawable xmlns:android="http://schemas.android.com/apk/res/android">
+            <item>
+                <calendar-icon /> </item>
+            <item>
+                <TextView
+                    android:id="@+id/tvAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:text="0" />
+            </item>
+        </layer-drawable>
+    </item>
+</layer-list>

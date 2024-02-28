@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dashboard"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UI.MaterialEditText.MaterialEditTextDemoActivity">
+
+
+    <LinearLayout
+
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       >
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+        <TextView
+            android:layout_marginTop="@dimen/_16dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_16dp"
+           android:text="Material InputLayout Demo"
+            android:background="@color/bg_dashboard"
+            android:padding="@dimen/_8dp"
+           style="@style/TextViewStyle.BannerBold"
+        />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/_12dp"
+                app:cardCornerRadius="@dimen/_12dp"
+                android:layout_marginBottom="@dimen/_2dp"
+                android:layout_marginTop="@dimen/_2dp"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_16dp"
+
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilName"
+                        android:layout_marginTop="@dimen/_8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etName"
+                            android:focusable="true"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:maxLength="50"
+                            android:imeOptions="actionNext"
+
+                            android:inputType="phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilMobNo"
+                        android:layout_marginTop="@dimen/_8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMobile"
+                            android:focusable="true"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:maxLength="50"
+                            android:imeOptions="actionNext"
+
+                            android:inputType="phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--       app:endIconDrawable="@drawable/ic_home_24"-->
+                    <!--       app:endIconMode="custom"-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/childDOB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilDob"
+
+                            app:layout_constraintStart_toStartOf="@+id/childDOB"
+                            app:layout_constraintEnd_toEndOf="@+id/childDOB"
+                            app:layout_constraintTop_toTopOf="@+id/childDOB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionDone"
+
+                            android:hint="Date of Birth(DD-MM-YYYY)"
+
+                            android:inputType="number">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etDob"
+                                android:inputType="date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:lines="1"
+                                android:maxLines="1"
+                                android:maxLength="10"
+
+                                android:text=""
+
+
+
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+
+                            app:layout_constraintTop_toTopOf="@+id/tilDob"
+                            app:layout_constraintBottom_toBottomOf="@id/tilDob"
+                            app:layout_constraintEnd_toEndOf="@+id/childDOB"
+                            android:layout_marginRight="@dimen/_8dp"
+                            android:layout_marginTop="-16dp"
+                            android:padding="12dp"
+                            android:gravity="center"
+                            android:id="@+id/tvAge"
+                            android:background="@drawable/rect_lightblue_shape"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextViewStyle.Large"
+                            android:text="22 years"
+                            android:textStyle="bold" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </ScrollView>
+
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_marginTop="@dimen/_16dp"
+            android:layout_marginHorizontal="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:trackThickness="6dp"
+            app:indicatorColor="@color/light_blue"
+            android:progress="10"
+            app:trackCornerRadius="@dimen/_16dp"
+            app:trackColor="@color/blue_bg_light"
+            android:indeterminate="false" />
+
+   </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivClose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:src="@drawable/ic_close_24"
+        android:layout_marginHorizontal="@dimen/_8dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

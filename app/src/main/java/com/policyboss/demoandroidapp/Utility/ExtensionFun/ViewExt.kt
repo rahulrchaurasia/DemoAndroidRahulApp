@@ -14,16 +14,23 @@
 * limitations under the License.
 */
 
-package com.policyboss.demoandroidapp.Utility
+package com.policyboss.demoandroidapp.Utility.ExtensionFun
 
 import android.content.Context
-import android.content.DialogInterface
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.findViewTreeLifecycleOwner
 
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.demoandroidapp.R
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**************** For Snackbar *********************************************/
 //fun View.showSnackbar(msgId: Int, length: Int) {
@@ -114,4 +121,20 @@ fun View.showAlerDialog(context : Context) {
 //      val toast = Toast.makeText(context,message,Toast.LENGTH_SHORT)
 //        toast.show()
 //    }
+
+
+    // for use myView.delayOnLifeCycle(500L){...}
+     fun View.delayOnLifeCycle(
+
+         durationInMilliSec : Long,
+         dispatches : CoroutineDispatcher = Dispatchers.Main,
+         block: () -> Unit
+     ) : Job? = findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
+
+         lifecycleOwner.lifecycle.coroutineScope.launch(dispatches){
+             delay(durationInMilliSec)
+             block
+         }
+     }
+
 }

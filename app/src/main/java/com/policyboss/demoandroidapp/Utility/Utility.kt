@@ -17,6 +17,7 @@ import android.util.Base64
 import android.util.Base64.encodeToString
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.policyboss.demoandroidapp.BuildConfig
@@ -148,6 +149,33 @@ object Utility {
         }
         context.startActivity(browserIntent)
     }
+
+
+
+    fun calculateAge(dob: String, customDateFormat : String ): Int {
+        // Define the date format for parsing the DOB
+        val dateFormat = SimpleDateFormat(customDateFormat, Locale.US)
+
+        try {
+            // Parse the DOB string to a Date object
+            val dobDate = dateFormat.parse(dob)
+
+            // Get the current date
+            val currentDate = Calendar.getInstance().time
+
+            // Calculate the difference in milliseconds between the current date and DOB
+            val diffInMillis = currentDate.time - dobDate!!.time
+
+            // Convert the difference to years
+            val age = (diffInMillis / (1000L * 60 * 60 * 24 * 365.25)).toInt()
+
+            return age
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return -1 // Return -1 if there's an error in parsing the DOB
+        }
+    }
+
 
     /****************************************************************
     //Note : Download any Type of File and Images Using URL

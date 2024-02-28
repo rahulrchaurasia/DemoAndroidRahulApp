@@ -1,6 +1,5 @@
 package com.policyboss.demoandroidapp.UI.Login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
@@ -10,14 +9,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.BaseActivity
-import com.policyboss.demoandroidapp.R
+import com.policyboss.demoandroidapp.Utility.ExtensionFun.showSnackbar
 import com.policyboss.demoandroidapp.Utility.showSnackbar
 import com.policyboss.demoandroidapp.ViewModel.UserViewModel
 import com.policyboss.demoandroidapp.databinding.ActivityLoginBinding
-import com.policyboss.demoandroidapp.databinding.ActivitySecondBinding
 import com.policyboss.demoandroidapp.request.LoginRequestModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

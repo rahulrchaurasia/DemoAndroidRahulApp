@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.policyboss.demoandroidapp.NavGraphDirections
-import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.dataModel.SampleData
-import com.policyboss.demoandroidapp.Utility.showSnackbar
+import com.policyboss.demoandroidapp.Utility.ExtensionFun.showSnackbar
 import com.policyboss.demoandroidapp.databinding.FragmentSettingBinding
 
 /*********** Global Action **************

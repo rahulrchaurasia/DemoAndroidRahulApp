@@ -16,7 +16,9 @@ import com.policyboss.demoandroidapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+  Serach : Using Filter Data
+ */
 public class BankAdapter extends ArrayAdapter<BankEntity> {
 
     Context context;

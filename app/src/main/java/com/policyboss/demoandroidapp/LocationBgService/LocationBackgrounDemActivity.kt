@@ -44,7 +44,7 @@ class LocationBackgrounDemActivity : BaseActivity() , View.OnClickListener {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_location_backgroun_dem)
+       // setContentView(R.layout.activity_location_backgroun_dem)
 
         binding = ActivityLocationBackgrounDemBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -2,26 +2,12 @@ package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.os.postDelayed
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
-import com.policyboss.demoandroidapp.NavGraphDirections
 import com.policyboss.demoandroidapp.R
-import com.policyboss.demoandroidapp.Utility.hideKeyboard
-import com.policyboss.demoandroidapp.Utility.showAlerDialog
-import com.policyboss.demoandroidapp.Utility.showSnackbar
-import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBinding
 
 /*********************************setupActionBarWithNavController *******************/
