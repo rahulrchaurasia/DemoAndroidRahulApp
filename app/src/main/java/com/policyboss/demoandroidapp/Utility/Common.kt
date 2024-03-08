@@ -18,6 +18,42 @@ fun Context.showSnackbar(view: View, msg: String?) {
     Snackbar.make(view, msg ?: "Something went wrong", Snackbar.LENGTH_SHORT).show()
 }
 
+/*
+example 1 (with action button):
+val button: Button = findViewById(R.id.myButton)
+button.setOnClickListener {
+    context.showSnackbar(it, "Button clicked!", "Undo", object : View.OnClickListener {
+        override fun onClick(v: View) {
+            // Handle undo action
+
+        }
+    })
+}
+
+example 2 (without action button):
+
+val textView: TextView = findViewById(R.id.myTextView)
+context.showSnackbar(textView, "This is a message without action.")
+
+ */
+fun Context.showSnackbar(
+    view: View,
+    msg: String? = null,
+    actionText: String? = null,
+    actionListener: View.OnClickListener? = null
+) {
+    val message = msg ?: "Something went wrong"
+    val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+
+    if (actionText != null && actionListener != null) {
+        snackbar.setAction(actionText, actionListener)
+    }
+
+    snackbar.show()
+}
+
+
+
 fun Context.hideKeyboard(view: View) {
     val imm = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(view.windowToken, 0)

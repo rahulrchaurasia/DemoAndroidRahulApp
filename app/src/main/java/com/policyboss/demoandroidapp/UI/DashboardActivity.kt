@@ -26,12 +26,12 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
     lateinit var binding : ActivityDashboardBinding
 
-    private val callback = object  : OnBackPressedCallback(enabled = true){
-        override fun handleOnBackPressed() {
-            this@DashboardActivity.finish()
-        }
-
-    }
+//    private val callback = object  : OnBackPressedCallback(enabled = true){
+//        override fun handleOnBackPressed() {
+//            this@DashboardActivity.finish()
+//        }
+//
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,7 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
         setClickListener()
 
         //BACKPRRESS EVENT
-        onBackPressedDispatcher.addCallback(this, callback)
+      //  onBackPressedDispatcher.addCallback(this, callback)
 
     }
 

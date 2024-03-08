@@ -87,7 +87,7 @@ class LocationBgService: Service() {
         val notification = buildNotification(remoteViews = remoteViews )
         startForeground(1, notification)
         locationClient
-            .getLocationUpdates(10000L)
+            .getLocationUpdates(interval = 5000, distance = 10f)
             .catch {
                     e -> e.printStackTrace()
             }
@@ -200,7 +200,7 @@ class LocationBgService: Service() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         locationClient
-            .getLocationUpdates(10000L)
+            .getLocationUpdates(interval = 5000, distance = 1f)
             .catch {
                     e -> e.printStackTrace()
             }

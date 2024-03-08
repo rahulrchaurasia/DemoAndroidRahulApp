@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
 
+
+    <external-path name="external_files" path="pictures/" />
+    <external-cache-path name="external_cache_files" path="." />
+
     <external-path name="external_files" path="." />
 
     <external-cache-path
@@ -9,9 +13,11 @@
     <external-files-path
         name="external_files_files"
         path="." />
-<!--    <files-path-->
-<!--        name="camera_photo"-->
-<!--        path="."/>-->
+    <files-path
+        name="camera_photo"
+        path="."/>
+
+
 
 <!--    <external-path name="external_files" path="." />-->
 

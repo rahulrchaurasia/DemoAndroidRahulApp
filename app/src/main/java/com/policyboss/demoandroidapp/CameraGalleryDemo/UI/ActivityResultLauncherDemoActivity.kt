@@ -196,7 +196,14 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
                 //  showSnackBar(layout,"Permission Not ask Yet")
                 // Permission Is Not Ask yet Request the Permisssion
 
-                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+               requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+
+//                val permissions = arrayOf(
+//                    Manifest.permission.CAMERA,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE
+//                )
+//                requestPermissionLauncher.launch(permissions) // Request both permissions together
+
             }
 
         }

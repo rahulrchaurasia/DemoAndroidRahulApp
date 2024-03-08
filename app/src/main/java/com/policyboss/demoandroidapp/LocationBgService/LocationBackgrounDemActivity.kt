@@ -9,16 +9,19 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
 
 import com.policyboss.demoandroidapp.R
+import com.policyboss.demoandroidapp.Utility.Utility
 import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.ActivityLocationBackgrounDemBinding
 import java.io.IOException
@@ -132,9 +135,20 @@ class LocationBackgrounDemActivity : BaseActivity() , View.OnClickListener {
     //endregion
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
-        registerReceiver(locationReceiver, IntentFilter(LocationBgService.Location_UPDATE))
+       //
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(locationReceiver, IntentFilter(LocationBgService.Location_UPDATE), RECEIVER_EXPORTED)
+        }else {
+            registerReceiver(locationReceiver, IntentFilter(LocationBgService.Location_UPDATE))
+        }
+
+
+
     }
 
 
@@ -162,6 +176,9 @@ class LocationBackgrounDemActivity : BaseActivity() , View.OnClickListener {
 
                     }
 
+                    else{
+                        Utility.showSettingsAlert(context = this@LocationBackgrounDemActivity)
+                    }
                 }
 
             }

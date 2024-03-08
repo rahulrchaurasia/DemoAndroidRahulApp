@@ -25,6 +25,16 @@ import com.policyboss.demoandroidapp.databinding.ActivityMultiplePermissionBindi
 //https://medium.com/@ajinkya.kolkhede1/requesting-runtime-permissions-using-new-activityresult-api-cb6116551f00
 //https://gist.github.com/SurajBahadur/671521c379502495d9ef0f6f1dc21724           [ Multiple Permission]
 
+/********************************************************************************************
+1> hasCamerRationalPermission():
+
+Purpose: Determines whether you should provide an explanation (rationale)
+to the user before requesting a previously denied permission.
+
+When to Use:
+After a permission request has been denied, to decide whether to show a rationale explaining why the permission is needed before requesting it again.
+To improve user experience and transparency by providing context for permission requests.
+ */
 class MultiplePermissionActivity : BaseActivity() {
     private lateinit var binding: ActivityMultiplePermissionBinding
     lateinit var layout: View

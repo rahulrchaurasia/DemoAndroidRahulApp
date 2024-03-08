@@ -78,7 +78,7 @@ open class BaseActivity : AppCompatActivity() {
 
     //region progress dialog
 
-    fun displayLoadingWithText(
+   open fun displayLoadingWithText(
         view: View,
         text: String? = "",
         subText: String? = "",
@@ -119,7 +119,7 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun hideLoading() {
+    open fun hideLoading() {
         try {
             if (this.dialog != null) {
                 dialog.dismiss()

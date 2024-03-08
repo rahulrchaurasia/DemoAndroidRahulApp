@@ -10,11 +10,13 @@ import android.location.LocationManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.Granularity
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.Priority
 import com.google.android.gms.location.SettingsClient
 import com.policyboss.demoandroidapp.LocationDemo.LocationService
 
@@ -31,16 +33,31 @@ class LocationHelper(private val context: Context, private val activity: Activit
     private val client: SettingsClient = LocationServices.getSettingsClient(context)
     val REQUEST_CHECK_SETTINGS = 0x1
     fun checkDeviceLocationSettings(onLocationSettingsChecked: (Boolean) -> Unit) {
-        val locationRequest = LocationRequest.create().apply {
-            interval = 10000
-            fastestInterval = 5000
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
 
-        val builder = LocationSettingsRequest.Builder()
+        //region depricated
+//        val locationRequest = LocationRequest.create().apply {
+//            interval = 10000
+//            fastestInterval = 5000
+//            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//        }
+        //endregion
+
+        val locationRequest = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            // Set the desired update interval in milliseconds (e.g., 300000 for 5 minutes)
+            300000
+        )
+            .setMinUpdateDistanceMeters(10f) // Set the minimum distance between updates (optional)
+            .setGranularity(Granularity.GRANULARITY_PERMISSION_LEVEL) // Use permission-level granularity
+            .setWaitForAccurateLocation(true) // Wait for a more accurate location (optional)
+            .build()
+
+
+        val settingsRequest = LocationSettingsRequest.Builder()
             .addLocationRequest(locationRequest)
+            .build()
 
-        val task = client.checkLocationSettings(builder.build())
+        val task = client.checkLocationSettings(settingsRequest)
 
         task.addOnSuccessListener {
             onLocationSettingsChecked(true)

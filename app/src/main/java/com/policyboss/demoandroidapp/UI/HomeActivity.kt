@@ -16,7 +16,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.policyboss.demoandroidapp.BaseActivity
 
@@ -210,7 +209,9 @@ class HomeActivity : BaseActivity() ,View.OnClickListener {
             binding.btnAPI.id -> {
 
                // startActivity(Intent(this, Log::class.java))
-                downloadPDF(this@HomeActivity)
+               // displayLoadingWithText(binding.root, "Loading.." )
+                downloadPDF(binding.root,this@HomeActivity)
+
               //  shareText(this@HomeActivity)
 
             }
@@ -340,17 +341,19 @@ enum class Currency(val code: String, val symbol: String) {
 
 
 
- fun downloadPDF(context: Context){
+ fun downloadPDF(view : View,context: Context){
 
-     val context = context.applicationContext // Replace with your context
+     //Note : We req Activity Context here not apllication COntext
+     val context = context // Replace with your context
 
      val url = "https://origin-cdnh.policyboss.com/fmweb/policyboss-pro/uploads/sales_materialpb/814concern.jpg"
      val url1 = "https://origin-cdnh.policyboss.com/fmweb/policyboss-pro/uploads/salesmaterial/motor.png"
-     val url2 = "https://www.africau.edu/images/default/sample.pdf" // Replace with your file URL
+     val url2 = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" // Replace with your file URL
    //  val mimeType = "application/pdf" // Replace with the appropriate MIME type
      val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
      val filename = "sampleDD"+ timeStamp // Replace with your desired filename
 
+     (context as BaseActivity).displayLoadingWithText(view,"Loading")
    CoroutineScope(Dispatchers.IO).launch {
 
        val mimeType = Utility.getMimeTypeFromUrl(url2)
@@ -361,10 +364,13 @@ enum class Currency(val code: String, val symbol: String) {
 
       val downloadedUri =  downloadedUritemp.await()
       withContext(Dispatchers.Main) {
+
+          (context).hideLoading()
            if (downloadedUri != null) {
 
+
                Toast.makeText(context,"Fille Downloaded",Toast.LENGTH_LONG).show()
-               shareDara(context, fileUri =downloadedUri,mimeType = mimeType )
+               Utility.shareData(context = context, fileUri =downloadedUri,mimeType = mimeType )
               // shareText(context)
            } else {
                // File download failed
@@ -377,29 +383,7 @@ enum class Currency(val code: String, val symbol: String) {
  }
 
 
-fun shareDara(context: Context,fileUri: Uri, mimeType: String ="image/*"){
 
-
-    val shareIntent = Intent(Intent.ACTION_SEND)
-    shareIntent.type = mimeType // Set the MIME type based on the file type
-   // shareIntent.type = "image/*"
-    shareIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    shareIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-    shareIntent.putExtra(Intent.EXTRA_TEXT, "*****official Link*****")
-// Set the URI as the content to share
-    shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
-
-// Optionally set a subject for the shared content
-    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Sharing Content")
-
-// Start the sharing activity
-
-    context.startActivity(Intent.createChooser(shareIntent, "Share File"))
-
-}
 
 fun shareText(context: Context){
 

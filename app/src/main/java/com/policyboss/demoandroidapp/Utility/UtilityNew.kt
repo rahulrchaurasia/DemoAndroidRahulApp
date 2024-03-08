@@ -275,16 +275,7 @@ object UtilityNew {
     }
 
 
-    fun createImageUri(context: Context) : Uri {
 
-        val image = File(context.filesDir,"camera_photo.png")
-
-        return FileProvider.getUriForFile(context.applicationContext,
-            "com.example.policybosscaller.fileprovider",
-            image
-        )
-
-    }
 
 
 

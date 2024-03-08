@@ -165,6 +165,7 @@ class PermissionActivity : BaseActivity() {
     //endregion
 
     override fun onBackPressed() {
+        super.onBackPressed()
         // super.onBackPressed()
         setResult(RESULT_OK, Intent().putExtra(Constant.KEY_DATA,"test Data"))
         finish()

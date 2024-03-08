@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
+    <string name="file_provider_authority" translatable="false">com.policyboss.demoandroidapp.fileprovider</string>
     <string name="NoConnection">No Internet Connection</string>
 
     <string name="permission_required">Required Permssion to access it</string>

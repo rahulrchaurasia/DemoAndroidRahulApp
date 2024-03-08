@@ -6,9 +6,11 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.Granularity
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.Priority
 import com.policyboss.demoandroidapp.Utility.hasLocationPermission
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +23,7 @@ class DefaultLocationClient(
 ): LocationBgClient {
 
     @SuppressLint("MissingPermission")
-    override fun getLocationUpdates(interval: Long): Flow<Location> {
+    override fun getLocationUpdates(interval: Long,distance: Float): Flow<Location> {
         return callbackFlow {
             if(!context.hasLocationPermission()) {
                 throw LocationBgClient.LocationException("Missing location permission")
@@ -34,12 +36,18 @@ class DefaultLocationClient(
                 throw LocationBgClient.LocationException("GPS is disabled")
             }
 
-            val request = LocationRequest.create()
-//                .setInterval(interval)
-//                .setFastestInterval(interval)
-                  .setInterval(5000)
-                  .setFastestInterval(5000)
-                   .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+
+
+
+            val request = LocationRequest.Builder(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                // Set the desired update interval in milliseconds (e.g., 300000 for 5 minutes)
+                interval
+            )
+                .setMinUpdateDistanceMeters(distance) // Set the minimum distance between updates (optional)
+                .setGranularity(Granularity.GRANULARITY_PERMISSION_LEVEL) // Use permission-level granularity
+                .setWaitForAccurateLocation(true) // Wait for a more accurate location (optional)
+                .build()
 
             val locationCallback = object : LocationCallback() {
                 override fun onLocationResult(result: LocationResult) {
