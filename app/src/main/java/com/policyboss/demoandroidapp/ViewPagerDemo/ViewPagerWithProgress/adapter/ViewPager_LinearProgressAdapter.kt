@@ -152,6 +152,22 @@ class ViewPager_LinearProgressAdapter(private val context: Context,
 
     }
 
+    fun hideProgressAnimations() {
+
+        CoroutineScope(Dispatchers.Main).launch {
+
+            //delay(100)
+            cancelProgressAnimation()
+
+            list.forEach { it.isUpdate = false }
+
+
+            notifyDataSetChanged()
+
+        }
+
+    }
+
     fun cancelProgressAnimation() {
         job?.cancel()
         job = null

@@ -54,34 +54,32 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
 
     private var autoScrollJob: Job? = null  // Make autoScrollJob nullable
 
-    private var lastUpdatedPosition = -1
+
+    private var lastUserScrollTime = 0L // Track last user interaction time
+
+
+    private val MIN_SCROLL_INTERVAL = 1000L // Minimum time in milliseconds after user stops dragging
+    private val DEFAULT_SCROLL_INTERVAL = 5000L // Default auto-scroll delay (consider user preferences)
 
     private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback(){
 
 
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
+
+            Log.d(Constant.TAG,"onPageSelected : $position " )
            //Note : uses the provided position which reflects the final, selected item after scrolling
             if (!isUserScrolling) {
 
+                val foodEntity : FoodEntity =  foodList[position]
+                // adpaterLinearProg.updateProgressAnimations(foodEntity)
+                foodEntity?.let { // Update progress only if item exists
+                    adpaterLinearProg.updateProgressAnimations(it)
+                }
 
-               // adpaterLinearProg.updateProgressAnimations(foodList.get( viewPager.currentItem))
-               if(!isAutoUpdateRestart) {
-                   val foodEntity : FoodEntity =  foodList[position]
-                   // adpaterLinearProg.updateProgressAnimations(foodEntity)
-                   foodEntity?.let { // Update progress only if item exists
-                       adpaterLinearProg.updateProgressAnimations(it)
-                   }
-               }else{
-                   isAutoUpdateRestart = false
-
-                  // startAutoScroll(startPosition =  viewPager.currentItem,_restartImmediate = true)
-//                   startAutoScroll(startPosition = position,_restartImmediate = true)
-//                   adpaterLinearProg.cancelProgressAnimation()
-
-               }
 
             }
+
         }
 
         override fun onPageScrollStateChanged(state: Int) {
@@ -92,32 +90,27 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
                     // User started scrolling
                     isUserScrolling = true
                     stopAutoScroll()
-                    adpaterLinearProg.cancelProgressAnimation()
-                    Log.d(Constant.TAG,"User Scroll : $isUserScrolling cancel Auto Scroll Linear-Progress" )
+                    adpaterLinearProg.hideProgressAnimations()
+                  //  Log.d(Constant.TAG,"User Scroll : $isUserScrolling cancel Auto Scroll Linear-Progress" )
+                   // lastUserScrollTime = System.currentTimeMillis() // Update time on drag
 
                 }
                 ViewPager2.SCROLL_STATE_IDLE -> {
                     // User finished scrolling
+
                     isUserScrolling = false
+                    Log.d(Constant.TAG,"SCROLL_STATE_IDLE called  :  ${viewPager.currentItem}" )
 
-                    if (autoScrollJob?.isActive != true){
 
+                        if (autoScrollJob?.isActive != true){
+                           startAutoScroll()           // Restart auto-scroll after minimum time interval
+                          //  startAutoScroll(startPosition =  viewPager.currentItem,_restartImmediate = true)
+                           val foodEntity  = foodList.get( viewPager.currentItem)
+                            foodEntity?.let { // Update progress only if item exists
+                                adpaterLinearProg.updateProgressAnimations(it)
+                            }
+                        }
 
-                        startAutoScroll(startPosition =  viewPager.currentItem,_restartImmediate = true)
-                        //adpaterLinearProg.cancelProgressAnimation()
-
-                        isAutoUpdateRestart = true
-
-                      //  adpaterLinearProg.cancelProgressAnimation()
-                        adpaterLinearProg.updateProgressAnimations(foodList.get( viewPager.currentItem))
-
-                    }
-//                    val currentPosition = viewPager.currentItem
-//                    val foodEntity: FoodEntity = foodList[currentPosition]
-
-                    // startAutoScroll()
-                  //  adpaterLinearProg.updateProgressAnimations(foodList.get( viewPager.currentItem))
-                    Log.d(Constant.TAG,"User Scroll : $isUserScrolling  activate User scroll and Linear-Progress")
 
                 }
             }
@@ -137,19 +130,7 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
         startAutoScroll()
          //adpaterLinearProg.updateProgressAnimations(foodList.first())
 
-//       binding.btnToggle.setOnClickListener{
-//
-//          stopAutoScroll()
-//           adpaterLinearProg.cancelProgressAnimation()
-//
-//       }
-//
-//        binding.btnStart.setOnClickListener{
-//
-//            startAutoScroll()
-//
-//
-//        }
+
     }
     fun  init() {
 
@@ -190,8 +171,43 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
         )
     }
 
+    private fun  startAutoScroll() {
 
-    private fun  startAutoScroll( startPosition: Int = -1, _restartImmediate : Boolean = false) {
+
+
+        if ( autoScrollJob?.isActive == true) {
+
+            // stopAutoScroll()
+            return
+        }
+        stopAutoScroll()
+
+        autoScrollJob = lifecycleScope.launch(Dispatchers.Main) {
+
+            while (isActive) {
+                // Skip delay only if restartImmediate is true
+
+                delay(DEFAULT_SCROLL_INTERVAL) //  5 sec Adjust the delay for your needs
+
+                withContext(Dispatchers.Main) {
+
+                    // viewPager.currentItem = (viewPager.currentItem + 1) % viewPager.adapter?.itemCount!!
+
+                    if (viewPager.currentItem < viewPager.adapter?.itemCount!! - 1) {
+                        viewPager.currentItem++
+                    } else {
+                        viewPager.currentItem = 0
+                    }
+
+                }
+            }
+        }
+
+
+    }
+
+
+    private fun  startAutoScroll_OLD( startPosition: Int = -1, _restartImmediate : Boolean = false) {
 
 
          var restartImmediate = _restartImmediate
@@ -210,9 +226,10 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
                     // Skip delay only if restartImmediate is true
                     if (restartImmediate) {
 
+                       // delay(MIN_SCROLL_INTERVAL)
                         restartImmediate = false
                     } else {
-                        delay(5000) //  5 sec Adjust the delay for your needs
+                        delay(DEFAULT_SCROLL_INTERVAL) //  5 sec Adjust the delay for your needs
                     }
 
                     withContext(Dispatchers.Main) {
@@ -224,17 +241,7 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
                         } else {
                             viewPager.currentItem = 0
                         }
-//                        if (restartImmediate) {
-//                            viewPager.currentItem = startPosition
-//
-//                        }else{
-//
-//                            if (viewPager.currentItem < viewPager.adapter?.itemCount!! - 1) {
-//                                viewPager.currentItem++
-//                            } else {
-//                                viewPager.currentItem = 0
-//                            }
-//                        }
+
 
                         restartImmediate = false
 
