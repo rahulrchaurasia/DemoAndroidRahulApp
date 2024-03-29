@@ -47,18 +47,14 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
 
     private var isUserScrolling = false
 
-    private var isAutoUpdateRestart = false
-
-//    private lateinit var progressIndicator: LinearProgressIndicator
-
 
     private var autoScrollJob: Job? = null  // Make autoScrollJob nullable
 
 
     private var lastUserScrollTime = 0L // Track last user interaction time
-
-
     private val MIN_SCROLL_INTERVAL = 1000L // Minimum time in milliseconds after user stops dragging
+
+
     private val DEFAULT_SCROLL_INTERVAL = 5000L // Default auto-scroll delay (consider user preferences)
 
     private val onPageChangeCallback = object : ViewPager2.OnPageChangeCallback(){
@@ -130,6 +126,10 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
         startAutoScroll()
          //adpaterLinearProg.updateProgressAnimations(foodList.first())
 
+       binding.ivClose.setOnClickListener{
+
+           this@ViewPagerWithProgressActivity.finish()
+       }
 
     }
     fun  init() {
@@ -170,6 +170,8 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
 
         )
     }
+
+
 
     private fun  startAutoScroll() {
 
@@ -276,5 +278,6 @@ class ViewPagerWithProgressActivity : AppCompatActivity() {
         super.onDestroy()
         // Cancel the auto-scroll job to avoid memory leaks
         stopAutoScroll()
+
     }
 }

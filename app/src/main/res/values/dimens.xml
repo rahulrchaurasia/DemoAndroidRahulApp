@@ -17,6 +17,9 @@
     <dimen name="_16dp">16dp</dimen>
     <dimen name="_40dp">40dp</dimen>
 
+    <dimen name="dot_margin">5dp</dimen>
+    dot_margin
+
     <dimen name="menu_arrow">18dp</dimen>
     <dimen name="design_bottom_navigation_text_size" tools:override="true">14sp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">14sp</dimen>

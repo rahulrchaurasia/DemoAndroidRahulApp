@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import com.policyboss.demoandroidapp.Constant
+import com.policyboss.demoandroidapp.KotlinDemo.model.Customer
+import com.policyboss.demoandroidapp.KotlinDemo.model.Order
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.databinding.ActivityKotlinDemoBinding
 
@@ -31,8 +33,11 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
 
         binding.btnCompanionDemo.setOnClickListener(this)
         binding.btnMap.setOnClickListener(this)
+        binding.btnFlatMap.setOnClickListener(this)
         binding.btnClose.setOnClickListener(this)
     }
+
+
 
 
 
@@ -48,6 +53,11 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
             binding.btnMap.id -> {
 
                 mapDemo()
+            }
+
+            binding.btnFlatMap.id -> {
+
+                FlatMapDemo()
             }
 
             binding.btnClose.id -> {
@@ -93,6 +103,37 @@ class KotlinDemoActivity : AppCompatActivity() , OnClickListener{
         }
 
         Log.d(Constant.TAG,empDetail.toString())
+    }
+
+    fun FlatMapDemo(){
+
+        // flatmap for :FlatMap is used to combine all the items of lists into one list.
+        // here we combine OlrdeList to oneList
+        val customList = getCustomerList().flatMap {
+
+            it.orders
+
+
+        }.filter { it.amount > 30  }
+
+
+        customList.forEach{
+
+            Log.d(Constant.TAG,"Data ${it.amount} " )
+        }
+    }
+
+    fun getCustomerList() : List<Customer>{
+
+       return listOf(
+            Customer(name ="Alice", orders = listOf(Order(10), Order(20))),
+            Customer(name ="Peter",  orders =listOf(Order(80), Order(90))),
+            Customer(name ="Jeck", orders = listOf(Order(100), Order(110))),
+            Customer(name ="Bob",  orders =listOf(Order(30)))
+
+        )
+
+
     }
 
     fun filterData(){

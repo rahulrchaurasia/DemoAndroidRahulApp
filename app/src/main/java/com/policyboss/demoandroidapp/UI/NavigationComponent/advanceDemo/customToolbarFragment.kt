@@ -23,6 +23,14 @@ import kotlinx.coroutines.launch
 
 
 //Note : here we hide and show Appbar using Interface callback to NavigationAdvanceActivity
+
+/*
+activity as? NavigationAdvanceCallback:
+activity: This refers to the current activity associated with the fragment.
+as?: This is a safe cast operator in Kotlin. It attempts to cast the activity to the NavigationAdvanceCallback interface type, but if the cast fails (i.e., the activity doesn't implement the interface), it returns null.
+NavigationAdvanceCallback: This is the name of the interface you defined.
+
+ */
 class customToolbarFragment : Fragment(),View.OnClickListener {
 
 

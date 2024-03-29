@@ -1,19 +1,33 @@
 package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo
 
 //import android.R
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.dataModel.SampleData
+import com.policyboss.demoandroidapp.Utility.showSnackbar
 import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.FragmentSendCashBinding
 
@@ -52,7 +66,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.d(Constant.TAG,"SendFragment : onCreate")
     }
 
     override fun onCreateView(
@@ -60,7 +74,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        Log.d(Constant.TAG,"SendFragment : onCreateView")
         _binding = FragmentSendCashBinding.inflate(inflater,container,false)
 
 
@@ -73,10 +87,15 @@ class sendCashFragment : Fragment()  , OnClickListener{
         super.onViewCreated(view, savedInstanceState)
 
 
+        setupMenu()
 
+       // val toolbar = requireActivity().findViewById<Toolbar>(com.policyboss.demoandroidapp.R.id.toolbar)
 
-        val toolbar = requireActivity().findViewById<Toolbar>(com.policyboss.demoandroidapp.R.id.toolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
 
+            title = "SendCashFragment :"
+
+        }
         //region commented
 //        toolbar.setNavigationOnClickListener {
 //
@@ -147,12 +166,56 @@ class sendCashFragment : Fragment()  , OnClickListener{
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        Log.d(Constant.TAG,"SendFragment : onDestroyView")
        // callback.remove()
     }
 
     override fun onResume() {
         super.onResume()
+        Log.d(Constant.TAG,"SendFragment : onResume")
 
+    }
+
+    private fun setupMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+            @SuppressLint("UnsafeOptInUsageError")
+            override fun onPrepareMenu(menu: Menu) {
+
+                val view = menu.getItem(0).actionView
+                view?.findViewById<ImageView>(R.id.imgMenuWallet)?.let {
+                    it.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_account_balance_wallet
+                        )
+                    )
+                }
+
+                view?.findViewById<TextView>(R.id.txtMenuWalletBalance)?.let {
+                    it.text =
+                        "${resources.getString(R.string.rupee_symbol)}${300}"
+                }
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.transaction_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Validate and handle the selected menu item
+                return when (menuItem.itemId) {
+                    R.id.menuRechargeWalletBalance -> {
+                        requireContext().showSnackbar(binding.root, "Wallet clicked")
+                        return true
+                    }
+                    R.id.menuRechargeRefresh -> {
+                        requireContext().showSnackbar(binding.root, "Refresh")
+                        return true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onClick(view: View?) {
@@ -184,6 +247,10 @@ class sendCashFragment : Fragment()  , OnClickListener{
                 /**************** PopBackStack *********************************/
 
                 findNavController().popBackStack(R.id.homeDashBoardFragment,false)  //Include destination not to  remove
+
+               // findNavController().popBackStack()
+
+
 
             }
 

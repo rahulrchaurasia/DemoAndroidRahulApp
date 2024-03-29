@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:context=".ShareViewModel.fragment.TestFragment2">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_marginLeft="@dimen/eight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+
+        android:text="Title : Fragment 2" />
+    <TextView
+        android:id="@+id/txtfrag2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+
+        android:gravity="center"
+        android:text="Hello Fragment 2" />
+</FrameLayout>

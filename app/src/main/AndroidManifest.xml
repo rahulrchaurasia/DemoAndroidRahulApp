@@ -31,9 +31,32 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ShareViewModel.ShareViewModeDemoActivity"
+            android:theme="@style/Theme.DemoAndroidApp"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPagerDemo.TabLayout.CustomTabLayout.UI.ScrollableTabLayoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPagerDemo.TabLayout.CustomTabLayout.UI.CustomTabLayout2Activity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".ViewPagerDemo.TabLayout.CustomTabLayout.UI.CustomTabLayoutActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".ViewPagerDemo.CarouselViewPager.CarouselViewPagerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".ViewPagerDemo.BasicViewPager.BasicViewPagerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
             android:name=".ViewPagerDemo.ViewPagerWithProgress.UI.ViewPagerWithProgressActivity"
             android:exported="false"
-            android:theme="@style/Theme.DemoAndroidApp"/>
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".ViewPagerDemo.ViewPagerMainActivity"
             android:exported="false"
@@ -286,7 +309,6 @@
         <service
             android:name=".LocationBgService.LocationBgService"
             android:foregroundServiceType="location" />
-
 
         <provider
             android:name="androidx.core.content.FileProvider"

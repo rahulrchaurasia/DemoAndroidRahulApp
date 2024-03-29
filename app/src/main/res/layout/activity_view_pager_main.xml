@@ -60,12 +60,13 @@ tools:context=".ViewPagerDemo.ViewPagerMainActivity">
             app:layout_constraintTop_toTopOf="@+id/childparent"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="ViewPager withProgress "
+            android:text="Basic ViewPager "
 
             android:textColor="@color/Brown"
             style="@style/outlined_button"
             android:layout_marginTop="@dimen/eight"
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"/>
 
         <com.google.android.material.button.MaterialButton
@@ -73,7 +74,7 @@ tools:context=".ViewPagerDemo.ViewPagerMainActivity">
             app:layout_constraintTop_toBottomOf="@+id/btnViePager1"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Login Using Hilt"
+            android:text="ViewPager withProgress"
 
             android:textColor="@color/Brown"
             style="@style/outlined_button"
@@ -85,27 +86,79 @@ tools:context=".ViewPagerDemo.ViewPagerMainActivity">
             app:layout_constraintTop_toBottomOf="@+id/btnViePager2"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Auto Text Reader"
+            android:text="Carousel Viewpager"
 
             android:textColor="@color/Brown"
             style="@style/outlined_button"
             android:layout_marginTop="@dimen/eight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
+
+
+
+        <View
+            android:id="@+id/viewDivider"
+            app:layout_constraintTop_toBottomOf="@+id/btnViePager3"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:background="@color/blue_descent"
+            android:layout_marginTop="@dimen/_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViePager4"
-            app:layout_constraintTop_toBottomOf="@+id/btnViePager3"
+            app:layout_constraintTop_toBottomOf="@+id/viewDivider"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="CropImage Fro View"
+            android:text="Custom Tab Layout 1"
 
             android:textColor="@color/Brown"
             style="@style/outlined_button"
             android:layout_marginTop="@dimen/eight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViePager5"
+            app:layout_constraintTop_toBottomOf="@+id/btnViePager4"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Custom Tab Layout 2"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViePager6"
+            app:layout_constraintTop_toBottomOf="@+id/btnViePager5"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Custom Tab Layout 3"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnViePager7"
+            app:layout_constraintTop_toBottomOf="@+id/btnViePager6"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Custom Tab Layout 4"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
 
 
 

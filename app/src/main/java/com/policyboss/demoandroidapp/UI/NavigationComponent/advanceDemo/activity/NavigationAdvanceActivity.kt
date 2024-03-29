@@ -35,10 +35,16 @@ import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBindin
 
       For Handing Toolbar default button ie <----
        Step we have two option
+
+
       1> Use either
+      If you're using a custom Toolbar component within a fragment and have data binding enabled:
+
        binding.toolbar.setupWithNavController(navController)
 
        2> or
+       If you're using the default action bar provided by the activity and don't have data binding: Use setupActionBarWithNavController directly in your activity's code.
+
        setupActionBarWithNavController(navController)
 
        override fun onSupportNavigateUp(): Boolean {
@@ -128,13 +134,22 @@ class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback 
             binding.drawerLayout    // Adding drawerLayout in App bar ie for Hamburger icon to show
         )
        // or   2>add navController and appBar which have bottom nav and Navigattion Drawer  into toolbar
+       // If you're using the default action bar provided by the activity and don't have data binding
         setupActionBarWithNavController(navController,appBarConfiguration)
+
+      //  or we can used
+//If you're using a custom Toolbar component within a fragment and have data binding enabled:
+      //  binding.toolbar.setupWithNavController(navController,appBarConfiguration)
+
+       //Set Only Toolbar usinf  navController
+//        val appBarConfiguration = AppBarConfiguration(navController.graph)
+
 
 
         // For Bottom nav connect to navController
         binding.bottomNavView.setupWithNavController(navController)
 
-        // For Drawer layout
+        // For NavigationView : Drawer layout
         binding.navDrawer.setupWithNavController(navController )
 
 

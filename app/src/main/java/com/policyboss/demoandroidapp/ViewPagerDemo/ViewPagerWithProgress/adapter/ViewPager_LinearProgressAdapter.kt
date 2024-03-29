@@ -13,6 +13,7 @@ import com.policyboss.demoandroidapp.databinding.ViewpagerProgressLayoutItemBind
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -30,6 +31,7 @@ class ViewPager_LinearProgressAdapter(private val context: Context,
 
     private var progressIndicator: LinearProgressIndicator? = null
     private var job: Job? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
 
@@ -168,12 +170,17 @@ class ViewPager_LinearProgressAdapter(private val context: Context,
 
     }
 
+
+
     fun cancelProgressAnimation() {
         job?.cancel()
         job = null
 
 
     }
+
+
+
 
 
 }

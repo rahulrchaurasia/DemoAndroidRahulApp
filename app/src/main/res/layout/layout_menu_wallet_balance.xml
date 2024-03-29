@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@drawable/round_menu_shape"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="12dp"
+    android:paddingTop="4dp"
+    android:paddingRight="12dp"
+    android:layout_marginRight="8dp"
+    android:paddingBottom="4dp">
+
+    <ImageView
+        android:id="@+id/imgMenuWallet"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_account_balance_wallet"
+        app:tint="@color/orange" />
+
+    <TextView
+        android:layout_marginLeft="4dp"
+        android:id="@+id/txtMenuWalletBalance"
+        style="@style/semibold_regular_orange_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="99" />
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -80,7 +80,7 @@ class AutoCompDemo2Activity : AppCompatActivity() {
 
         lifecycleScope.launch{
 
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.CREATED){
 
                 viewModel.LoginStateFlow.buffer().collect{
 

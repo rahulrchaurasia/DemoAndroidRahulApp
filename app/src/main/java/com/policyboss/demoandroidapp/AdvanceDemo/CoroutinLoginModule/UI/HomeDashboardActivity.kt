@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.demo.kotlindemoapp.HomeMain.CarouselViewPager.CarouselTransformer
+import com.demo.kotlindemoapp.HomeMain.CarouselViewPager.CarouselTransformerDashBoard
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.demoandroidapp.AdvanceDemo.CoroutinLoginModule.ViewModel.ResponseOLD
 import com.policyboss.demoandroidapp.AdvanceDemo.RetrofitHelper1
@@ -405,7 +406,7 @@ class HomeDashboardActivity : BaseActivity() {
 
         viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 
-        viewPager2.setPageTransformer(CarouselTransformer(this))
+        viewPager2.setPageTransformer(CarouselTransformerDashBoard(this))
 
 
 

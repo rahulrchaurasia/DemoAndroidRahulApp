@@ -80,6 +80,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
+
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnShare"
                 app:layout_constraintTop_toBottomOf="@+id/btnAPI"
@@ -93,8 +95,18 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnHilt"
+                android:id="@+id/btnShareViewModel"
                 app:layout_constraintTop_toBottomOf="@+id/btnShare"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Share View Model"
+                style="@style/outlined_button"
+                android:textColor="@color/Brown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHilt"
+                app:layout_constraintTop_toBottomOf="@+id/btnShareViewModel"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
                 android:text="Hilt Basic"
@@ -164,8 +176,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/btnDesignPattern"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Get Phone Number"
-                style="@style/customGreenButton"
+                android:text="Builder Pattern"
+                style="@style/myCustomButton"
 
                 android:textColor="@color/white"
                 android:layout_width="0dp"
@@ -176,10 +188,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/btnDeviceNo"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Read Photo from Contact"
+                android:text="GetPhotoFromContact"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:textColor="@color/white"
                 android:layout_width="0dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.button.MaterialButton

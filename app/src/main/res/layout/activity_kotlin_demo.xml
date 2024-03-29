@@ -109,13 +109,13 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCompanionDemo" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDemo"
+        android:id="@+id/btnFlatMap"
         style="@style/outlined_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8dp"
 
-        android:text="Demo"
+        android:text="Flat Map"
         app:layout_constraintTop_toBottomOf="@+id/btnMap"
         app:layout_constraintStart_toStartOf="@id/btnCompanionDemo"
         app:layout_constraintEnd_toEndOf="@id/btnCompanionDemo"

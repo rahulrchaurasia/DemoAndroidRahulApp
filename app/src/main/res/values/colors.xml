@@ -22,6 +22,7 @@
 <!--    // 40 percent transparency-->
     <color name="semi_red">#66de6d75</color>
 
+    <color name="dark_semi_red">#73de6d75</color>
 
     <color name="colorAccent">#696969</color>
     <!--    <color name="color_close">#444444</color>-->

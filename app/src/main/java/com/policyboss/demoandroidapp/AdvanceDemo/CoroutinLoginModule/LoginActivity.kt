@@ -1,6 +1,7 @@
 package com.policyboss.demoandroidapp.LoginModule
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
@@ -60,6 +61,7 @@ class LoginActivity : BaseActivity() {
     private var isWakeLockPermissionGranted = false
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

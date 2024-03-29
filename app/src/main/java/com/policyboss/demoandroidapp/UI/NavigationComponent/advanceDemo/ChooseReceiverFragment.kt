@@ -1,6 +1,7 @@
 package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -8,6 +9,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
@@ -38,7 +40,7 @@ class ChooseReceiverFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.d(Constant.TAG,"ChooseReceiverFragment : onCreate")
     }
 
     override fun onCreateView(
@@ -48,15 +50,20 @@ class ChooseReceiverFragment : Fragment() {
 
         _binding = FragmentChooseReceiverBinding.inflate(inflater,container,false)
 
-
+        Log.d(Constant.TAG,"ChooseReceiverFragment : onCreateView")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        Log.d(Constant.TAG,"ChooseReceiverFragment : onViewCreated")
         setupMenu()
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_home_24) // Optional: set custom navigation icon
+        }
 
         binding.btnNext.setOnClickListener{
 
@@ -145,10 +152,18 @@ class ChooseReceiverFragment : Fragment() {
         @JvmStatic
         fun newInstance() = ChooseReceiverFragment()
     }
+    override fun onResume() {
+        super.onResume()
+
+        Log.d(Constant.TAG,"ChooseReceiverFragment : onResume")
+
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        Log.d(Constant.TAG,"ChooseReceiverFragment : onDestroyView")
 
     }
 

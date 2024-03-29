@@ -189,14 +189,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFlowAdv6"
-                app:layout_constraintTop_toBottomOf="@+id/btnFlowAdv5"
-                app:layout_constraintStart_toStartOf="@+id/childparent"
-                app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Flow: transform"
                 style="@style/outlined_button"
+                android:text="Flow: transform"
                 android:textColor="@color/Brown"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintTop_toBottomOf="@+id/btnFlowAdv5" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFlowAdv7"

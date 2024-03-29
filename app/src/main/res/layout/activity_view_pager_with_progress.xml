@@ -50,10 +50,11 @@ tools:context=".ViewPagerDemo.ViewPagerWithProgress.UI.ViewPagerWithProgressActi
         android:layout_marginTop="@dimen/_16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_16dp"
+
+        android:layout_marginHorizontal="@dimen/fab_margin"
         android:text="Auto ViewPage With Progress"
-        android:background="@color/bg_dashboard"
-        android:padding="@dimen/_8dp"
+        android:background="@drawable/dotted_rectangle"
+        android:padding="@dimen/_16dp"
         style="@style/TextViewStyle.BannerBold"
         />
 

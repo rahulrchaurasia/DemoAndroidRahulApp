@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/fab_margin">
+
+        <EditText
+            android:id="@+id/etData"
+            android:hint="Enter the value"
+            android:background="@drawable/edittext_round_corners"
+            android:padding="@dimen/eight"
+            android:minHeight="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="@dimen/eight"
+            style="@style/ButtonStyle"
+            android:id="@+id/btnFrag1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Fragment 1"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="@dimen/fab_margin"
+            android:id="@+id/btnFrag2"
+            style="@style/ButtonBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Fragment 2" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/black_light"
+           />
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

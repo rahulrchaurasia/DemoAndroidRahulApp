@@ -28,6 +28,7 @@ import com.policyboss.demoandroidapp.FlowDemo.FlowDemoActivity
 import com.policyboss.demoandroidapp.HiltDemo.HiltDemoActivity
 import com.policyboss.demoandroidapp.KotlinDemo.KotlinDemoActivity
 import com.policyboss.demoandroidapp.ShareData.ShareActivityMain
+import com.policyboss.demoandroidapp.ShareViewModel.ShareViewModeDemoActivity
 import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.AutoCompleteDemo2.AutoCompDemo2Activity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
@@ -123,6 +124,7 @@ class HomeActivity : BaseActivity() ,View.OnClickListener {
         binding.btnFileUpload.setOnClickListener(this)
         binding.btnKotlinDemo.setOnClickListener(this)
         binding.btnCoroutine.setOnClickListener(this)
+        binding.btnShareViewModel.setOnClickListener(this)
     }
 
 
@@ -237,6 +239,11 @@ class HomeActivity : BaseActivity() ,View.OnClickListener {
                 startActivity(Intent(this, NavigationDemoMainActivity::class.java))
 
             }
+            binding.btnShareViewModel.id ->{
+
+                startActivity(Intent(this, ShareViewModeDemoActivity::class.java))
+
+            }
 
             binding.btnHilt.id -> {
 
@@ -269,7 +276,7 @@ class HomeActivity : BaseActivity() ,View.OnClickListener {
 
             binding.btnGetPhotoFromContact.id -> {
 
-                getPhotoFromDevice(this@HomeActivity)
+              //  getPhotoFromDevice(this@HomeActivity)
 
 
             }
