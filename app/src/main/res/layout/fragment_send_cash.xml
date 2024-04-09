@@ -113,6 +113,32 @@
         app:layout_constraintTop_toBottomOf="@+id/btnDone" />
 
     <Button
+        android:id="@+id/btnNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:text="Notification using Explicit Deeplink"
+        android:textColor="@color/white"
+        style="@style/ButtonBlue"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCustomToolBar" />
+
+    <Button
+        android:id="@+id/btnNotificationGraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:text="Notification using Graph Explicit Deeplink"
+        android:textColor="@color/white"
+        style="@style/ButtonStyle"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNotification" />
+
+    <Button
         android:id="@+id/btnGlobalAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,7 +149,7 @@
         style="@style/myCustomGreenButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCustomToolBar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNotificationGraph" />
 
 
 

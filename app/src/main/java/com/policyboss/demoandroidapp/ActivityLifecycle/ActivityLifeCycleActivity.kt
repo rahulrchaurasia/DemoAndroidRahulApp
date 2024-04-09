@@ -17,7 +17,7 @@ import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.TAG
-import com.policyboss.demoandroidapp.Utility.NotificationHelper
+import com.policyboss.demoandroidapp.Utility.NotificationHelperDefault
 import com.policyboss.demoandroidapp.databinding.ActivityLifeCycleBinding
 
 class ActivityLifeCycleActivity : BaseActivity() , View.OnClickListener{
@@ -44,7 +44,7 @@ class ActivityLifeCycleActivity : BaseActivity() , View.OnClickListener{
         }
         init()
         setOnClickListener()
-        NotificationHelper.initialize(this)
+        NotificationHelperDefault.initialize(this)
     }
 
     // region Method
@@ -141,7 +141,7 @@ class ActivityLifeCycleActivity : BaseActivity() , View.OnClickListener{
             R.id.action_second ->
 
               // intialize it on Oncreate
-            NotificationHelper.showNotification(
+            NotificationHelperDefault.showNotification(
                 context = this,
                 title = "Your Notification Title",
                 body = "Your Notification Body"

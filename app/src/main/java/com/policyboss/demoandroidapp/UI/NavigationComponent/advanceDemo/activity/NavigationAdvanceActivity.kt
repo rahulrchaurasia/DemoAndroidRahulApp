@@ -2,13 +2,18 @@ package com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
+import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
+import com.policyboss.demoandroidapp.UI.NavigationComponent.PushNotificationEntity
 import com.policyboss.demoandroidapp.databinding.ActivityNavigationAdvanceBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /*********************************setupActionBarWithNavController *******************/
 /*
@@ -61,6 +66,8 @@ interface NavigationAdvanceCallback {
     fun hideAppBar()
     fun showAppBar()
 }
+
+@AndroidEntryPoint
 class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback {
 
    private lateinit var binding : ActivityNavigationAdvanceBinding
@@ -162,7 +169,10 @@ class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback 
                     //Note : here we check sendCashFragment has any onBackPressedDispatcher
                     // if has than handle by its onBackPressedDispatcher callback written in sendCashFragment
                     if (onBackPressedDispatcher.hasEnabledCallbacks())
-                        onBackPressedDispatcher.onBackPressed()
+                       onBackPressedDispatcher.onBackPressed()
+
+
+
                     else
                         navController.navigateUp()
                 }
@@ -195,6 +205,30 @@ class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback 
                    // showToast("Other")
                 }
             }
+        }
+
+
+
+        handlinkNotification()
+    }
+
+
+    fun handlinkNotification(){
+
+        if (intent.hasExtra(Constant.PUSH_NOTITIFICATION)) {
+            val pushNotificationEntity = intent.getParcelableExtra<PushNotificationEntity>(Constant.PUSH_NOTITIFICATION)
+
+            Log.d(Constant.TAG, "Notification: ${pushNotificationEntity?.header} and ${pushNotificationEntity?.message}")
+
+            // Create a bundle to pass data to the destination fragment
+            val bundle = Bundle().apply {
+
+                putString(Constant.NOTIFICATION_RECEIVERNAME,pushNotificationEntity?.message?:"No Data")
+            }
+
+            // Navigate to the desired destination in your navigation graph
+
+            navController.navigate(R.id.sendCashFragment, bundle)
         }
     }
 
@@ -303,6 +337,7 @@ class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback 
 
 
     override fun onBackPressed() {
+        super.onBackPressed()
 
         // onBackPressedDispatcher.onBackPressed()
 //        if (getOnBackPressedDispatcher().hasEnabledCallbacks()) {
@@ -324,6 +359,7 @@ class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback 
 //            // Handle activity back navigation
 //            onBackPressedDispatcher.onBackPressed()  // This checks if there are any callbacks registered with the onBackPressedDispatcher
 //        }
+
 
         if(onBackPressedDispatcher.hasEnabledCallbacks()){  //// This checks if there are any callbacks registered with the onBackPressedDispatcher
 

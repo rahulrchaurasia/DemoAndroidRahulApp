@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".UI.RecyclerViewOperation.RecyclerViewMainActivity">
+
+
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appBarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:elevation="0dp"
+    android:theme="@style/Theme.DemoAndroidApp.AppBarOverlay"
+    android:fitsSystemWindows="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="0dp"
+
+        android:contentInsetStart="0dp"
+        android:contentInsetEnd="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="" />
+
+</com.google.android.material.appbar.AppBarLayout>
+
+<androidx.core.widget.NestedScrollView
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginBottom="@dimen/fab_margin"
+    app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/childparent"
+        android:fillViewport="true"
+        android:layout_marginTop="@dimen/_40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/twenty_four"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle1"
+            app:layout_constraintTop_toTopOf="@+id/childparent"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Multi-ViewType RecyclerView "
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle2"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecycle1"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="ViewPager withProgress"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle3"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecycle2"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Carousel Viewpager"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+
+
+        <View
+            android:id="@+id/viewDivider"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecycle3"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:background="@color/blue_descent"
+            android:layout_marginTop="@dimen/_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle4"
+            app:layout_constraintTop_toBottomOf="@+id/viewDivider"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Custom Tab Layout 1"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle5"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecycle4"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Custom Tab Layout 2"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle6"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecycle5"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Custom Tab Layout 3"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle7"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecycle6"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Custom Tab Layout 4"
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

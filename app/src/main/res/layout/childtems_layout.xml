@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_dashboard"
+    android:padding="@dimen/_8dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_call_24"
+        android:padding="10dp"
+        />
+
+    <TextView
+
+        android:layout_marginTop="@dimen/twelve"
+        android:id="@+id/txtChildHeader"
+        android:layout_marginLeft="@dimen/eight"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/icon"
+        android:textColor="@color/black"
+        android:text="Strawberry"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:minLines="1"
+        android:layout_marginRight="@dimen/four"
+        android:textSize="17dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_divider_color"
+        />
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="@dimen/_8dp"
+       android:orientation="horizontal">
+
+       <ImageView
+           android:layout_width="100dp"
+           android:layout_height="100dp"
+           android:visibility="visible"
+           android:src="@drawable/ic_delivery"/>
+
+       <TextView
+
+           android:layout_marginTop="@dimen/twelve"
+           android:id="@+id/txtChildHeaderDes"
+           android:layout_marginLeft="@dimen/eight"
+           android:gravity="center_vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/icon"
+           android:textColor="@color/black"
+           android:text="Des"
+           android:ellipsize="end"
+           android:maxLines="1"
+           android:minLines="1"
+           android:layout_marginRight="@dimen/four"
+           android:textSize="16dp" />
+   </LinearLayout>
+
+
+</LinearLayout>

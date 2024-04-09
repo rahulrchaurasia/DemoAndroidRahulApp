@@ -85,7 +85,7 @@
         <argument
             android:name="receiverName"
             app:argType="string"
-           />
+            />
 <!--        android:defaultValue="No Data"-->
 
         <action
@@ -131,7 +131,12 @@
         android:id="@+id/settingFragment"
         android:name="com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.SettingFragment"
         android:label="Setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <argument
+            android:name="amount"
+            app:argType="string"
+            android:defaultValue='' />
+    </fragment>
 
     <fragment
         android:id="@+id/aboutAppFragment"
@@ -155,5 +160,18 @@
         android:name="com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.customToolbarFragment"
         android:label="fragment_custom_toolbar"
         tools:layout="@layout/fragment_custom_toolbar" />
+    <navigation android:id="@+id/navigation3"
+        app:startDestination="@id/otherFragA">
+        <fragment
+            android:id="@+id/otherFragA"
+            android:name="com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.OtherFrag.OtherFragA"
+            android:label="fragment_other_frag_a"
+            tools:layout="@layout/fragment_other_frag_a" />
+        <fragment
+            android:id="@+id/otherFragB"
+            android:name="com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.OtherFrag.OtherFragB"
+            android:label="fragment_other_frag_b"
+            tools:layout="@layout/fragment_other_frag_b" />
+    </navigation>
 
 </navigation>

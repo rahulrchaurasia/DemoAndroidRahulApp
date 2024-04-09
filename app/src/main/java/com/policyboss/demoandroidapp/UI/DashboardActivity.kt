@@ -15,6 +15,7 @@ import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivi
 import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
 import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.UI.MaterialEditText.MaterialEditTextDemoActivity
+import com.policyboss.demoandroidapp.UI.RecyclerViewOperation.RecyclerViewMainActivity
 import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderActivity
 import com.policyboss.demoandroidapp.UI.circularProgress.CircularProgressActivity
 
@@ -86,6 +87,8 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
 
         binding.btnViewPagerMain.setOnClickListener(this)
 
+        binding.btnRecycleViewMain.setOnClickListener(this)
+
 
     }
 
@@ -111,6 +114,14 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
             binding.btnViewPagerMain.id -> {
 
                 startActivity(Intent(this, ViewPagerMainActivity::class.java))
+
+
+            }
+            binding.btnRecycleViewMain.id -> {
+
+                startActivity(Intent(this, RecyclerViewMainActivity::class.java))
+
+
             }
             binding.btnAutoTextReader.id -> {
 

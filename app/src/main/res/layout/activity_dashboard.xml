@@ -76,8 +76,21 @@
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnViewPagerMain"
+                android:id="@+id/btnRecycleViewMain"
                 app:layout_constraintTop_toBottomOf="@+id/btnLocatinInBg"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="RecyclerView Demo"
+
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnViewPagerMain"
+                app:layout_constraintTop_toBottomOf="@+id/btnRecycleViewMain"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
                 android:text="ViewPager Demo"

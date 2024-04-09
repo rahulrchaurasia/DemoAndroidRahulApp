@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.policyboss.demoandroidapp.NavGraphDirections
 import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.dataModel.SampleData
 import com.policyboss.demoandroidapp.Utility.ExtensionFun.showSnackbar
@@ -22,6 +23,8 @@ class SettingFragment : Fragment() {
     private var _binding : FragmentSettingBinding? = null
 
     private val binding get() = _binding!!
+
+    private val args : SettingFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +45,15 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val default_amount = SampleData.defaultAmount
+        var default_amount = args.amount
 
-        binding.etAmount.setText(default_amount.value.toString())
+        if(default_amount.isNullOrEmpty()){
+            default_amount =  SampleData.defaultAmount.value.toString()
+        }
+
+
+
+        binding.etAmount.setText(default_amount)
 
         binding.btnSave.setOnClickListener {
 

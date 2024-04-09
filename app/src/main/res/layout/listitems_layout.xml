@@ -25,10 +25,11 @@
         android:layout_toRightOf="@+id/icon"
         android:textColor="@color/black"
         android:text="Strawberry"
+        android:fontFamily="@font/inter_bold"
         android:ellipsize="end"
         android:maxLines="1"
         android:minLines="1"
         android:layout_marginRight="@dimen/four"
-        android:textSize="14dp" />
+        android:textSize="16dp" />
 
 </LinearLayout>

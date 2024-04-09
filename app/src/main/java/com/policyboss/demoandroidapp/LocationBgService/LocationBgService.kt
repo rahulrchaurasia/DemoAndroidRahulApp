@@ -14,6 +14,7 @@ import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.LocationServices
+import com.policyboss.demoandroidapp.BaseApplication
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.Utility.showToast
 import kotlinx.coroutines.CoroutineScope
@@ -85,7 +86,10 @@ class LocationBgService: Service() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val notification = buildNotification(remoteViews = remoteViews )
-        startForeground(1, notification)
+        startForeground(1, notification)     // for Notification
+
+
+
         locationClient
             .getLocationUpdates(interval = 5000, distance = 10f)
             .catch {
@@ -143,7 +147,7 @@ class LocationBgService: Service() {
         remoteViews.setTextViewText(R.id.tv_longitude, lon) // Update with actual longitude
         remoteViews.setOnClickPendingIntent(R.id.iv_close, stopPendingIntent) // Set PendingIntent for close button
 
-        return NotificationCompat.Builder(this, "location")
+        return NotificationCompat.Builder(this, BaseApplication.CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notifications_24)
             .setCustomContentView(remoteViews)
             .setContentIntent(pendingIntent)  // click on notification Action
@@ -230,6 +234,7 @@ class LocationBgService: Service() {
         super.onDestroy()
         serviceScope.cancel()
     }
+
 
     companion object {
         const val ACTION_START = "ACTION_START"

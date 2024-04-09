@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" /> <!-- req for version 14 And above -->
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -30,10 +30,19 @@
         android:theme="@style/Theme.DemoAndroidApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".UI.RecyclerViewOperation.RecyclerViewMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp"/>
+        <activity
+            android:name=".UI.RecyclerViewOperation.RecycleMultiViewTypeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp"/>
         <activity
             android:name=".ShareViewModel.ShareViewModeDemoActivity"
-            android:theme="@style/Theme.DemoAndroidApp"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".ViewPagerDemo.TabLayout.CustomTabLayout.UI.ScrollableTabLayoutActivity"
             android:exported="false" />
@@ -239,7 +248,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
+        </activity> <!-- 007 -->
         <activity
             android:name=".UI.NavigationComponent.advanceDemo.activity.NavigationAdvanceActivity"
             android:exported="false"
@@ -305,9 +314,21 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- ///005 location here : for continuous background Works //// -->
+        </activity> <!-- ///For Deeplink Check s //// -->
+        <!-- android:name=".UI.NavigationComponent.advanceDemo.activity.NavigationAdvanceActivity" -->
+        <!-- <activity -->
+        <!-- android:name=".UI.SplashActivity" -->
+        <!-- android:exported="false" -->
+        <!-- android:parentActivityName=".UI.NavigationComponent.NavigationDemoMainActivity"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.app.lib_name" -->
+        <!-- android:value="" /> -->
+        <!-- </activity> -->
+        <!-- ///005 location here : for continuous background Works //// -->
         <service
             android:name=".LocationBgService.LocationBgService"
+            android:enabled="true"
+            android:exported="false"
             android:foregroundServiceType="location" />
 
         <provider

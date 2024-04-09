@@ -140,7 +140,7 @@ class LocationBackgrounDemActivity : BaseActivity() , View.OnClickListener {
         super.onResume()
        //
 
-
+         //For BroadCast Handling
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(locationReceiver, IntentFilter(LocationBgService.Location_UPDATE), RECEIVER_EXPORTED)
         }else {
@@ -166,10 +166,24 @@ class LocationBackgrounDemActivity : BaseActivity() , View.OnClickListener {
                     if (isSettingsEnabled) {
                         // Location settings are good, proceed with location-related tasks
                        if(locationHelper.hasLocationPermissions()) {
-                           Intent(applicationContext, LocationBgService::class.java).apply {
-                               action = LocationBgService.ACTION_START
-                               startService(this)
+
+
+
+                           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                               // Use startForegroundService() for devices running Oreo (API level 26) or higher
+                               Intent(applicationContext, LocationBgService::class.java).apply {
+                                   action = LocationBgService.ACTION_START
+                                   startForegroundService(this)
+                               }
+                           } else {
+                               // Use startService() for devices running older Android versions
+                               Intent(applicationContext, LocationBgService::class.java).apply {
+                                   action = LocationBgService.ACTION_START
+                                   startService(this)
+                               }
                            }
+
+
 
                        }
 

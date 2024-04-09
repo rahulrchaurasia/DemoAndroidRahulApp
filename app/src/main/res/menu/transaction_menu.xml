@@ -5,12 +5,17 @@
     <item
         android:id="@+id/menuRechargeWalletBalance"
         android:title=""
-        app:actionLayout="@layout/layout_menu_wallet_balance"
-        app:showAsAction="ifRoom" />
+        android:icon="@drawable/icon_switch"
+
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menuRechargeRefresh"
-        android:icon="@drawable/icon_switch"
+
+        android:orderInCategory="100"
+
+        app:actionLayout="@layout/layout_menu_wallet_balance"
         android:title=""
-        app:showAsAction="always" />
+        app:showAsAction="always"
+         />
 </menu>

@@ -38,6 +38,8 @@ object Constant {
 
     val REQUEST_ID_MULTIPLE_PERMISSIONS = 111
 
+    val REQUEST_ID_POST_NOTIFICATION = 112
+
     val bundl_name_key = "bundl_name_key"
 
        val TAG_Coroutine : String = "COROUTINE"
@@ -49,6 +51,8 @@ object Constant {
     const val   NOTIFICATION_MAX = "NOTIFICATION_MAX"
     const val   NOTIFICATION_MESSAGE = "NOTIFICATION_MESSAGE"
 
+    const val PUSH_NOTITIFICATION = "demoAndroidApp_notification"
+    const val   NOTIFICATION_RECEIVERNAME = "receiverName"
 
     fun hideKeyBoard(view: View?, context: Context) {
         if (view != null) {

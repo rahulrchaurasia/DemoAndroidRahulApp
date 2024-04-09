@@ -9,6 +9,7 @@ import android.content.res.AssetFileDescriptor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
 import android.provider.ContactsContract
@@ -17,6 +18,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
+import com.google.android.gms.common.api.internal.LifecycleActivity
+import com.policyboss.demoandroidapp.ActivityLifecycle.ActivityLifeCycleActivity
 import com.policyboss.demoandroidapp.BaseActivity
 
 
@@ -32,6 +35,8 @@ import com.policyboss.demoandroidapp.ShareViewModel.ShareViewModeDemoActivity
 import com.policyboss.demoandroidapp.TAG
 import com.policyboss.demoandroidapp.UI.AutoCompleteDemo2.AutoCompDemo2Activity
 import com.policyboss.demoandroidapp.UI.NavigationComponent.NavigationDemoMainActivity
+import com.policyboss.demoandroidapp.UI.NavigationComponent.PushNotificationEntity
+import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activity.NavigationAdvanceActivity
 import com.policyboss.demoandroidapp.Utility.Utility
 import com.policyboss.demoandroidapp.databinding.ActivityHomeBinding
 import kotlinx.coroutines.CoroutineScope
@@ -105,6 +110,10 @@ class HomeActivity : BaseActivity() ,View.OnClickListener {
             }
 
         })
+
+
+        handlingNotificationData()
+
     }
 
     fun setOnClickListener(){
@@ -125,6 +134,40 @@ class HomeActivity : BaseActivity() ,View.OnClickListener {
         binding.btnKotlinDemo.setOnClickListener(this)
         binding.btnCoroutine.setOnClickListener(this)
         binding.btnShareViewModel.setOnClickListener(this)
+    }
+
+    fun handlingNotificationData(){
+
+        if(intent == null){
+
+            return
+        }
+        if (intent.hasExtra(Constant.PUSH_NOTITIFICATION)) {
+
+
+            val pushNotificationEntity = if (Build.VERSION.SDK_INT >= 33) {
+                intent.getParcelableExtra(Constant.PUSH_NOTITIFICATION, PushNotificationEntity::class.java)
+            } else {
+                intent.getParcelableExtra<PushNotificationEntity>(Constant.PUSH_NOTITIFICATION)
+            }
+
+            Log.d(Constant.TAG,"Notification: ${pushNotificationEntity?.header } and  ${pushNotificationEntity?.message }")
+
+
+            val intent = Intent(this, NavigationAdvanceActivity::class.java)
+
+
+            // Put the Parcelable object as an extra in the Intent
+            intent.putExtra(Constant.PUSH_NOTITIFICATION, pushNotificationEntity)
+
+             // Start the Activity with the Intent
+            startActivity(intent)
+
+
+
+        }
+
+
     }
 
 
