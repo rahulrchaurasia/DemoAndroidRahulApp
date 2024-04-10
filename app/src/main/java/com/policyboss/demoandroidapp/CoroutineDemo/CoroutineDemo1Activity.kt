@@ -97,6 +97,8 @@ class CoroutineDemo1Activity : AppCompatActivity(),  View.OnClickListener {
         binding.btnCoroutineHandler.setOnClickListener(this)
         binding.btnHandlerCoroutineCancel.setOnClickListener(this)
         binding.btnDispatchersMain.setOnClickListener(this)
+        binding.btnJobDemo.setOnClickListener(this)
+        binding.btnJobDemo1.setOnClickListener(this)
 
 
     }
@@ -475,6 +477,29 @@ class CoroutineDemo1Activity : AppCompatActivity(),  View.OnClickListener {
         var result =  deffere.await()
 
         Log.d(Constant.TAG_Coroutine, "Test 3 Async Demo Complete with Result : ${result}")
+
+    }
+
+    suspend fun jobDemo(){
+
+
+            val job: Job = lifecycleScope.launch() { // Launch a coroutine that simulates work
+                delay(1000) // Simulate some work for 1 second
+                println("Coroutine is finished")
+            }
+            // Wait for 500 milliseconds, then try to cancel the coroutine
+            delay(500)
+            if (job.isActive) {
+                println("Trying to cancel the coroutine...")
+                job.cancel()
+            }
+            // Check if the coroutine was cancelled
+            if (job.isCancelled) {
+                println("Coroutine was cancelled successfully")
+            } else {
+                println("Coroutine completed normally")
+            }
+
 
     }
 
@@ -879,6 +904,70 @@ class CoroutineDemo1Activity : AppCompatActivity(),  View.OnClickListener {
                     Log.d(Constant.TAG_Coroutine, " Coroutine Finish ")
 
                 }
+            }
+            binding.btnJobDemo.id ->{
+
+                lifecycle.coroutineScope.launch(Dispatchers.Main) {
+
+
+                    val job: Job = CoroutineScope(Dispatchers.Default).launch  { // Launch a coroutine that simulates work
+                        delay(1000) // Simulate some work for 1 second
+                        Log.d(Constant.TAG_Coroutine,"Coroutine1 is finished")
+                    }
+                    // Wait for 500 milliseconds, then try to cancel the coroutine
+                    delay(500)
+                    if (job.isActive) {
+                        Log.d(Constant.TAG_Coroutine,"Trying to cancel the coroutine...")
+                        job.cancel()
+                    }
+                    // Check if the coroutine was cancelled
+                    if (job.isCancelled) {
+                        println("Coroutine was cancelled successfully")
+                    } else {
+                        Log.d(Constant.TAG_Coroutine,"Coroutine completed normally")
+                    }
+                }
+
+            }
+
+            binding.btnJobDemo1.id ->{
+
+                lifecycle.coroutineScope.launch(Dispatchers.Main) {
+
+                    val job1 = CoroutineScope(Dispatchers.Default).launch {
+                        Log.d(Constant.TAG_Coroutine, " Coroutine1 Started ")
+
+                        delay(300) // Simulate some work for 1 second
+                        Log.d(Constant.TAG_Coroutine,"Coroutine1 is finished")
+                    }
+                    val job2: Job = CoroutineScope(Dispatchers.Default).launch  { // Launch a coroutine that simulates work
+                        delay(500) // Simulate some work for 1 second
+                        Log.d(Constant.TAG_Coroutine,"Coroutine2 is finished")
+                    }
+                    // Wait for 400 milliseconds, then try to cancel the coroutine
+                    delay(400)
+                    if (job1.isActive) {
+                        Log.d(Constant.TAG_Coroutine,"Trying to cancel the coroutine1...")
+                        job1.cancel()
+                    }
+                    if (job2.isActive) {
+                        Log.d(Constant.TAG_Coroutine,"Trying to cancel the coroutine2...")
+                        job2.cancel()
+                    }
+                    // Check if the coroutine was cancelled
+                    if (job1.isCancelled) {
+                        println("Coroutine1 was cancelled successfully")
+                    } else {
+                        Log.d(Constant.TAG_Coroutine,"Coroutine1 completed normally")
+                    }
+
+                    if (job2.isCancelled) {
+                        println("Coroutine2 was cancelled successfully")
+                    } else {
+                        Log.d(Constant.TAG_Coroutine,"Coroutine2 completed normally")
+                    }
+                }
+
             }
 
         }

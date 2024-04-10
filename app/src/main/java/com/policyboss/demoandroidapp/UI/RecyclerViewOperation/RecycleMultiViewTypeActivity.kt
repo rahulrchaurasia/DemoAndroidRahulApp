@@ -22,27 +22,43 @@ class RecycleMultiViewTypeActivity : AppCompatActivity() {
 
     private val sections = listOf(
         SectionData("Section 1"),
-        SectionData("Section 2", listOf("childSect2.1", "childSect2.2", "childSect2.3", "childSect2.4")),
+        SectionData(content = listOf("childSect1.1", "childSect1.2", "childSect2.3", "childSect2.4")),
+        SectionData("Section 2"),
+        SectionData( content =  listOf("childSect2.1", "childSect2.2", "childSect2.3", "childSect2.4")),
+        SectionData( content =  listOf("childSect22.1", "childSect22.2", "childSect2.3", "childSect2.4")),
+        SectionData( content =  listOf("childSect23.1", "childSect23.2", "childSect2.3", "childSect2.4")),
+
         SectionData("Section 3"),
-        SectionData("Section 4", listOf("childSect4.1", "childSect4.2", "childSect4.3", "childSect4.4")),
+        SectionData(content =  listOf("childSect3.1", "childSect3.2", "childSect2.3", "childSect2.4")),
+        SectionData( content =  listOf("childSect32.1", "childSect32.2", "childSect2.3", "childSect2.4")),
+        SectionData( content =  listOf("childSect33.1", "childSect33.2", "childSect2.3", "childSect2.4")),
 
-        SectionData("Section 5", listOf("childSect5.1", "childSect5.2", "childSect5.3", "childSect5.4")),
-        SectionData("Section 6", listOf("childSect6.1", "childSect6.2", "childSect6.3", "childSect6.4")),
+        SectionData("Section 4"),
+        SectionData(content =  listOf("childSect4.1", "childSect4.2", "childSect4.3", "childSect4.4")),
+        SectionData( content =  listOf("childSect42.1", "childSect42.2", "childSect2.3", "childSect2.4")),
+
+        SectionData("Section 5"),
+        SectionData(content =  listOf("childSect5.1", "childSect5.2", "childSect5.3", "childSect5.4")),
+
+        SectionData("Section 6"),
+        SectionData(content =  listOf("childSect6.1", "childSect6.2", "childSect6.3", "childSect6.4")),
 
 
-        SectionData("Section 7", listOf("childSect5.1", "childSect5.2", "childSect5.3", "childSect5.4")),
-        SectionData("Section 8", listOf("childSect6.1", "childSect6.2", "childSect6.3", "childSect6.4")),
+        SectionData("Section 7"),
+        SectionData(content =  listOf("childSect7.1", "childSect7.2", "childSect5.3", "childSect5.4")),
+
+
+        SectionData("Section 8"),
+        SectionData(content =  listOf("childSect8.1", "childSect8.2", "childSect7.3", "childSect7.4")),
         SectionData("Section M"),
 
-        SectionData("Section 5", listOf("childSect5.1", "childSect5.2", "childSect5.3", "childSect5.4")),
-        SectionData("Section 6", listOf("childSect6.1", "childSect6.2", "childSect6.3", "childSect6.4")),
-        SectionData("Section 7", listOf("childSect7.1", "childSect7.2", "childSect7.3", "childSect7.4")),
-        SectionData("Section 8"),
-        SectionData("Section 8", listOf("childSect8.1", "childSect8.2", "childSect7.3", "childSect7.4")),
-        SectionData("Section 9"),
-        SectionData("Section 9", listOf("childSect9.1", "childSect9.2", "childSect7.3", "childSect7.4")),
+        SectionData( content =  listOf("childSect5.1", "childSect5.2", "childSect5.3", "childSect5.4")),
+        SectionData(content =  listOf("childSect6.1", "childSect6.2", "childSect6.3", "childSect6.4")),
+        SectionData(content =  listOf("childSect7.1", "childSect7.2", "childSect7.3", "childSect7.4")),
+                SectionData("Section 9"),
+        SectionData(content = listOf("childSect9.1", "childSect9.2", "childSect7.3", "childSect7.4")),
         SectionData("Section 10"),
-        SectionData("Section 10", listOf("childSect10.1", "childSect10.2", "childSect7.3", "childSect7.4")),
+        SectionData(content =  listOf("childSect10.1", "childSect10.2", "childSect7.3", "childSect7.4")),
 
         // Add more sections...
     )
@@ -63,8 +79,10 @@ class RecycleMultiViewTypeActivity : AppCompatActivity() {
         bindRecyclerView()
 
 
+        // Filter sections with non-empty titles
+        val sectionsWithTitle = sections.filter { it.title.isNotEmpty() }
         // Create tabs for each section
-        sections.forEach { section ->
+        sectionsWithTitle.forEach { section ->
             val tab = tabLayout.newTab().setText(section.title)
             tabLayout.addTab(tab)
         }
@@ -75,9 +93,9 @@ class RecycleMultiViewTypeActivity : AppCompatActivity() {
         // Handle tab selection changes
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-//                val position = tab.position
-//                scrollToPosition(position)
-               // scrollView.smoothScrollTo(0, calculateScrollYForSection(position))
+                val position = tab.position
+                scrollToPosition(position)
+               //scrollView.smoothScrollTo(0, calculateScrollYForSection(position))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -92,9 +110,6 @@ class RecycleMultiViewTypeActivity : AppCompatActivity() {
         })
 
 
-//        binding.rvMultiViewType.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-//
-//        })
 
         binding.rvMultiViewType.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -138,8 +153,6 @@ class RecycleMultiViewTypeActivity : AppCompatActivity() {
 
         })
     }
-
-    // Update selected tab based on scroll position
 
 
 
