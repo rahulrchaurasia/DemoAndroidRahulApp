@@ -30,15 +30,30 @@
         android:theme="@style/Theme.DemoAndroidApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".UI.Collapsing.CollapsingDemo4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Collapsing.CollapsingToolbarWithPinnedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Collapsing.CollapsingWithPinnedActivity"
+            android:exported="false"
+            android:parentActivityName=".UI.Collapsing.CollapsingToolbarMain"
+            android:theme="@style/Theme.DemoAndroidApp" />
+        <activity
+            android:name=".UI.Collapsing.CollapsingToolbarMain"
+            android:exported="false"
+            android:parentActivityName=".UI.DashboardActivity"
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".UI.RecyclerViewOperation.RecyclerViewMainActivity"
             android:exported="false"
-            android:theme="@style/Theme.DemoAndroidApp"/>
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".UI.RecyclerViewOperation.RecycleMultiViewTypeActivity"
             android:exported="false"
-            android:theme="@style/Theme.DemoAndroidApp"/>
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".ShareViewModel.ShareViewModeDemoActivity"
             android:exported="false"

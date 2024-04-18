@@ -55,6 +55,8 @@
 
     </style>
 
+
+
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/oval_dialog_background</item>
     </style>
@@ -63,6 +65,13 @@
     <style name="TabLayout" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
         <item name="android:textSize">13sp</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ToolbarTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!-- Define your desired text appearance properties here -->
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <!-- Add any other properties you want to customize -->
     </style>
 
 <!--    <style name="CustomDialog" parent="Theme.AppCompat.Light.Dialog">-->

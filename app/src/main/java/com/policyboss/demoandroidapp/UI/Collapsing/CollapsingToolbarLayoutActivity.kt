@@ -19,6 +19,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 // Pinned View : ---> Based on Pinned View layout stick on top
+
+//Note : But we req nested ScrollView and above it all is pinned
 class CollapsingToolbarLayoutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCollapsingToolbarLayoutBinding

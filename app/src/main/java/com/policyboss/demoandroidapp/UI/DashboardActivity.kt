@@ -12,6 +12,7 @@ import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActi
 import com.policyboss.demoandroidapp.LocationBgService.LocationBackgrounDemActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivity
+import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarMain
 import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
 import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.UI.MaterialEditText.MaterialEditTextDemoActivity
@@ -155,7 +156,7 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
             binding.btnCollapsing.id -> {
 
 
-                startActivity(Intent(this, CollapsingToolbarLayoutActivity::class.java))
+                startActivity(Intent(this, CollapsingToolbarMain::class.java))
             }
             binding.btnCalander.id -> {
 
