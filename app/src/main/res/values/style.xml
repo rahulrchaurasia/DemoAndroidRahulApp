@@ -70,6 +70,7 @@
         <item name="android:backgroundTint">@color/blue</item>
     </style>
 
+<!--    //Not working-->
     <style name="outlined_button" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:height">?attr/actionBarSize</item>
         <item name="android:radius">0dp</item>

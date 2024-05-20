@@ -3,8 +3,6 @@ package com.policyboss.demoandroidapp.LoginModule
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -32,7 +30,6 @@ import com.policyboss.demoandroidapp.AdvanceDemo.Room.Database.DemoDatabase
 
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
-import com.policyboss.demoandroidapp.RetrofitHelper
 import com.policyboss.demoandroidapp.UI.DashboardActivity
 import com.policyboss.demoandroidapp.Utility.NetworkUtils
 import com.policyboss.demoandroidapp.databinding.ActivityLogin1Binding
@@ -41,7 +38,7 @@ import com.policyboss.demoandroidapp.databinding.ActivityLogin1Binding
 import kotlinx.coroutines.launch
 
 
-class LoginActivity : BaseActivity() {
+class LoginActivityMain : BaseActivity() {
 
 
     lateinit var binding : ActivityLogin1Binding
@@ -120,11 +117,13 @@ class LoginActivity : BaseActivity() {
                    when(it){
 
                        is APIState1.Loading -> {
-                           showDialog()
+                           displayLoadingWithText(binding.root,"Loading...")
+
                        }
 
                        is APIState1.Success -> {
-                           cancelDialog()
+                           hideLoading()
+
 
                            it.data?.let {
 
@@ -135,8 +134,8 @@ class LoginActivity : BaseActivity() {
                                 showSnackBar(viewParent, "Dear ${it.MasterData.FullName}, You Login Successfully!!")
 
 
-                               startActivity(Intent(this@LoginActivity, HomeDashboardActivity::class.java))
-                               this@LoginActivity.finish()
+                               startActivity(Intent(this@LoginActivityMain, HomeDashboardActivity::class.java))
+                               this@LoginActivityMain.finish()
                               // startActivity(Intent(this@LoginActivity, CommonWebViewActivity::class.java))
                            }
 
@@ -146,13 +145,15 @@ class LoginActivity : BaseActivity() {
                        }
                        is APIState1.Failure -> {
 
-                           cancelDialog()
+                           hideLoading()
+
 
                            showSnackBar(viewParent,it.errorMessage?: Constant.ErrorMessage)
                            Log.d(Constant.TAG_Coroutine, it.errorMessage.toString())
                        }
                        is APIState1.Empty -> {
-                           cancelDialog()
+                           hideLoading()
+
 
                        }
 
@@ -172,11 +173,13 @@ class LoginActivity : BaseActivity() {
             when(it){
 
                 is APIState1.Loading -> {
-                    showDialog()
+                    displayLoadingWithText(binding.root,"Loading...")
+
                 }
 
                 is APIState1.Success -> {
-                    cancelDialog()
+                    hideLoading()
+
                     it.data?.let {
 
                         Log.d(Constant.TAG_Coroutine,"Using LiveData"+ it.MasterData.EmailID)
@@ -192,7 +195,8 @@ class LoginActivity : BaseActivity() {
                 }
                 is APIState1.Failure -> {
 
-                    cancelDialog()
+                    hideLoading()
+
 
                     showSnackBar(viewParent,"Using LiveData" +it.errorMessage?: Constant.ErrorMessage)
                     Log.d(Constant.TAG_Coroutine,"Using LiveData" + it.errorMessage.toString())
@@ -200,7 +204,8 @@ class LoginActivity : BaseActivity() {
 
                 }
                 is APIState1.Empty -> {
-                    cancelDialog()
+                    hideLoading()
+
 
                 }
 
@@ -218,7 +223,7 @@ class LoginActivity : BaseActivity() {
 
 
 
-            if (!NetworkUtils.isNetworkAvailable(this@LoginActivity)){
+            if (!NetworkUtils.isNetworkAvailable(this@LoginActivityMain)){
 
                 showSnackBar(viewParent,Constant.NetworkError)
                 return@setOnClickListener

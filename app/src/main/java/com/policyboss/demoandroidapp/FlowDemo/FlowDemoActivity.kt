@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
 
 import com.policyboss.demoandroidapp.databinding.ActivityFlowDemoBinding
@@ -27,7 +28,7 @@ import kotlinx.coroutines.launch
 //https://www.youtube.com/watch?v=_1xH9d7w_tA&t=353s
 
 
-class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
+class FlowDemoActivity : BaseActivity(), View.OnClickListener{
 
     lateinit var binding : ActivityFlowDemoBinding
 
@@ -83,6 +84,12 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
         binding.btnFlowAdv9.setOnClickListener(this)
         binding.btnFlowAdv10.setOnClickListener(this)
         binding.btnFlowAdv11.setOnClickListener(this)
+
+        binding.btnFlowAdv12.setOnClickListener(this)
+        binding.btnFlowAdv13.setOnClickListener(this)
+        binding.btnFlowAdv14.setOnClickListener(this)
+        binding.btnFlowAdv15.setOnClickListener(this)
+
 
     }
 
@@ -255,6 +262,15 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
 
     // region Advance Flow
 
+    fun MutableStateFlowDemo() {
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            val flow = MutableStateFlow(0)
+
+            // Emit values to the Flow
+
+        }
+    }
     private fun producer() : Flow<Int>{
 
         return  flow {
@@ -456,26 +472,140 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
             }
         }
     }
-    //endregion
+    //endregion\\
+
+    //region Flow Operator
+
+    private fun mergeDemo() {
+
+        lifecycleScope.launch(Dispatchers.Main){
+
+            val flow1 = flow {
+
+                emit("A")
+                delay(1000)
+                emit("B")
+                delay(1000)
+                emit("C")
+            }
+
+            val flow2 = flow {
+                emit(1)
+                delay(500)
+                emit(2)
+                delay(500)
+                emit(3)
+            }
+
+            val mergedFlow = merge(flow1,flow2)
 
 
-    fun MutableStateFlowDemo(){
+            mergedFlow.collect { value ->
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            val flow = MutableStateFlow(0)
 
-      // Emit values to the Flow
-            flow.value = 1
-            flow.value = 2
-            flow.value = 3
+                Log.d(Constant.TAG, " Flow Merge :  $value ")
 
-           // Collect the Flow and print the latest value
-            flow.collect { value ->
-
-                Log.d(Constant.TAG, "Collector Finished eating  Pancake  $value ")
             }
         }
+
     }
+
+    private fun zipDemo() {
+
+        lifecycleScope.launch(Dispatchers.Main){
+
+            val flow1 = flow {
+
+                emit("A")
+
+                delay(200)
+                emit("B")
+
+                delay(1000)
+                emit("C")
+
+                delay(400)
+                emit("D")
+
+                delay(200)
+                emit("E")
+            }
+
+            val flow2 = flow {
+                emit(1)
+                delay(1000)
+                emit(2)
+                delay(300)
+                emit(3)
+                delay(100)
+                emit(4)
+                delay(500)
+                emit(5)
+
+                delay(900)
+                emit(6)
+                delay(500)
+                emit(7)
+            }
+
+            val zipFlow = flow1.zip(flow2){ a,b -> "$a$b" }
+
+             zipFlow.collect { value ->
+
+                Log.d(Constant.TAG, " Flow Merge :  $value ")
+
+            }
+        }
+
+
+    }
+
+    private fun combineDemo() {
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            val flow1 = flow {
+
+                emit("A")
+
+                delay(1000)
+                emit("B")
+
+                delay(1000)
+                emit("C")
+
+                delay(400)
+                emit("D")
+
+                delay(200)
+                emit("E")
+            }
+
+            val flow2 = flow {
+                emit(1)
+                delay(500)
+                emit(2)
+                delay(500)
+                emit(3)
+                delay(500)
+                emit(4)
+                delay(500)
+                emit(5)
+            }
+
+            val combineFlow = combine(flow1,flow2){ a,b -> "$a,$b"}
+
+            combineFlow.collect{ value ->
+
+                Log.d(Constant.TAG, " Flow Combine :  $value ")
+
+            }
+        }
+
+
+    }
+    //endregion
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -574,6 +704,28 @@ class FlowDemoActivity : AppCompatActivity() , View.OnClickListener{
             binding.btnFlowAdv11.id -> {
 
                 FlowcallBackDemo()
+
+            }
+
+            binding.btnFlowAdv12.id -> {
+
+                FlowcallBackDemo()
+
+            }
+            binding.btnFlowAdv13.id -> {
+
+               mergeDemo()
+
+            }
+            binding.btnFlowAdv14.id -> {
+
+               zipDemo()
+
+            }
+
+            binding.btnFlowAdv15.id -> {
+
+              combineDemo()
 
             }
 

@@ -29,7 +29,7 @@ import javax.inject.Singleton
 
 @Singleton
 class NotificationHelper @Inject constructor  (@ApplicationContext val context: Context,
-                                               private val notificationManager: NotificationManagerCompat){
+                                               @AppModules.ForNotifications  private val notificationManager: NotificationManagerCompat){
 
 
     fun sendNotification( title: String, message: String, pushNotificationEntity: PushNotificationEntity?) {

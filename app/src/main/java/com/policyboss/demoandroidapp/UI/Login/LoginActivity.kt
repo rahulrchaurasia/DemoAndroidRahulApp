@@ -23,6 +23,8 @@ class LoginActivity : BaseActivity() , OnClickListener{
     private lateinit var binding: ActivityLoginBinding
 
     private val mUserViewModel by viewModels<UserViewModel>()
+
+    lateinit var myNullableString: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)

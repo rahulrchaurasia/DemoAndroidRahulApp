@@ -233,12 +233,12 @@ class HomeDashboardActivity : BaseActivity() {
             when(it){
 
                 is ResponseOLD.Loading ->{
-                    showDialog()
+                    displayLoadingWithText(binding.root,"Loading...")
                 }
 
                 is ResponseOLD.Success -> {
 
-                    cancelDialog()
+                    hideLoading()
 
                     it.data?.let {
                         Log.d(Constant.TAG_Coroutine +" Dasbboard :", it.toString())
@@ -251,7 +251,7 @@ class HomeDashboardActivity : BaseActivity() {
                 }
 
                 is ResponseOLD.Error -> {
-                    cancelDialog()
+                    hideLoading()
                     Snackbar.make(layout,it.errorMessage.toString(), Snackbar.LENGTH_SHORT).show()
                     Log.d(Constant.TAG_Coroutine, it.errorMessage.toString())
                 }

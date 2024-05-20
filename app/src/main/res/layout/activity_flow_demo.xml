@@ -25,9 +25,11 @@
             android:contentInsetEnd="0dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="xsx" />
+            app:title="Flow Demo" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <androidx.core.widget.NestedScrollView
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -192,6 +194,8 @@
                 style="@style/outlined_button"
                 android:text="Flow: transform"
                 android:textColor="@color/Brown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintTop_toBottomOf="@+id/btnFlowAdv5" />
@@ -281,10 +285,46 @@
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
                 android:text="Flow Listener"
+                style="@style/solid_button"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFlowAdv13"
+                app:layout_constraintTop_toBottomOf="@+id/txtflowAdv12"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Merge"
                 android:layout_marginTop="@dimen/eight"
 
                 android:textColor="@color/black"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFlowAdv14"
+                app:layout_constraintTop_toBottomOf="@+id/btnFlowAdv13"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Zip"
+                android:layout_marginTop="@dimen/eight"
+
+                android:textColor="@color/black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFlowAdv15"
+                app:layout_constraintTop_toBottomOf="@+id/btnFlowAdv14"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Flow Combine"
+                android:layout_marginTop="@dimen/eight"
+
+                android:textColor="@color/black"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

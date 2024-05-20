@@ -50,6 +50,8 @@ tools:context=".UI.Collapsing.CollapsingDemo4Activity">
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+
    <androidx.coordinatorlayout.widget.CoordinatorLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent">

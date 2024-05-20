@@ -275,7 +275,7 @@ class sendCashFragment : Fragment()  , OnClickListener{
                          Here homeDashBoardFragment Fragment is not also remove
                 */
 
-             //  findNavController().popBackStack(R.id.homeDashBoardFragment,true) // Include destination to remove
+            //  findNavController().popBackStack(com.policyboss.demoandroidapp.R.id.homeDashBoardFragment,true) // Include destination to remove
 
                 /**************** PopBackStack *********************************/
 
@@ -289,6 +289,19 @@ class sendCashFragment : Fragment()  , OnClickListener{
 
             binding.btnDone.id ->{
 
+                //Note :
+                /*
+                 app:popUpTo="@id/homeDashBoardFragment"
+                 app:popUpToInclusive="true"
+
+                  on the basis on action define in navGraph it will remove tinationhomeDashBoardFragment and its top all des
+                 */
+                /*
+
+                 And when we use only   app:popUpTo="@id/homeDashBoardFragment" and escape      app:popUpToInclusive="true"
+
+                 then we get homeDashBoardFragment twice why 
+                 */
                 val action = sendCashFragmentDirections.actionSendCashFragmentToHomeDashBoardFragment()
 
                 findNavController().navigate(action)

@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <!--Note : Always use no action bar here.... -->
+
     <style name="Theme.DemoAndroidApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>  <!--toolbar color-->

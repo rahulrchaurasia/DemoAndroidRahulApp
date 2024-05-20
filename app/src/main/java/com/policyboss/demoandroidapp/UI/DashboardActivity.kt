@@ -11,6 +11,7 @@ import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncher
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
 import com.policyboss.demoandroidapp.LocationBgService.LocationBackgrounDemActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
+import com.policyboss.demoandroidapp.LoginModule.LoginActivityMain
 import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivity
 import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarMain
 import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
@@ -71,6 +72,8 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
         binding.btnLauncher.setOnClickListener(this)
 
         binding.btnLogin.setOnClickListener(this)
+
+        binding.btnLogin1.setOnClickListener(this)
 
         binding.btnCollapsing.setOnClickListener(this)
 
@@ -149,6 +152,11 @@ class DashboardActivity : AppCompatActivity() , View.OnClickListener{
             }
 
             binding.btnLogin.id -> {
+
+
+                startActivity(Intent(this, LoginActivityMain::class.java))
+            }
+            binding.btnLogin1.id -> {
 
 
                 startActivity(Intent(this, LoginActivity::class.java))

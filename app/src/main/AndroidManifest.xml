@@ -31,11 +31,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".FlowDemo.FlowDemoMainActivity"
+            android:exported="false"
+          />
+        <activity
             android:name=".UI.Collapsing.CollapsingDemo4Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".UI.Collapsing.CollapsingToolbarMain" />
         <activity
             android:name=".UI.Collapsing.CollapsingToolbarWithPinnedActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".UI.Collapsing.CollapsingToolbarMain" />
         <activity
             android:name=".UI.Collapsing.CollapsingWithPinnedActivity"
             android:exported="false"
@@ -130,6 +136,7 @@
         <activity
             android:name=".ActivityLifecycle.DemoLifeCycleSecond"
             android:exported="false"
+            android:launchMode="singleTask"
             android:parentActivityName=".ActivityLifecycle.ActivityLifeCycleActivity"
             android:theme="@style/Theme.DemoAndroidApp" />
         <activity
@@ -175,7 +182,7 @@
             android:exported="false"
             android:theme="@style/Theme.DemoAndroidApp" />
         <activity
-            android:name=".LoginModule.LoginActivity"
+            android:name=".LoginModule.LoginActivityMain"
             android:exported="false"
             android:theme="@style/Theme.DemoAndroidApp" />
         <activity
@@ -243,11 +250,8 @@
         <activity
             android:name=".FlowDemo.FlowDemoActivity"
             android:exported="false"
-            android:theme="@style/Theme.DemoAndroidApp">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:parentActivityName=".UI.DashboardActivity"
+            android:theme="@style/Theme.DemoAndroidApp"></activity>
         <activity
             android:name=".HiltDemo.HiltDemoActivity"
             android:exported="false"

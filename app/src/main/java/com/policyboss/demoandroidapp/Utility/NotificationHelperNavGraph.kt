@@ -29,7 +29,7 @@ import javax.inject.Singleton
 @Singleton
 class NotificationHelperNavGraph  constructor
     ( @ApplicationContext val context: Context,
-      private val notificationManager: NotificationManagerCompat){
+      @AppModules.ForNavigation private val notificationManager: NotificationManagerCompat){
 
 
 
