@@ -134,8 +134,8 @@ class LoginActivityMain : BaseActivity() {
                                 showSnackBar(viewParent, "Dear ${it.MasterData.FullName}, You Login Successfully!!")
 
 
-                               startActivity(Intent(this@LoginActivityMain, HomeDashboardActivity::class.java))
-                               this@LoginActivityMain.finish()
+                              // startActivity(Intent(this@LoginActivityMain, HomeDashboardActivity::class.java))
+                              // this@LoginActivityMain.finish()
                               // startActivity(Intent(this@LoginActivity, CommonWebViewActivity::class.java))
                            }
 
@@ -189,7 +189,7 @@ class LoginActivityMain : BaseActivity() {
 
                         showSnackBar(viewParent, "Dear ${it.MasterData.FullName}, You Login Successfully!!")
                     }
-                    startActivity(Intent(this, DashboardActivity::class.java))
+                   // startActivity(Intent(this, DashboardActivity::class.java))
 
 
                 }
@@ -287,8 +287,9 @@ class LoginActivityMain : BaseActivity() {
 
     private fun init(){
 
-        var demoDatabase = DemoDatabase.getDatabase(applicationContext)
-        var loiginRepository = LoginRepository(RetrofitHelper1.retrofitLoginApi,demoDatabase)
+        //var demoDatabase = DemoDatabase.getDatabase(applicationContext)
+        //var loiginRepository = LoginRepository(RetrofitHelper1.retrofitLoginApi,demoDatabase)
+        var loiginRepository = LoginRepository(RetrofitHelper1.retrofitLoginApi)
         var viewModelFactory = LoginViewModelFactory(loiginRepository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
 

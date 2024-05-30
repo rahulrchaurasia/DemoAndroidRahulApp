@@ -56,6 +56,8 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/_16dp"
 
+                    android:background ="@color/yellow"
+
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -164,6 +166,23 @@
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Filled Style"
+                        app:boxBackgroundColor="@color/yellow"
+
+                        app:boxBackgroundMode="filled"
+                        app:boxStrokeColor="@color/blue"
+                        app:startIconDrawable="@drawable/ic_person"
+                        app:startIconTint="@color/Aqua">
+
+                        <com.google.android.material.textfield.TextInputEditText
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.cardview.widget.CardView>
@@ -172,10 +191,28 @@
 
         </ScrollView>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16dp"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:hint="Filled Style"
+            app:boxBackgroundColor="@color/fullTransparent"
+
+            app:boxBackgroundMode="filled"
+            app:boxStrokeColor="@color/blue"
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconTint="@color/Aqua">
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressBar"
-            android:layout_marginTop="@dimen/_16dp"
+            android:layout_marginTop="@dimen/_3dp"
             android:layout_marginHorizontal="100dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -198,5 +235,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="32dp"
         android:layout_height="32dp"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -95,12 +95,16 @@
 
 <!--    </style>-->
 
+    <!--For Default Text Color
+    add color <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#B1E872</color>
+     -->
     <!--Style Edit text-->
     <style name="outlined_edittext" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeWidth">0.6dp</item> <!--before focused width-->
         <item name="boxStrokeWidthFocused">1dp</item><!--after focused width-->
         <item name="boxBackgroundColor">@color/white</item>
-        <item name="boxStrokeColor">@color/secondary_text_color</item>
+        <item name="boxStrokeColor">@color/yellow</item>
+
 
         <!--icon color inside box-->
         <item name="endIconTint">@color/secondary_text_color</item>

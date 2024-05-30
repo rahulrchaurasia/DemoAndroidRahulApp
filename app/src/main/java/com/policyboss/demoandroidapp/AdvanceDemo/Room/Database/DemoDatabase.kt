@@ -29,7 +29,7 @@ import com.policyboss.demoandroidapp.MVVMDemo.Data.DashboardData.ConstantEntity
  **********************************************/
 
 
-@Database(entities = [LoginEntity::class, Contact::class, QuoteEntity::class, ConstantEntity::class], version = 1, exportSchema = false)
+@Database(entities = [LoginEntity::class, Contact::class, QuoteEntity::class, ConstantEntity::class], version = 2, exportSchema = false)
 @TypeConverters(Convertors::class)
 abstract class DemoDatabase : RoomDatabase() {
 

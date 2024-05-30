@@ -21,6 +21,13 @@ import kotlinx.coroutines.withContext
 
 //Note :SsnMask - Give Format For EdiTTexthere dd-mm-yyyy
 //link https://brandonlehr.com/android/learn-to-code/2018/08/20/android-edit-text-input-masking
+
+/*
+For Default textinputEdit Color add color
+             <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#B1E872</color>
+
+ */
+
 class MaterialEditTextDemoActivity : BaseActivity() , View.OnClickListener {
 
 

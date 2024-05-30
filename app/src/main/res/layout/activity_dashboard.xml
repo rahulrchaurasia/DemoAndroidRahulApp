@@ -223,7 +223,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_alert_demo"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
-                android:text="Material EditText Demo"
+                android:text="Material EditText, Calander Best Demo"
 
                 android:textColor="@color/Brown"
                 style="@style/outlined_button"

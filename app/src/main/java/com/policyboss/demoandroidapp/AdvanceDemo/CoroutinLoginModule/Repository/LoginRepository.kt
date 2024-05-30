@@ -11,7 +11,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class LoginRepository (private val apiService : APIService1, private val demoDatabase: DemoDatabase) {
+class LoginRepository (private val apiService : APIService1,
+                      // private val demoDatabase: DemoDatabase
+    ) {
 
 
     suspend fun getLogin(loginRequestEntity: LoginRequestEntity)  = flow {
@@ -27,7 +29,7 @@ class LoginRepository (private val apiService : APIService1, private val demoDat
             if (response.body()?.StatusNo == 0) {
 
                 response.body()?.let {
-                    demoDatabase.loginDao().insertLoginData(it.MasterData)
+                  //  demoDatabase.loginDao().insertLoginData(it.MasterData)
                 }
 
             }
