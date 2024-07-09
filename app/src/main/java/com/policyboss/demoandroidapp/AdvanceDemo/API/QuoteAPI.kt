@@ -13,4 +13,7 @@ interface QuoteAPI {
    // https://quotable.io/quotes?page=1
    @GET("/quotes")
     suspend fun getQuotes( @Query("page") page : Int) : Response<quoteResponse>
+
+//    @GET("/quotes")
+//    suspend fun getQuotes(@Query("page") page: Int): QuoteList
 }

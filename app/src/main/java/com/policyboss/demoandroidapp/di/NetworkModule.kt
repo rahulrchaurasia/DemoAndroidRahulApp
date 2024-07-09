@@ -1,8 +1,10 @@
 package com.policyboss.demoandroidapp.di
 
 import android.content.Context
+import com.policyboss.demoandroidapp.AdvanceDemo.API.QuoteAPI
 import com.policyboss.demoandroidapp.LoginModule.API.APIService
 import com.policyboss.demoandroidapp.BuildConfig
+import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.facade.SevenPayPrefsManager
 
 import dagger.Module
@@ -28,7 +30,8 @@ class NetworkModule {
     fun provideRetrofit(): Retrofit.Builder {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BuildConfig.CONSOLE_BASE_URL)
+           // .baseUrl(BuildConfig.CONSOLE_BASE_URL)
+            .baseUrl(Constant.BASE_URL)
     }
 
     @Singleton
@@ -71,6 +74,12 @@ class NetworkModule {
     @Provides
     fun provideLoginAPI(retrofitBuilder: Retrofit.Builder, okHttpClient: OkHttpClient): APIService {
         return retrofitBuilder.client(okHttpClient).build().create(APIService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun getQuoteAPI(retrofitBuilder: Retrofit.Builder,): QuoteAPI {
+        return retrofitBuilder.build().create(QuoteAPI::class.java)
     }
 
 

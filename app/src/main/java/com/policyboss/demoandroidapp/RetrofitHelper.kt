@@ -3,6 +3,7 @@ package com.policyboss.demoandroidapp
 import com.policyboss.demoandroidapp.LoginModule.API.APIService
 
 import com.google.gson.GsonBuilder
+import com.policyboss.demoandroidapp.AdvanceDemo.API.QuoteAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,7 +12,9 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitHelper {
 
-    val BASE_URL = "http://transactionapi.tech-sevenpay.com"
+   // val BASE_URL = "http://transactionapi.tech-sevenpay.com"
+
+    val BASE_URL = "https://api.quotable.io/"
 
     const val token = "1234567890"
     internal var restAdapter: Retrofit? = null
@@ -39,6 +42,12 @@ object RetrofitHelper {
         retrofitInstance.create(APIService::class.java)
 
     }
+
+    val retrofitQuoteApi by lazy {
+        retrofitInstance.create(QuoteAPI::class.java)
+
+    }
+
 
 
 }

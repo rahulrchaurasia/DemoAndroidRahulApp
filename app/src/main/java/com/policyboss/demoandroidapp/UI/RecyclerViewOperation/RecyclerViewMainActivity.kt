@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.R
+import com.policyboss.demoandroidapp.UI.Pagging3Demo.Pagging3DemoActivity
 import com.policyboss.demoandroidapp.ViewPagerDemo.BasicViewPager.BasicViewPagerActivity
 import com.policyboss.demoandroidapp.ViewPagerDemo.CarouselViewPager.CarouselViewPagerActivity
 import com.policyboss.demoandroidapp.ViewPagerDemo.TabLayout.CustomTabLayout.UI.CustomTabLayout2Activity
@@ -81,7 +82,7 @@ class RecyclerViewMainActivity : BaseActivity() , View.OnClickListener{
 
             binding.btnRecycle2.id -> {
 
-
+                startActivity(Intent(this, Pagging3DemoActivity::class.java))
 
             }
 

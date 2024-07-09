@@ -1,13 +1,10 @@
 package com.policyboss.demoandroidapp.AdvanceDemo.CoroutinLoginModule.DataModel.ResponseEntity.QuoteResponse
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "Quote")
+//@Entity(tableName = "Quote")
 data class QuoteEntity(
 
-    @PrimaryKey(autoGenerate = true)
-    val quoteId : Int,
+    //@PrimaryKey(autoGenerate = true)
+    val _id: String,
     val author: String,
     val authorSlug: String,
     val content: String,

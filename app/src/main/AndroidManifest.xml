@@ -31,9 +31,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UI.Pagging3Demo.Pagging3DemoActivity"
+            android:theme="@style/Theme.DemoAndroidApp"
+            android:exported="false" />
+        <activity
             android:name=".FlowDemo.FlowDemoMainActivity"
-            android:exported="false"
-          />
+            android:exported="false" />
         <activity
             android:name=".UI.Collapsing.CollapsingDemo4Activity"
             android:exported="false"
@@ -251,7 +254,7 @@
             android:name=".FlowDemo.FlowDemoActivity"
             android:exported="false"
             android:parentActivityName=".UI.DashboardActivity"
-            android:theme="@style/Theme.DemoAndroidApp"></activity>
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name=".HiltDemo.HiltDemoActivity"
             android:exported="false"

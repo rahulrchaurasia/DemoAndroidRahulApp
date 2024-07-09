@@ -10,6 +10,8 @@ var TAG = "DEMOAPP"
 
 object Constant {
 
+    const val BASE_URL = "https://quotable.io/"
+
     val TAG_HILT : String = "HiltDEMO"
 
     val TAG_KOTLIN : String = "KotlinDEMO"
@@ -53,6 +55,9 @@ object Constant {
 
     const val PUSH_NOTITIFICATION = "demoAndroidApp_notification"
     const val   NOTIFICATION_RECEIVERNAME = "receiverName"
+
+    const val EmptyResponse = "Empty response body"
+    const val StatusMessage =  "Network request failed with status"
 
     fun hideKeyBoard(view: View?, context: Context) {
         if (view != null) {
