@@ -1,5 +1,6 @@
 package com.policyboss.demoandroidapp.UI.Login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
@@ -9,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.BaseActivity
+import com.policyboss.demoandroidapp.UI.HomeActivity
 import com.policyboss.demoandroidapp.Utility.ExtensionFun.showSnackbar
 import com.policyboss.demoandroidapp.Utility.showSnackbar
 import com.policyboss.demoandroidapp.ViewModel.UserViewModel
@@ -33,7 +35,7 @@ class LoginActivity : BaseActivity() , OnClickListener{
 
         binding.btnLogin.setOnClickListener(this)
 
-        responseListner()
+       // responseListner()
     }
 
 
@@ -71,7 +73,10 @@ class LoginActivity : BaseActivity() , OnClickListener{
 
             binding.btnLogin.id -> {
 
-                mUserViewModel.login(LoginRequestModel("SUPERADMIN", "IAVOgPjZsdnJM4ou71YAqg=="))
+               // mUserViewModel.login(LoginRequestModel("SUPERADMIN", "IAVOgPjZsdnJM4ou71YAqg=="))
+
+                this.finish()
+                startActivity(Intent(this, HomeActivity::class.java))
             }
 
         }

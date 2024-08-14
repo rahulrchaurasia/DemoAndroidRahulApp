@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import com.policyboss.demoandroidapp.ActivityLifecycle.ActivityLifeCycleActivity
 import com.policyboss.demoandroidapp.AlertDialog.AlertDialogDemo
+import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
 import com.policyboss.demoandroidapp.LocationBgService.LocationBackgrounDemActivity
@@ -24,8 +25,10 @@ import com.policyboss.demoandroidapp.UI.circularProgress.CircularProgressActivit
 import com.policyboss.demoandroidapp.Utility.PopupViewTop
 import com.policyboss.demoandroidapp.ViewPagerDemo.ViewPagerMainActivity
 import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class DashboardActivity : AppCompatActivity() , View.OnClickListener{
+@AndroidEntryPoint
+class DashboardActivity : BaseActivity() , View.OnClickListener{
 
     lateinit var binding : ActivityDashboardBinding
 

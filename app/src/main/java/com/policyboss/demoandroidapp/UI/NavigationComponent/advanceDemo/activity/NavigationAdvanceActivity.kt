@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
+import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.UI.NavigationComponent.PushNotificationEntity
@@ -68,7 +69,7 @@ interface NavigationAdvanceCallback {
 }
 
 @AndroidEntryPoint
-class NavigationAdvanceActivity : AppCompatActivity(),NavigationAdvanceCallback {
+class NavigationAdvanceActivity : BaseActivity(),NavigationAdvanceCallback {
 
    private lateinit var binding : ActivityNavigationAdvanceBinding
    private lateinit var layout: View

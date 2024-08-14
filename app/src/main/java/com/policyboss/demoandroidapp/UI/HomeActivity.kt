@@ -39,6 +39,7 @@ import com.policyboss.demoandroidapp.UI.NavigationComponent.PushNotificationEnti
 import com.policyboss.demoandroidapp.UI.NavigationComponent.advanceDemo.activity.NavigationAdvanceActivity
 import com.policyboss.demoandroidapp.Utility.Utility
 import com.policyboss.demoandroidapp.databinding.ActivityHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -52,6 +53,7 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 
+@AndroidEntryPoint
 class HomeActivity : BaseActivity() ,View.OnClickListener {
 
     var CAMERA_STORAGE_PERMISSION_REQUEST_CODE = 101
