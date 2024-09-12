@@ -34,7 +34,7 @@ class DashboardViewModel(private  val repository: DashboardRepository) : ViewMod
         viewModelScope.launch(Dispatchers.IO) {
 
             try {
-                val resultDashboardAsync = async {  repository.getDynamicDashBoard(body)}
+                val resultDashboardAsync = async {  repository.getDynamicDashBoard1(body)}
 
                 val resultConstantAsync = async {  repository.getUserConstandDataUsingWithFromAPI(body) }
 

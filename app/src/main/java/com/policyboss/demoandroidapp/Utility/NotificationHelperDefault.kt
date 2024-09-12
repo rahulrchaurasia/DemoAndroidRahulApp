@@ -11,6 +11,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.policyboss.demoandroidapp.R
 
+
+//Note : Open the Default Root page ie MainActivity
+// No handling of Pending Intent using NavGrapg we have to Handle Manually
 object NotificationHelperDefault {
 
     private lateinit var notificationManager: NotificationManagerCompat

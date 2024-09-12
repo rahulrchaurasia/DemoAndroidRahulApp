@@ -5,18 +5,21 @@ import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.AdvanceDemo.CoroutinLoginModule.API.APIService1
 import com.policyboss.demoandroidapp.AdvanceDemo.Room.Database.DemoDatabase
+import com.policyboss.demoandroidapp.response.Login.LoginResponse
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import retrofit2.Response
 
 class LoginRepository (private val apiService : APIService1,
                       // private val demoDatabase: DemoDatabase
     ) {
 
 
-    suspend fun getLogin(loginRequestEntity: LoginRequestEntity)  = flow {
+    suspend fun getLogin(loginRequestEntity: LoginRequestEntity) = flow {
 
 
 
