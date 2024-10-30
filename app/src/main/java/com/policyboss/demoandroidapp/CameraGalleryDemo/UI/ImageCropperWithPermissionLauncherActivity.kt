@@ -1,52 +1,70 @@
 package com.policyboss.demoandroidapp.CameraGalleryDemo.UI
 
 import android.Manifest
-import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
+import com.canhub.cropper.CropImageView
 import com.google.android.material.snackbar.Snackbar
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
-import com.policyboss.demoandroidapp.Utility.Utility
 import com.policyboss.demoandroidapp.Utility.ExtensionFun.showSnackbar
+import com.policyboss.demoandroidapp.Utility.Utility
+import com.policyboss.demoandroidapp.databinding.ActivityImageCropperWithPermissionLauncherBinding
 import com.policyboss.demoandroidapp.databinding.ActivityResultLauncherDemoBinding
-import com.policyboss.policybosspro.utils.AppPermission.AppPermissionManager
-import com.policyboss.policybosspro.utils.AppPermission.PermissionHandler
-import com.yalantis.ucrop.UCrop
-import java.io.File
 
-class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
+class ImageCropperWithPermissionLauncherActivity : BaseActivity(), View.OnClickListener {
 
-    lateinit var binding: ActivityResultLauncherDemoBinding
+    lateinit var binding: ActivityImageCropperWithPermissionLauncherBinding
     lateinit var imgUri : Uri
     private lateinit var layout: View
 
-    private lateinit var cropUri: Uri
 
-    lateinit var result : ActivityResultLauncher<Intent>    // For Passing Data From Second to First Activity
+    // region Old  Define Crop Image Contract for cropping functionality
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            val croppedImageUri = result.uriContent
+            val croppedImageFilePath = result.getUriFilePath(this) // Optional
 
-    lateinit var cameraContracts : ActivityResultLauncher<Uri>   // Open Camera Using Uri
 
-    lateinit var galleryContracts : ActivityResultLauncher<String>
+            // Display the cropped image
+            binding.imgProfile.setImageURI(null)
+            binding.imgProfile.setImageURI(croppedImageUri)
+        } else {
+            val exception = result.error
+            Log.e("ImageCropError", "Error during cropping: $exception")
+        }
+    }
+    //endregion
 
 
-    private lateinit var permissionHandler: PermissionHandler
 
+
+    private val cameraContracts = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success) startCrop(imgUri)  // Start cropping if the image was captured
+    }
+
+    private val galleryContracts = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) startCrop(uri)  // Start cropping if an image was picked
+    }
+
+    //region Permission Launcher
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -54,7 +72,7 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
 
             if(isGranted){
                 Log.d(Constant.TAG_Coroutine,"Permission Granted via Launcher")
-                showSnackBar(layout,"Permission Granted via Launcher")
+                // showSnackBar(layout,"Permission Granted via Launcher")
 
                 imgUri = Utility.createImageUri(this)
                 cameraContracts.launch(imgUri)
@@ -77,64 +95,35 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
 
 
         }
+    //endregion
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityResultLauncherDemoBinding.inflate(layoutInflater)  // bind data
+        binding = ActivityImageCropperWithPermissionLauncherBinding.inflate(layoutInflater)  // bind data
         setContentView(binding.root)
 
         layout = binding.root
         layout = binding.constraintLayout
 
-        permissionHandler = PermissionHandler(this)
 
-       // called both camera and Storage Permissopn
-        cameraStoragePermission()
-
-        result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-
-            if(result.resultCode ==  RESULT_OK){
-
-                val data =  result.data?.getStringExtra(Constant.KEY_DATA) ?: "No Data"
-
-                showSnackBar(binding.textView5,data)
-
-                binding.textView5.text = data
-            }
-
-
-        }
-
-        cameraContracts = registerForActivityResult(ActivityResultContracts.TakePicture()){ success ->
-
-//             binding.imgProfile.setImageURI(null)
+//        cameraContracts = registerForActivityResult(ActivityResultContracts.TakePicture()){
+//
+//            // binding.imgProfile.setImageURI(null)
 //            binding.imgProfile.setImageURI(imgUri)
+//
+//        }
 
-            if(success){
-
-                startCropActivity(imgUri)
-            }
-
-        }
-
-        galleryContracts = registerForActivityResult(ActivityResultContracts.GetContent()){ uri ->
-
+//        galleryContracts = registerForActivityResult(ActivityResultContracts.GetContent()){
+//
 //            binding.imgProfile.setImageURI(null)
-//            binding.imgProfile.setImageURI(uri)
-
-            uri?.let {
-                startCropActivity(it)
-            }
-
-
-            //Note : 05 crop added here
-        }
+//            binding.imgProfile.setImageURI(it)
+//        }
 
         binding.btnGallery.setOnClickListener(this)
         binding.btnCamera.setOnClickListener(this)
-        binding.btnNext.setOnClickListener(this)
+
         binding.imgClose.setOnClickListener(this)
 
 
@@ -144,30 +133,18 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
     }
 
 
-
-
-    private fun cameraStoragePermission() {
-
-        permissionHandler.checkAndRequestPermissions(
-
-            AppPermissionManager.PermissionType.CAMERA_AND_STORAGE,
-            onResult = { granted ->
-                if (granted) {
-                    // Open camera or Gallery
-
-                   showToast("Permission granted....")
-
-                } else {
-
-                    //showAlert("App need perission")
-                }
-            },
-            onPermanentlyDenied = { permissions ->
-                // Show dialog suggesting to open app settings
-                openSetting()
-            }
+    // Start Crop Activity with the selected or captured image URI
+    private fun startCrop(imageUri: Uri) {
+        cropImage.launch(
+            CropImageContractOptions(
+                uri = imageUri,
+                cropImageOptions = CropImageOptions(
+                    guidelines = CropImageView.Guidelines.ON,  // Show guidelines during cropping
+                    autoZoomEnabled = true, // Ensures the image is zoomed for better visibility
+                    outputCompressFormat = Bitmap.CompressFormat.JPEG
+                )
+            )
         )
-
     }
 
 
@@ -222,7 +199,6 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
                 showSnackBar(layout,"Permission Granted via Req : Use Camera")
 
                 imgUri = Utility.createImageUri(this)
-                cropUri = Utility.getTempCropUri(this)  // Note :05  for Crop added here
                 cameraContracts.launch(imgUri)
 
             }
@@ -252,7 +228,7 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
                 //  showSnackBar(layout,"Permission Not ask Yet")
                 // Permission Is Not Ask yet Request the Permisssion
 
-               requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
 
 //                val permissions = arrayOf(
 //                    Manifest.permission.CAMERA,
@@ -267,8 +243,6 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
 
 
 
-
-
     override fun onClick(view: View?) {
 
         when(view!!.id){
@@ -276,21 +250,7 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
             binding.imgClose.id ->{
                 this.finish()
             }
-            binding.btnNext.id  ->{
 
-                // Simple Format
-                val intent = Intent(this, PermissionActivity::class.java)
-                result.launch(intent)
-
-                // region or Short Format
-                /*
-                result.launch(
-                 Intent(this,SecondActivity::class.java)
-                )
-                */
-                //endregion
-
-            }
 
             binding.btnCamera.id -> {
 
@@ -308,49 +268,4 @@ class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener,
 
         }
     }
-
-
-
-    private fun startCropActivity(sourceImageUri: Uri) {
-        val destinationUri = Uri.fromFile(File(cacheDir, "cropped_image.jpg"))
-
-
-
-        UCrop.of(sourceImageUri, destinationUri)
-            .withOptions(getCropOptions())
-            .start(this)
-    }
-
-    private fun getCropOptions(): UCrop.Options {
-        return UCrop.Options().apply {
-            setCompressionQuality(80)
-            setToolbarColor(ContextCompat.getColor(this@ActivityResultLauncherDemoActivity, R.color.purple_500))
-            setStatusBarColor(ContextCompat.getColor(this@ActivityResultLauncherDemoActivity, R.color.purple_700))
-            setToolbarWidgetColor(ContextCompat.getColor(this@ActivityResultLauncherDemoActivity, android.R.color.white))
-            setFreeStyleCropEnabled(true)
-        }
-    }
-
-
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                UCrop.REQUEST_CROP -> {
-                    val resultUri = UCrop.getOutput(data!!)
-                    resultUri?.let { uri ->
-                        binding.imgProfile.setImageURI(null)
-                        binding.imgProfile.setImageURI(uri)
-                    }
-                }
-                UCrop.RESULT_ERROR -> {
-                    val cropError = UCrop.getError(data!!)
-                    Toast.makeText(this, "Cropping failed: ${cropError?.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
 }

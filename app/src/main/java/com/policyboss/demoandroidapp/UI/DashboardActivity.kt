@@ -9,6 +9,7 @@ import com.policyboss.demoandroidapp.ActivityLifecycle.ActivityLifeCycleActivity
 import com.policyboss.demoandroidapp.AlertDialog.AlertDialogDemo
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
+import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ImageCropperWithPermissionLauncherActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
 import com.policyboss.demoandroidapp.LocationBgService.LocationBackgrounDemActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
@@ -73,6 +74,8 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
         binding.btnPermission.setOnClickListener(this)
 
         binding.btnLauncher.setOnClickListener(this)
+
+        binding.btnImagCrooper.setOnClickListener(this)
 
         binding.btnLogin.setOnClickListener(this)
 
@@ -152,6 +155,12 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
 
 
                 startActivity(Intent(this, ActivityResultLauncherDemoActivity::class.java))
+            }
+
+            binding.btnImagCrooper.id -> {
+
+
+                startActivity(Intent(this, ImageCropperWithPermissionLauncherActivity::class.java))
             }
 
             binding.btnLogin.id -> {

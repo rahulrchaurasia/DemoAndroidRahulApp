@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/lyParent"
+tools:context=".CameraGalleryDemo.UI.ImageCropperWithPermissionLauncherActivity">
+
+
+
+<LinearLayout
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+
+    app:layout_anchor="@+id/constraintLayout"
+    app:layout_anchorGravity="center">
+
+    <ImageView
+        android:id="@+id/imgClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="@dimen/_8dp"
+        android:layout_marginLeft="@dimen/_8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close_24" />
+
+
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+
+        android:src="@drawable/ic_person_24"
+
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/header_textview_24"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Activity Result Launcher Demo"
+
+        tools:text="demo launcher" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginHorizontal="@dimen/_16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCamera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Camera"
+            />
+
+        <Button
+            android:id="@+id/btnGallery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gallery"
+            android:layout_marginLeft="@dimen/_16dp"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

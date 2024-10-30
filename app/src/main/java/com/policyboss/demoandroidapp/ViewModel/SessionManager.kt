@@ -51,6 +51,6 @@ class SessionManager @Inject constructor(application: Application) : AndroidView
     }
 
     companion object {
-        private const val SESSION_TIMEOUT = 1 * 60 * 1000L // 10 minutes in milliseconds
+        private const val SESSION_TIMEOUT = 5 * 60 * 1000L // 10 minutes in milliseconds
     }
 }

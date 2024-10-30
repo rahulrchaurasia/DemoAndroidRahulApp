@@ -56,8 +56,8 @@ object Utility {
        // val image = File(context.filesDir,"camera_photo.png")
         val imageFile = createImageFile(context)
 
-        return FileProvider.getUriForFile(context.applicationContext,
-            "com.policyboss.demoandroidapp.fileprovider",
+        return FileProvider.getUriForFile(context,
+            "${context.packageName}.provider",
             imageFile
         )
 
@@ -73,6 +73,26 @@ object Utility {
         return File.createTempFile(imageFileName, ".jpg", storageDir)
     }
 
+    @JvmStatic
+    fun getTempCropUri(context: Context): Uri {
+        // Use the app-specific external files directory for storing cropped images
+        val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        // Ensure the directory exists
+        if (storageDir != null && !storageDir.exists()) {
+            storageDir.mkdirs()
+        }
+
+        // Create the temporary cropped image file
+        val cropFile = File(storageDir, "cropped_image_${System.currentTimeMillis()}.jpg")
+
+        // Use FileProvider to get the URI for this file
+        return FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.provider",
+            cropFile
+        )
+    }
 
 
 
@@ -454,7 +474,6 @@ object Utility {
 
 
 
-
     fun createImageFile(name: String,context: Context ): File? {
         // Create an image file name
         val temp: File
@@ -554,6 +573,10 @@ object Utility {
             return -1 // Return -1 if there's an error in parsing the DOB
         }
     }
+
+
+
+
 
 
 }

@@ -39,7 +39,7 @@ class PermissionActivity : BaseActivity() {
                 Log.d(Constant.TAG_Coroutine,"Permission Granted via Launcher")
                 showSnackBar(layout,"Permission Granted via Launcher")
 
-                startCamera()      // Camera Start Using Camera Launcher
+                    startCamera()      // Camera Start Using Camera Launcher
 
             } else {
                 // Permission request was denied.

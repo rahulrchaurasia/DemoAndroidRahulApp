@@ -172,6 +172,19 @@
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
                 android:text="Launcher"
+                android:visibility="visible"
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnImagCrooper"
+                app:layout_constraintTop_toBottomOf="@+id/btnLauncher"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="Imaage Crooper with Permission and Launcher"
 
                 android:textColor="@color/Brown"
                 style="@style/outlined_button"
@@ -181,7 +194,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCollapsing"
-                app:layout_constraintTop_toBottomOf="@+id/btnLauncher"
+                app:layout_constraintTop_toBottomOf="@+id/btnImagCrooper"
                 app:layout_constraintStart_toStartOf="@+id/childparent"
                 app:layout_constraintEnd_toEndOf="@+id/childparent"
                 android:text="Collapsing Layoout"
