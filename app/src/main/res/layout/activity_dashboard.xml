@@ -271,6 +271,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_constrain_layout"
+                app:layout_constraintTop_toBottomOf="@+id/btn_activity_lifecycle"
+                app:layout_constraintStart_toStartOf="@+id/childparent"
+                app:layout_constraintEnd_toEndOf="@+id/childparent"
+                android:text="ConstrainLayout Demo"
+                android:visibility="visible"
+                android:textColor="@color/Brown"
+                style="@style/outlined_button"
+                android:layout_marginTop="@dimen/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

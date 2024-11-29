@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.Image
@@ -13,6 +14,7 @@ import android.os.Build
 import android.os.Environment
 import android.os.PowerManager
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.provider.Settings
 import android.telephony.SmsManager
 import android.util.Base64
@@ -440,4 +442,39 @@ object UtilityNew {
 
 
 
+
+
+    fun createTempFileFromUri(context: Context, uri: Uri): File {
+        // Get the file name from the Uri
+        val fileName = getFileName(context, uri) ?: "temp_file"
+        val tempFile = File(context.cacheDir, fileName)
+
+        // Copy the content from Uri to the temporary file
+        context.contentResolver.openInputStream(uri)?.use { inputStream ->
+            FileOutputStream(tempFile).use { outputStream ->
+                inputStream.copyTo(outputStream)
+            }
+        }
+
+        return tempFile
+    }
+
+    // Helper function to retrieve the file name from the Uri
+    fun getFileName(context: Context, uri: Uri): String? {
+        var name: String? = null
+        val cursor: Cursor? = context.contentResolver.query(uri, null, null, null, null)
+
+        cursor?.use {
+            if (it.moveToFirst()) {
+                // Check if the DISPLAY_NAME column is present in the query result
+                val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                if (nameIndex != -1) {
+                    name = it.getString(nameIndex)
+                }
+            }
+        }
+
+        // If DISPLAY_NAME is unavailable, use the last segment of the URI as the fallback name
+        return name ?: uri.lastPathSegment
+    }
 }

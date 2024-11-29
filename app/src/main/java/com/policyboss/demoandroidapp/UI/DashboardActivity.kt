@@ -11,6 +11,7 @@ import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ActivityResultLauncherDemoActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.ImageCropperWithPermissionLauncherActivity
 import com.policyboss.demoandroidapp.CameraGalleryDemo.UI.MultiplePermissionActivity
+import com.policyboss.demoandroidapp.ConstrainLayoutDemo.ConstrainLayoutMainActivity
 import com.policyboss.demoandroidapp.LocationBgService.LocationBackgrounDemActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.LoginModule.LoginActivityMain
@@ -20,6 +21,7 @@ import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
 import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.UI.MaterialEditText.MaterialEditTextDemoActivity
 import com.policyboss.demoandroidapp.UI.RecyclerViewOperation.RecyclerViewMainActivity
+
 import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderActivity
 import com.policyboss.demoandroidapp.UI.circularProgress.CircularProgressActivity
 
@@ -99,6 +101,7 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
 
         binding.btnRecycleViewMain.setOnClickListener(this)
 
+        binding.btnConstrainLayout.setOnClickListener(this)
 
     }
 
@@ -136,6 +139,7 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
             binding.btnAutoTextReader.id -> {
 
                 startActivity(Intent(this, AutoTextReaderActivity::class.java))
+
 
             }
             binding.btnCropImage.id -> {
@@ -209,6 +213,16 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
 
 
             }
+
+            binding.btnConstrainLayout.id ->{
+
+
+                startActivity(Intent(this, ConstrainLayoutMainActivity::class.java))
+
+
+            }
+
+
 
         }
     }
