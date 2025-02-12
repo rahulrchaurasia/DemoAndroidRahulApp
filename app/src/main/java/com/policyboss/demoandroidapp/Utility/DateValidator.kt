@@ -2,11 +2,13 @@ package com.policyboss.demoandroidapp.Utility
 
 import java.util.Calendar
 
+//validation handler
 class DateValidator(
     private val format: String = "dd-MM-yyyy", // Default format can be changed
     private val minYear: Int = Calendar.getInstance().get(Calendar.YEAR) - 120, // Current year minus 120
     private val maxYear: Int = Calendar.getInstance().get(Calendar.YEAR) // Current year by default
 ) {
+
 
     private val separators = listOf("-", "/")
 
@@ -54,5 +56,6 @@ class DateValidator(
     private fun isLeapYear(year: Int): Boolean {
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
     }
+
 }
 
