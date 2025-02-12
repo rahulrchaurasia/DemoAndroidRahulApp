@@ -1,23 +1,26 @@
 package com.policyboss.demoandroidapp.CameraGalleryDemo.UI
 
+import PDFHandlerAdv
 import android.Manifest
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageContractOptions
+
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
 import com.google.android.material.snackbar.Snackbar
@@ -25,15 +28,28 @@ import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.R
 import com.policyboss.demoandroidapp.Utility.ExtensionFun.showSnackbar
+import com.policyboss.demoandroidapp.Utility.PdfHandler.PDFHandler
+
 import com.policyboss.demoandroidapp.Utility.Utility
 import com.policyboss.demoandroidapp.databinding.ActivityImageCropperWithPermissionLauncherBinding
-import com.policyboss.demoandroidapp.databinding.ActivityResultLauncherDemoBinding
+import kotlinx.coroutines.launch
+import java.io.File
+
+/*
+//Note : com.vanniktech:android-image-cropper:4.6.0
+  canhub Image Crooper
+ */
 
 class ImageCropperWithPermissionLauncherActivity : BaseActivity(), View.OnClickListener {
 
     lateinit var binding: ActivityImageCropperWithPermissionLauncherBinding
     lateinit var imgUri : Uri
     private lateinit var layout: View
+
+    // region Pdf File Decleration
+    private val pdfHandler = PDFHandlerAdv()
+    private val PDF_PICKER_CODE = 123
+    //endregion
 
 
     // region Old  Define Crop Image Contract for cropping functionality
@@ -124,6 +140,7 @@ class ImageCropperWithPermissionLauncherActivity : BaseActivity(), View.OnClickL
         binding.btnGallery.setOnClickListener(this)
         binding.btnCamera.setOnClickListener(this)
 
+        binding.btnFile.setOnClickListener(this)
         binding.imgClose.setOnClickListener(this)
 
 
@@ -133,7 +150,11 @@ class ImageCropperWithPermissionLauncherActivity : BaseActivity(), View.OnClickL
     }
 
 
-    // Start Crop Activity with the selected or captured image URI
+
+    private fun openPDFPicker() {
+        pdfHandler.launchPDFPicker(this, PDF_PICKER_CODE)
+    }
+    //region Start Crop Activity with the selected or captured image URI
     private fun startCrop(imageUri: Uri) {
         cropImage.launch(
             CropImageContractOptions(
@@ -147,8 +168,10 @@ class ImageCropperWithPermissionLauncherActivity : BaseActivity(), View.OnClickL
         )
     }
 
+     //endregion
 
 
+    //region Permission and Open Setting Page
     fun settingDialog(){
 
         val dialogBuilder = AlertDialog.Builder(this)
@@ -240,6 +263,7 @@ class ImageCropperWithPermissionLauncherActivity : BaseActivity(), View.OnClickL
 
         }
     }
+    //endregion
 
 
 
@@ -266,6 +290,141 @@ class ImageCropperWithPermissionLauncherActivity : BaseActivity(), View.OnClickL
 
             }
 
+            binding.btnFile.id -> {
+
+                openPDFPicker()
+
+
+            }
+
         }
     }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PDF_PICKER_CODE && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                lifecycleScope.launch {
+                    try {
+                        val cachedFile = pdfHandler.handlePDFResult(this@ImageCropperWithPermissionLauncherActivity, uri)
+                        if (cachedFile != null) {
+                            // Log success details
+                            showAlert("Pdf cached successfully ${cachedFile.absolutePath}")
+                            // File is successfully cached
+                            Log.d(
+                                "PDFCache",
+                                "PDF cached successfully at: ${cachedFile.absolutePath}"
+                            )
+                            Log.d("PDFHandler", "Successfully cached file: ${cachedFile.absolutePath}")
+                            Log.d("PDFHandler", "File size: ${cachedFile.length()} bytes")
+
+                            // Process the file
+                            handleCachedFile(cachedFile)
+                        } else {
+                            
+                            showAlert("Failed to process PDF ${cachedFile?.absolutePath}")
+                            Log.d(
+                                "PDFCache",
+                                "PDF not generated:"
+                            )
+                        }
+                    } catch (e: Exception) {
+                        Log.e("PDFHandler", "Error: ${e.message}", e)
+                        Toast.makeText(this@ImageCropperWithPermissionLauncherActivity,
+                            "Error processing file: ${e.message}",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleCachedFile(file: File) {
+        // Process your cached file here
+        // For example, upload to server
+        lifecycleScope.launch {
+            try {
+                val uploaded = pdfHandler.uploadPDFToServer(file, "YOUR_SERVER_URL")
+                if (uploaded) {
+                    Toast.makeText(this@ImageCropperWithPermissionLauncherActivity,
+                        "File uploaded successfully",
+                        Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@ImageCropperWithPermissionLauncherActivity,
+                        "Upload failed",
+                        Toast.LENGTH_SHORT).show()
+                }
+            } finally {
+                // Optionally clear cache after processing
+                pdfHandler.clearCache(this@ImageCropperWithPermissionLauncherActivity)
+            }
+        }
+    }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == PDF_PICKER_CODE && resultCode == Activity.RESULT_OK) {
+//            data?.data?.let { uri ->
+//                try {
+//                    // Take persistent permission
+//                    contentResolver.takePersistableUriPermission(
+//                        uri,
+//                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                    )
+//
+//                    lifecycleScope.launch {
+//                        try {
+//                            // Cache the PDF
+//                            val cachedFile = pdfHandler.handlePDFResult(this@ImageCropperWithPermissionLauncherActivity, uri)
+//
+//
+//                            if (cachedFile != null) {
+//
+//
+//                                showAlert("Pdf cached successfully ${cachedFile.absolutePath}")
+//                                // File is successfully cached
+//                                Log.d(
+//                                    "PDFCache",
+//                                    "PDF cached successfully at: ${cachedFile.absolutePath}"
+//                                )
+//                                // Log cache information
+//                                Log.d("PDFCache", "Cache size: ${pdfHandler.getCacheSize(this@ImageCropperWithPermissionLauncherActivity)}")
+//                                Log.d("PDFCache", "File path: ${cachedFile.absolutePath}")
+//                                Log.d("PDFCache", "File size: ${cachedFile.length()}")
+//
+//
+//                                // Upload to server
+//                                val uploaded = pdfHandler.uploadPDFToServer(cachedFile, "YOUR_SERVER_URL")
+//                                if (uploaded) {
+//                                    Toast.makeText(this@ImageCropperWithPermissionLauncherActivity, "PDF uploaded successfully", Toast.LENGTH_SHORT).show()
+//                                    // Optionally clear cache after successful upload
+//                                    pdfHandler.clearCache(this@ImageCropperWithPermissionLauncherActivity)
+//                                } else {
+//                                    Toast.makeText(this@ImageCropperWithPermissionLauncherActivity, "Upload failed", Toast.LENGTH_SHORT).show()
+//                                }
+//                            } else {
+//
+//                                showAlert("Failed to process PDF ${cachedFile?.absolutePath}")
+//                                Log.d(
+//                                    "PDFCache",
+//                                    "PDF not generated:"
+//                                )
+//                            }
+//                        } catch (e: Exception) {
+//                            Log.e("ImageCropperWithPermissionLauncherActivity", "Error: ${e.message}")
+//                            Toast.makeText(this@ImageCropperWithPermissionLauncherActivity, "Error processing PDF", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                } catch (e: SecurityException) {
+//                    Log.e("ImageCropperWithPermissionLauncherActivity", "Permission error: ${e.message}")
+//                    Toast.makeText(this, "Cannot access the selected file", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+//    }
+//
+
 }

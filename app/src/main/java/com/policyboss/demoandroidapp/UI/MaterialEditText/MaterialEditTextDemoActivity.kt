@@ -8,6 +8,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Utility.DateMaskFormat
+
+import com.policyboss.demoandroidapp.Utility.ExtensionFun.addPlateNumberFormatter
 import com.policyboss.demoandroidapp.Utility.ExtensionFun.isValidDate
 import com.policyboss.demoandroidapp.Utility.Utility
 import com.policyboss.demoandroidapp.ViewPagerDemo.model.FoodEntity
@@ -87,6 +89,11 @@ class MaterialEditTextDemoActivity : BaseActivity() , View.OnClickListener {
         val dateMask = DateMaskFormat(separator = "-", binding.etDob,::getDateMask)
 
         binding.etDob.addTextChangedListener(dateMask)
+
+
+        binding.etPlate.addPlateNumberFormatter()
+
+
 
     }
     fun  init() {

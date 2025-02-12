@@ -5,9 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.policyboss.demoandroidapp.APIState
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.Constant
+import com.policyboss.demoandroidapp.Repository.LoginRepository
+import com.policyboss.demoandroidapp.RetrofitHelper
+import com.policyboss.demoandroidapp.Utility.showSnackbar
+import com.policyboss.demoandroidapp.ViewModel.LoginViewModel
+import com.policyboss.demoandroidapp.ViewModel.LoginViewModelFactory
+import com.policyboss.demoandroidapp.ViewModel.UserViewModel
 
 import com.policyboss.demoandroidapp.databinding.ActivityFlowDemoBinding
 import kotlinx.coroutines.CoroutineScope
@@ -31,7 +42,7 @@ import kotlinx.coroutines.launch
 class FlowDemoActivity : BaseActivity(), View.OnClickListener{
 
     lateinit var binding : ActivityFlowDemoBinding
-
+    lateinit var viewModel: LoginViewModel
 
     private lateinit var fixedFlow : Flow<Int>
     private lateinit var collectionFlow : Flow<Int>
@@ -39,8 +50,18 @@ class FlowDemoActivity : BaseActivity(), View.OnClickListener{
     private lateinit var channelFlow : Flow<Int>
 
     private val list = listOf(1,2,3,4,5 )
+   // private val viewModel by viewModels<UserViewModel>()
 
 
+    private fun init(){
+
+
+        var loiginRepository = LoginRepository(RetrofitHelper.retrofitLoginApi)
+        var viewModelFactory = LoginViewModelFactory(loiginRepository)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
+
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,6 +76,7 @@ class FlowDemoActivity : BaseActivity(), View.OnClickListener{
             it.title = "Flow Demo"
         }
 
+        init()
         setupFixedFlow()
         setupFromList()
         setupFlowWithLembda()
@@ -62,6 +84,22 @@ class FlowDemoActivity : BaseActivity(), View.OnClickListener{
 
 
         setClickListener()
+
+      //  observe()
+    }
+
+    fun observe(){
+
+        lifecycleScope.launch {
+
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+
+                viewModel.generateNoFlow.collect{
+
+                   Log.d(Constant.TAG,"Collected data ${it.toString()}")
+                }
+            }
+        }
     }
 
     fun setClickListener(){
@@ -89,6 +127,7 @@ class FlowDemoActivity : BaseActivity(), View.OnClickListener{
         binding.btnFlowAdv13.setOnClickListener(this)
         binding.btnFlowAdv14.setOnClickListener(this)
         binding.btnFlowAdv15.setOnClickListener(this)
+        binding.btnFlowAdv16.setOnClickListener(this)
 
 
     }
@@ -472,7 +511,7 @@ class FlowDemoActivity : BaseActivity(), View.OnClickListener{
             }
         }
     }
-    //endregion\\
+    //endregion
 
     //region Flow Operator
 
@@ -604,8 +643,36 @@ class FlowDemoActivity : BaseActivity(), View.OnClickListener{
 
 
     }
+
+
     //endregion
 
+
+   //region Flow parallel api call
+
+    //in repository :
+
+
+    fun generateNumberUsingFlow() : Flow<Int> = flow {
+
+        for(i in 1..10){
+
+            emit(i)
+            delay(2000)
+       }
+    }
+
+    private fun parallelApiDemo() {
+
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            generateNumberUsingFlow().collect{
+
+
+            }
+        }
+    }
+    //endregion
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -726,6 +793,12 @@ class FlowDemoActivity : BaseActivity(), View.OnClickListener{
             binding.btnFlowAdv15.id -> {
 
               combineDemo()
+
+            }
+
+            binding.btnFlowAdv16.id -> {
+
+              viewModel.generateNumberUsingFlow()
 
             }
 

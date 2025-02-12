@@ -1,6 +1,7 @@
 package com.policyboss.demoandroidapp.ViewModel
 
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.policyboss.demoandroidapp.LoginModule.API.APIService
@@ -34,6 +35,11 @@ class UserViewModel @Inject constructor(
         get() = loginMutableFlow
 
 
+    private val generateNoMutableFlow : MutableStateFlow<Int> = MutableStateFlow(0)
+    val generateNoFlow: StateFlow<Int>
+        get() = generateNoMutableFlow
+
+
     fun login(loginRequestModel: LoginRequestModel) = viewModelScope.launch {
 
         loginMutableFlow.value = APIState.Loading()
@@ -57,5 +63,18 @@ class UserViewModel @Inject constructor(
                }
            }
    }
+
+
+
+    fun generateNumberUsingFlow() = viewModelScope.launch {
+
+        userRepository.generateNumberUsingFlow().collect{
+
+            Log.d(Constant.TAG , "Number generated"+ it.toString())
+
+
+            generateNoMutableFlow.value = it
+        }
+    }
 
 }

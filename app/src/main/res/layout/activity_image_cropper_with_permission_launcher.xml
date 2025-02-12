@@ -53,9 +53,21 @@ tools:context=".CameraGalleryDemo.UI.ImageCropperWithPermissionLauncherActivity"
         style="@style/header_textview_24"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Activity Result Launcher Demo"
+        android:text="vanniktech canhub.cropper"
 
-        tools:text="demo launcher" />
+       />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/TextViewStyle.Medium"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Image Cropping Library"
+
+        />
 
 
     <LinearLayout
@@ -85,7 +97,16 @@ tools:context=".CameraGalleryDemo.UI.ImageCropperWithPermissionLauncherActivity"
 
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/btnFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16dp"
+        android:text="PDF Upload"
+        android:layout_marginHorizontal="@dimen/_40dp"
+        style="@style/ButtonStyle"
+        android:layout_marginLeft="@dimen/_16dp"
+        />
 
 
 

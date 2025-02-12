@@ -30,6 +30,9 @@ import com.policyboss.policybosspro.utils.AppPermission.PermissionHandler
 import com.yalantis.ucrop.UCrop
 import java.io.File
 
+/*
+  Note : Camera / Gallery handling cropping using Yalantis/UCrop Library
+ */
 class ActivityResultLauncherDemoActivity : BaseActivity(), View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     lateinit var binding: ActivityResultLauncherDemoBinding
