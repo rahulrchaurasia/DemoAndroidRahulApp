@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- ///005 location here //// -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -33,21 +34,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UI.Collapsing.CollapsingDemo7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Collapsing.CollapsingDemo6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Collapsing.CollapsingDemo5Activity"
+            android:exported="false" />
+        <activity
             android:name=".ConstrainLayoutDemo.ConstarinLayoutDemo1Activity"
             android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:theme="@style/Theme.DemoAndroidApp"/>
+            android:theme="@style/Theme.DemoAndroidApp"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ConstrainLayoutDemo.ConstrainLayoutMainActivity"
             android:exported="false"
-            android:theme="@style/Theme.DemoAndroidApp"/>
-
+            android:theme="@style/Theme.DemoAndroidApp" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

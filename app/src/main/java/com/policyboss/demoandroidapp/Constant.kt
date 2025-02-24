@@ -59,6 +59,16 @@ object Constant {
     const val EmptyResponse = "Empty response body"
     const val StatusMessage =  "Network request failed with status"
 
+
+
+    const val today = "Today"
+    const val yesterday = "Yesterday"
+    const val thisWeek = "This Week"
+    const val lastWeek = "Last Week"
+    const val thisMonth = "This Month"
+    const val lastMonth = "Last Month"
+
+
     fun hideKeyBoard(view: View?, context: Context) {
         if (view != null) {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -52,6 +52,8 @@ class CollapsingToolbarMain : BaseActivity() , View.OnClickListener{
 
         binding.btnRecycle7.setOnClickListener(this)
 
+        binding.btnRecycle8.setOnClickListener(this)
+
 
     }
 
@@ -91,14 +93,21 @@ class CollapsingToolbarMain : BaseActivity() , View.OnClickListener{
             }
             binding.btnRecycle6.id -> {
 
+                startActivity(Intent(this, CollapsingDemo5Activity::class.java))
 
             }
 
             binding.btnRecycle7.id -> {
 
-                //  startActivity(Intent(this, CustomTabLayoutActivity::class.java))
+                startActivity(Intent(this, CollapsingDemo6Activity::class.java))
 
             }
+            binding.btnRecycle8.id -> {
+
+                startActivity(Intent(this, CollapsingDemo7Activity::class.java))
+
+            }
+
 
         }
     }

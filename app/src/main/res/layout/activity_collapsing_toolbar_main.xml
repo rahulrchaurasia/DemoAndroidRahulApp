@@ -137,11 +137,11 @@ tools:context=".UI.Collapsing.CollapsingToolbarMain">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRecycle6"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/btnRecycle5"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Custom Tab Layout 3"
+            android:text="Collapse toolbar Advance"
 
             android:textColor="@color/Brown"
             style="@style/outlined_button"
@@ -151,11 +151,11 @@ tools:context=".UI.Collapsing.CollapsingToolbarMain">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRecycle7"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/btnRecycle6"
             app:layout_constraintStart_toStartOf="@+id/childparent"
             app:layout_constraintEnd_toEndOf="@+id/childparent"
-            android:text="Custom Tab Layout 4"
+            android:text="Collapse toolbar Advance2 "
 
             android:textColor="@color/Brown"
             style="@style/outlined_button"
@@ -163,6 +163,19 @@ tools:context=".UI.Collapsing.CollapsingToolbarMain">
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecycle8"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/btnRecycle7"
+            app:layout_constraintStart_toStartOf="@+id/childparent"
+            app:layout_constraintEnd_toEndOf="@+id/childparent"
+            android:text="Collapse toolbar Advance3 "
+
+            android:textColor="@color/Brown"
+            style="@style/outlined_button"
+            android:layout_marginTop="@dimen/eight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
 
 
 

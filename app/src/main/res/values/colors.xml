@@ -6,18 +6,21 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
     <color name="primary_light_color">#C5CAE9</color>
 
     <!-- For Default TextInputLayout stroke color  vvimp-->
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#B1E872</color>
 
     <color name="orange">#FF6600</color>
+    <color name="light_green">#9FE2BF</color>
 
     <color name="black_shade_1">#292D36</color>
     <color name="yellow">#ffa500</color>
 
     <color name="green_700">#B1E872</color>
+
+    <color name="default_icon_color">#3D85B7</color>
 
     <!--    //50 percent transparency-->
     <color name="semi_transparent">#80000000</color>
@@ -243,6 +246,12 @@
 
     <color name="yellow_text">#e2e20d</color>
 
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="scrim_color">#99000000</color>
+    <color name="toolbar_elevated_color">#80FFFFFF</color>
+    <color name="status_bar_scrim">#F9F9F9</color>
+
 
     <!--<array name="array_dot_active">-->
     <!--<item>@color/dot_light_screen1</item>-->
@@ -278,7 +287,7 @@
 
     <color name="transparent_color">#A6000000</color>
 
-
+    <color name="line">#ffd3dde6</color>
     <!--    ///added color-->
 
     <color name="gblue">#4885ed</color>

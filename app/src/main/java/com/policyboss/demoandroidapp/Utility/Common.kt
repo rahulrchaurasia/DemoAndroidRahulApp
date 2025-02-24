@@ -11,6 +11,7 @@ import java.net.Inet4Address
 import java.net.NetworkInterface
 import java.net.SocketException
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -96,4 +97,20 @@ fun Context.twoDecimalFormat(value: Double): String {
     val df = DecimalFormat("#.##")
     df.roundingMode = RoundingMode.DOWN
     return df.format(value)
+}
+
+
+fun String?.formatCardNumber(): String {
+    if (this == null || this.length < 10) return this ?: ""
+
+    val firstSix = this.take(6)
+    val lastFour = this.takeLast(4)
+    val middleStars = "*".repeat(this.length - 10)
+
+    return "$firstSix$middleStars$lastFour"
+}
+
+fun Calendar.formatDate(): String {
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    return dateFormat.format(this.time)
 }
