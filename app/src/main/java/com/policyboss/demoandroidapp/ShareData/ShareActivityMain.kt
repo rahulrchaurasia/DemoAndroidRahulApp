@@ -1,13 +1,10 @@
 package com.policyboss.demoandroidapp.ShareData
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.policyboss.demoandroidapp.BaseActivity
 import com.policyboss.demoandroidapp.R
-import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderActivity
-import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
 import com.policyboss.demoandroidapp.databinding.ActivityShareMainBinding
 
 class ShareActivityMain :BaseActivity() , View.OnClickListener {

@@ -19,6 +19,12 @@
 
     <string name="rupee_symbol">₹</string>
 
+    <string name="plate_scan_no_text"> No text detected</string>
+
+    <string name="plate_scan_no_valid_plate"> No valid plate detected</string>
+    <string name="plate_scan_align"> Align with plate</string>
+
+
     <string name="ok">OK</string>
     <string name="title_activity_home">HomeActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -58,6 +64,13 @@
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_activity_text_scanner">TextScannerActivity</string>
+
+    <string name="back_button">Back Button</string>
+    <string name="plate_scan_guide">Align vehicle plate within rectangle</string>
+    <string name="detect_plate">Detect Plate</string>
+
+    plate_scan_guide
+
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 

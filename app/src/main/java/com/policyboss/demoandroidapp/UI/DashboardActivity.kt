@@ -1,10 +1,8 @@
 package com.policyboss.demoandroidapp.UI
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import com.policyboss.demoandroidapp.ActivityLifecycle.ActivityLifeCycleActivity
 import com.policyboss.demoandroidapp.AlertDialog.AlertDialogDemo
 import com.policyboss.demoandroidapp.BaseActivity
@@ -15,17 +13,17 @@ import com.policyboss.demoandroidapp.ConstrainLayoutDemo.ConstrainLayoutMainActi
 import com.policyboss.demoandroidapp.LocationBgService.LocationBackgrounDemActivity
 import com.policyboss.demoandroidapp.LocationDemo.LocationDemoActivity
 import com.policyboss.demoandroidapp.LoginModule.LoginActivityMain
-import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarLayoutActivity
 import com.policyboss.demoandroidapp.UI.Collapsing.CollapsingToolbarMain
 import com.policyboss.demoandroidapp.UI.CropImage.CameraCropImageActivity
 import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.UI.MaterialEditText.MaterialEditTextDemoActivity
 import com.policyboss.demoandroidapp.UI.RecyclerViewOperation.RecyclerViewMainActivity
 
-import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderActivity
+import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderMainActivity
+import com.policyboss.demoandroidapp.UI.TextScanner.scanner.TextScannerActivity
+import com.policyboss.demoandroidapp.UI.TextScanner.vehicleScanner.VehiclePlateReaderActivity
 import com.policyboss.demoandroidapp.UI.circularProgress.CircularProgressActivity
 
-import com.policyboss.demoandroidapp.Utility.PopupViewTop
 import com.policyboss.demoandroidapp.ViewPagerDemo.ViewPagerMainActivity
 import com.policyboss.demoandroidapp.databinding.ActivityDashboardBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,6 +68,8 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
         binding.btnLocationDemo.setOnClickListener(this)
 
         binding.btnAutoTextReader.setOnClickListener(this)
+
+        binding.btnAutoTextReader1.setOnClickListener(this)
 
         binding.btnCropImage.setOnClickListener(this)
 
@@ -138,10 +138,21 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
             }
             binding.btnAutoTextReader.id -> {
 
-                startActivity(Intent(this, AutoTextReaderActivity::class.java))
+               // startActivity(Intent(this, TextScannerActivity::class.java))
 
+                startActivity(Intent(this, AutoTextReaderMainActivity::class.java))
 
             }
+
+            binding.btnAutoTextReader1.id -> {
+
+                // startActivity(Intent(this, TextScannerActivity::class.java))
+
+                startActivity(Intent(this, VehiclePlateReaderActivity::class.java))
+
+            }
+            //
+
             binding.btnCropImage.id -> {
 
                 //startActivity(Intent(this, KotlinDemoActivity::class.java))

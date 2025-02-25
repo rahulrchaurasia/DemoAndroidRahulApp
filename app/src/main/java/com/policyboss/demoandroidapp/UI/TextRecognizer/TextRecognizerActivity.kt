@@ -21,6 +21,25 @@ import com.google.android.gms.vision.text.TextRecognizer
 import com.policyboss.demoandroidapp.databinding.ActivityTextRecognizerBinding
 import java.io.IOException
 
+import android.content.Intent
+
+import android.graphics.Rect
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+
+import androidx.camera.core.Camera
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import java.util.concurrent.Executors
+
+
 
 class TextRecognizerActivity : AppCompatActivity() {
 

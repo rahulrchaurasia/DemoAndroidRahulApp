@@ -1,6 +1,5 @@
-package com.policyboss.demoandroidapp.UI.TextScanner
+package com.policyboss.demoandroidapp.UI.TextScanner.old
 
-import android.R
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -11,20 +10,15 @@ import android.graphics.Rect
 import android.graphics.YuvImage
 import android.os.Bundle
 import android.util.Log
-import android.util.Size
 import android.view.View
-import android.widget.ImageView
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
-import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.common.internal.ImageUtils
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.policyboss.demoandroidapp.BaseActivity
