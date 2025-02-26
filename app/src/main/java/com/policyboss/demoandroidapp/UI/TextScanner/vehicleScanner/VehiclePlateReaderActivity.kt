@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Size
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -52,11 +53,18 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
     private lateinit var plateTextView: TextView
     private lateinit var btnDetect: Button
     private lateinit var btnBack: Button
+    private lateinit var plateDetectionZone : View
+
+    private lateinit var detectionOverlay: DetectionOverlayView //005
+
 
     // Camera related
     private var camera: Camera? = null
     private lateinit var cameraExecutor: ExecutorService
-    private val detectionRectangle = Rect(400, 300, 880, 500) // Fixed coordinates optimized for license plates
+   // private val detectionRectangle = Rect(400, 300, 880, 500) // Fixed coordinates optimized for license plates
+
+    // Define the detection rectangle that will be initialized once layout is complete
+    private var detectionRectangle = Rect()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -75,7 +83,13 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
         plateTextView = findViewById(R.id.plateTextView)
         btnDetect = findViewById(R.id.btnDetect)
         btnBack = findViewById(R.id.btnBack)
+        plateDetectionZone = findViewById(R.id.plateDetectionZone)
 
+        detectionOverlay = findViewById(R.id.detectionOverlay)
+
+
+        // Setup the detection rectangle once the layout is ready
+       // setupDetectionRectangle()
         // Initialize executor for camera operations
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -105,6 +119,32 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
         }
     }
 
+
+
+//    private fun setupDetectionRectangle() {
+//
+//        plateDetectionZone.post {
+//            // Get view position on screen
+//            val locationOnScreen = IntArray(2)
+//            plateDetectionZone.getLocationOnScreen(locationOnScreen)
+//
+//            // Set detection rectangle to match the view's position
+//            // No need for dpToPx conversion here - width and height are already in pixels
+//            detectionRectangle.set(
+//                locationOnScreen[0],
+//                locationOnScreen[1],
+//                locationOnScreen[0] + plateDetectionZone.width,
+//                locationOnScreen[1] + plateDetectionZone.height
+//            )
+//
+//            Log.d(TAG, "Detection rectangle set to: $detectionRectangle")
+//        }
+//    }
+//
+//    private fun dpToPx(dp: Int): Int {
+//        return (dp * resources.displayMetrics.density).toInt()
+//    }
+
     @OptIn(ExperimentalGetImage::class)
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -114,7 +154,7 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
 
             // Set up the preview use case
             val preview = Preview.Builder().build().also {
-                it.setSurfaceProvider(cameraPreview.surfaceProvider)
+                it.surfaceProvider = cameraPreview.surfaceProvider
             }
 
             // Configure image analysis for optimal vehicle plate detection
@@ -172,18 +212,24 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
         }
     }
 
+
     @androidx.camera.core.ExperimentalGetImage
     private fun processImageForPlateDetection(imageProxy: androidx.camera.core.ImageProxy) {
         val mediaImage = imageProxy.image
         if (mediaImage != null) {
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
-            // Initialize ML Kit text recognizer
-            val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+            // Get detection rectangle from the overlay view in image coordinates
+            val imageWidth = imageProxy.width
+            val imageHeight = imageProxy.height
+            detectionRectangle = detectionOverlay.getDetectionRectInImageCoordinates(imageWidth, imageHeight)
 
+            Log.d(TAG, "Detection rectangle: $detectionRectangle")
+
+            // Continue with text recognition...
+            val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
             recognizer.process(image)
                 .addOnSuccessListener { visionText ->
-                    // Get well-formatted text from within the detection rectangle
                     processDetectedText(visionText)
                     imageProxy.close()
                 }
@@ -208,6 +254,12 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
             val vehicleNumber = extractVehicleNumber(detectedText)
 
             runOnUiThread {
+
+                // Special case check for "UMESH"
+                if (detectedText.lowercase().contains("umesh")) {
+                    showToast("Detected special plate: UMESH")
+                }
+
                 if (vehicleNumber != null && isValidVehicleNumber(vehicleNumber)) {
                     // A valid plate number was found - format and display it
                     val formattedPlate = formatVehicleNumber(vehicleNumber)
@@ -217,10 +269,7 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
                     plateTextView.setBackgroundResource(R.drawable.plate_background_success)
                     btnDetect.isEnabled = true
 
-                    // Special case check for "UMESH"
-                    if (detectedText.lowercase().contains("umesh")) {
-                        showToast("Detected special plate: UMESH")
-                    }
+                    returnResult(formattedPlate)
                 } else {
                     // Text detected but not a valid plate number
                     // Show only the first line, limited to 20 chars
@@ -244,11 +293,51 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
         }
     }
 
+
+    /**
+     * Calculate a score based on overlap and position within the detection zone
+     * Higher score = better match for license plate
+     */
+
+    //005 temp added
+    private fun calculateOverlapScore(textBox: Rect, detectionZone: Rect): Float {
+        val intersection = Rect()
+        if (!intersection.setIntersect(textBox, detectionZone)) {
+            return 0f
+        }
+
+        // Calculate overlap percentage
+        val intersectionArea = intersection.width() * intersection.height()
+        val textBoxArea = textBox.width() * textBox.height()
+        val overlapPercentage = intersectionArea.toFloat() / textBoxArea.toFloat()
+
+        // Calculate distance from center (normalized to 0-1, where 0 is center)
+        val textCenterX = textBox.centerX()
+        val textCenterY = textBox.centerY()
+        val zoneCenterX = detectionZone.centerX()
+        val zoneCenterY = detectionZone.centerY()
+
+        val maxPossibleDistance = Math.sqrt(
+            Math.pow(detectionZone.width() / 2.0, 2.0) +
+                    Math.pow(detectionZone.height() / 2.0, 2.0)
+        ).toFloat()
+
+        val actualDistance = Math.sqrt(
+            Math.pow((textCenterX - zoneCenterX).toDouble(), 2.0) +
+                    Math.pow((textCenterY - zoneCenterY).toDouble(), 2.0)
+        ).toFloat()
+
+        val normalizedDistance = actualDistance / maxPossibleDistance
+        val proximityScore = 1f - normalizedDistance
+
+        // Weight proximity higher than pure overlap
+        return (overlapPercentage * 0.4f) + (proximityScore * 0.6f)
+    }
     /**
      * Gets license plate text from the detection rectangle
      * Focus on up to 2 lines max - optimal for standard Indian plates
      */
-    private fun getLicensePlateText(visionText: Text): String {
+    private fun getLicensePlateTextOLD(visionText: Text): String {
         val plateTextLines = mutableListOf<String>()
 
         // Process blocks of text
@@ -281,6 +370,45 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
         return plateTextLines.joinToString("\n")
     }
 
+
+    /**
+     * Gets license plate text from the detection rectangle
+     * Focus on up to 2 lines max - optimal for standard Indian plates
+     */
+    private fun getLicensePlateText(visionText: Text): String {
+        val plateTextLines = mutableListOf<String>()
+        val candidateLines = mutableListOf<Pair<String, Float>>()
+
+        // Process blocks of text
+        for (block in visionText.textBlocks) {
+            // Process each line in the block
+            for (line in block.lines) {
+                val boundingBox = line.boundingBox ?: continue
+
+                // Check if this line is within or intersects our detection rectangle
+                if (isTextInDetectionZone(boundingBox, detectionRectangle)) {
+                    // Calculate overlap percentage to prioritize text
+                    val overlapScore = calculateOverlapScore(boundingBox, detectionRectangle)
+
+                    // Add to candidates with overlap score
+                    candidateLines.add(Pair(line.text, overlapScore))
+                }
+            }
+        }
+
+        // Sort by overlap score (higher score first)
+        candidateLines.sortByDescending { it.second }
+
+        // Take the top 2 lines maximum
+        val maxLines = minOf(2, candidateLines.size)
+        for (i in 0 until maxLines) {
+            plateTextLines.add(candidateLines[i].first)
+        }
+
+        // Join the lines with a newline character
+        return plateTextLines.joinToString("\n")
+    }
+
     /**
      * Determines if text is in the detection zone based on overlap percentage
      */
@@ -296,7 +424,7 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
             val intersectionArea = intersection.width() * intersection.height()
             val textBoxArea = textBox.width() * textBox.height()
 
-            return intersectionArea > (textBoxArea * 0.5)
+            return intersectionArea > (textBoxArea * 0.3)
         }
 
         return false

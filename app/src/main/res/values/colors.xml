@@ -189,6 +189,8 @@
     <color name="buttonGreenBackground">#20d2bb</color>
     <color name="buttonOrangeBackground">#f67b58</color>
 
+    <color name="card_bg">#F2F4F5</color>
+
 
     <color name="red_light">#ff7777</color>
     <color name="red_custom">#ff5a5f</color>
