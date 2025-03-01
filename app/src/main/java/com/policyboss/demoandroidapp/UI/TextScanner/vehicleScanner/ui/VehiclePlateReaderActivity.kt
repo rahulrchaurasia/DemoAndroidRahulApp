@@ -22,6 +22,7 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.core.SurfaceOrientedMeteringPointFactory
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -29,6 +30,7 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
@@ -41,8 +43,12 @@ import com.policyboss.demoandroidapp.UI.TextScanner.vehicleScanner.PlateDetectio
 import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.ActivityCarPlateBinding
 import com.policyboss.demoandroidapp.databinding.ActivityVehiclePlateReaderBinding
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -64,7 +70,7 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
 
     // Camera related
     private var camera: Camera? = null
-    private lateinit var cameraExecutor: ExecutorService
+   // private lateinit var cameraExecutor: ExecutorService
     // private val detectionRectangle = Rect(400, 300, 880, 500) // Fixed coordinates optimized for license plates
 
     // Define the detection rectangle that will be initialized once layout is complete
@@ -93,7 +99,7 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
         // Setup the detection rectangle once the layout is ready
         // setupDetectionRectangle()
         // Initialize executor for camera operations
-        cameraExecutor = Executors.newSingleThreadExecutor()
+       // cameraExecutor = Executors.newSingleThreadExecutor()
 
 
 
@@ -135,40 +141,33 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
 
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
-
-            // Set up the preview use case
             val preview = Preview.Builder().build().also {
                 it.surfaceProvider = cameraPreview.surfaceProvider
             }
 
-            // Configure image analysis for optimal vehicle plate detection
             val imageAnalysis = ImageAnalysis.Builder()
                 .setTargetResolution(Size(1280, 720))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
-                    it.setAnalyzer(cameraExecutor) { imageProxy ->
-                        processImageForPlateDetection(imageProxy)
+                    it.setAnalyzer(ContextCompat.getMainExecutor(this)) { imageProxy ->
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            processImageForPlateDetection(imageProxy)
+                        }
                     }
                 }
 
-            // Always use the back camera for plate scanning
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
-                // Unbind all use cases before rebinding
                 cameraProvider.unbindAll()
-
-                // Bind camera to the lifecycle
-                camera = cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageAnalysis
-                )
-
-                // Configure camera for optimal plate reading
+                camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis)
                 setupCameraForPlateReading()
             } catch (e: Exception) {
                 Log.e(Constant.TAG, "Use case binding failed", e)
-                showToast("Camera initialization failed: ${e.message}")
+                lifecycleScope.launch(Dispatchers.Main) {
+                    showToast("Camera initialization failed: ${e.message}")
+                }
             }
         }, ContextCompat.getMainExecutor(this))
     }
@@ -199,32 +198,31 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
     //endregion
 
     //region Processes the Image For Rectangle area detect
-    @androidx.camera.core.ExperimentalGetImage
-    private fun processImageForPlateDetection(imageProxy: androidx.camera.core.ImageProxy) {
-        val mediaImage = imageProxy.image
-        if (mediaImage != null) {
-            val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
-            // Get detection rectangle from the overlay view in image coordinates
-            val imageWidth = imageProxy.width
-            val imageHeight = imageProxy.height
-            detectionRectangle = detectionOverlay.getDetectionRectInImageCoordinates(imageWidth, imageHeight)
+    @OptIn(ExperimentalGetImage::class)
+    private suspend fun processImageForPlateDetection(imageProxy: ImageProxy) {
+        withContext(Dispatchers.IO) {
+            try {
+                val mediaImage = imageProxy.image ?: return@withContext
+                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
-            Log.d(Constant.TAG, "Detection rectangle: $detectionRectangle")
+                detectionRectangle = detectionOverlay.getDetectionRectInImageCoordinates(
+                    imageProxy.width,
+                    imageProxy.height
+                )
 
-            // Continue with text recognition...
-            val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-            recognizer.process(image)
-                .addOnSuccessListener { visionText ->
+                val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+                val visionText = recognizer.process(image).await()
+
+
+                withContext(Dispatchers.Main) {
                     processDetectedText(visionText)
-                    imageProxy.close()
                 }
-                .addOnFailureListener { e ->
-                    Log.e(Constant.TAG, "Text recognition failed", e)
-                    imageProxy.close()
-                }
-        } else {
-            imageProxy.close()
+            } catch (e: Exception) {
+                Log.e(Constant.TAG, "Text recognition failed", e)
+            } finally {
+                imageProxy.close()
+            }
         }
     }
 
@@ -240,7 +238,7 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
         val detectedText = PlateDetectionHelper.getLicensePlateText(visionText,detectionRectangle)
 
 
-        runOnUiThread {
+        lifecycleScope.launch(Dispatchers.Main) {
 
             if (detectedText.isNotEmpty()) {
                 // Look for a valid vehicle number in the detected text
@@ -276,11 +274,8 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
                         plateTextView.setBackgroundResource(R.drawable.plate_background_success)
                         // btnDetect.isEnabled = true
 
-                        // Then use Handler to delay the activity finish
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            returnResult(formattedPlate)
-                        }, 400) // 500ms delay
-
+                        delay(400)
+                        returnResult(formattedPlate)
 
                         //returnResult(formattedPlate)
                     }
@@ -290,7 +285,6 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
                         // Vehicle number found but not valid
                         Log.d(Constant.TAG, "Invalid vehicle number format: $vehicleNumber")
                         plateTextView.text = vehicleNumber
-                        plateTextView.visibility = View.VISIBLE
                         plateTextView.setBackgroundResource(R.drawable.plate_background_neutral)
                         // btnDetect.isEnabled = false
                     }
@@ -303,7 +297,6 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
 
                     Log.d(Constant.TAG, "No valid vehicle number pattern detected in: $displayText")
                     plateTextView.text = displayText
-                    plateTextView.visibility = View.VISIBLE
                     plateTextView.setBackgroundResource(R.drawable.plate_background_neutral)
                    // btnDetect.isEnabled = false
                 }
@@ -313,7 +306,6 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
             else {
                 // No text was detected
                 plateTextView.text = getString(R.string.plate_scan_no_text)
-                plateTextView.visibility = View.VISIBLE
                 plateTextView.setBackgroundResource(R.drawable.plate_background_error)
                 // btnDetect.isEnabled = false
 
@@ -331,11 +323,12 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
     * Returns the detected plate text to the calling activity
     */
     private fun returnResult(plateText: String) {
-        val resultIntent = Intent()
-        Log.d(Constant.TAG, "Detected Text is $plateText")
-        resultIntent.putExtra(Constant.KEY_DETECT_TEXT, plateText.toByteArray(Charsets.UTF_8))
-        setResult(RESULT_OK, resultIntent)
-        finish()
+
+       val resultIntent = Intent().apply {
+           putExtra(Constant.KEY_DETECT_TEXT, plateText.toByteArray(Charsets.UTF_8))
+       }
+       setResult(RESULT_OK, resultIntent)
+       finish()
     }
 
     //endregion
@@ -373,6 +366,6 @@ class VehiclePlateReaderActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
+      //  cameraExecutor.shutdown()
     }
 }
