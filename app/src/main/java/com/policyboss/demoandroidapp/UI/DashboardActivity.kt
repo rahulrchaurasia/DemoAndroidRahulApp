@@ -19,9 +19,8 @@ import com.policyboss.demoandroidapp.UI.Login.LoginActivity
 import com.policyboss.demoandroidapp.UI.MaterialEditText.MaterialEditTextDemoActivity
 import com.policyboss.demoandroidapp.UI.RecyclerViewOperation.RecyclerViewMainActivity
 
-import com.policyboss.demoandroidapp.UI.TextScanner.AutoTextReaderMainActivity
-import com.policyboss.demoandroidapp.UI.TextScanner.scanner.TextScannerActivity
-import com.policyboss.demoandroidapp.UI.TextScanner.vehicleScanner.VehiclePlateReaderActivity
+import com.policyboss.demoandroidapp.UI.TextScanner.vehicleScanner.old.AutoTextReaderMainActivity
+import com.policyboss.demoandroidapp.UI.TextScanner.vehicleScanner.ui.CarPlateActivity
 import com.policyboss.demoandroidapp.UI.circularProgress.CircularProgressActivity
 
 import com.policyboss.demoandroidapp.ViewPagerDemo.ViewPagerMainActivity
@@ -148,7 +147,7 @@ class DashboardActivity : BaseActivity() , View.OnClickListener{
 
                 // startActivity(Intent(this, TextScannerActivity::class.java))
 
-                startActivity(Intent(this, VehiclePlateReaderActivity::class.java))
+                startActivity(Intent(this, CarPlateActivity::class.java))
 
             }
             //

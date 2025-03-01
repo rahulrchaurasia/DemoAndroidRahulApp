@@ -41,16 +41,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UI.TextScanner.vehicleScanner.CarPlateActivity"
+            android:name=".UI.TextScanner.vehicleScanner.ui.VehiclePlateReaderActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.TextScanner.vehicleScanner.VehiclePlateReaderActivity"
+            android:name=".UI.TextScanner.vehicleScanner.ui.CarPlateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.TextScanner.vehicleScanner.old.VehiclePlateReaderOLDActivity"
             android:exported="false" />
         <activity
             android:name=".UI.TextScanner.scanner.TextScannerActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.TextScanner.AutoTextReaderMainActivity"
+            android:name=".UI.TextScanner.vehicleScanner.old.AutoTextReaderMainActivity"
             android:exported="false" />
         <activity
             android:name=".UI.Collapsing.CollapsingDemo7Activity"

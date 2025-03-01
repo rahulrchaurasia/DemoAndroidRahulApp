@@ -1,14 +1,8 @@
-package com.policyboss.demoandroidapp.UI.TextScanner
+package com.policyboss.demoandroidapp.UI.TextScanner.vehicleScanner.old
 
-import android.Manifest.permission.CAMERA
-import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -16,11 +10,7 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.camera.core.Preview
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.policyboss.demoandroidapp.Constant.TAG
 import com.policyboss.demoandroidapp.R
 
 import java.util.concurrent.Executors
@@ -44,7 +34,6 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.policyboss.demoandroidapp.Constant
 import com.policyboss.demoandroidapp.Utility.showToast
 import com.policyboss.demoandroidapp.databinding.ActivityAutoTextReaderMainBinding
-import com.policyboss.demoandroidapp.databinding.ActivityLoginBinding
 
 
 class AutoTextReaderMainActivity : AppCompatActivity() {
@@ -305,6 +294,7 @@ class AutoTextReaderMainActivity : AppCompatActivity() {
 
     private fun returnResult(detectedText: String) {
         val resultIntent = Intent()
+        Log.d(Constant.TAG, "Detected Text is $detectedText" )
         resultIntent.putExtra("DETECTED_TEXT", detectedText)
         setResult(RESULT_OK, resultIntent)
         finish() // Close the activity

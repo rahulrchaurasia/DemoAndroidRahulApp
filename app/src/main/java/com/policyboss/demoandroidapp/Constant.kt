@@ -30,6 +30,8 @@ object Constant {
 
      val KEY_DATA : String = "keydata"
 
+    val KEY_DETECT_TEXT : String = "keydetectText"
+
     val ErrorMessage : String = "Error Occoured"
 
     val ErrorDefault : String = "Unknown Error"

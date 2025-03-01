@@ -15,7 +15,7 @@ class DetectionOverlayView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
-    // Pre-allocate Paint object with thicker border
+    // Pre-allocate Paint object with thicker borderx
     private val rectPaint = Paint().apply {
         color = Color.WHITE
         style = Paint.Style.STROKE
@@ -27,7 +27,7 @@ class DetectionOverlayView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
+x
         // Calculate rectangle that's 80% of width with aspect ratio for license plates
         val rectWidth = width * 0.8f
         val rectHeight = rectWidth * 0.2f  // License plate aspect ratio (approximately 5:1)
